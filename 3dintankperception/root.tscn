@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://8d80gka37gim"]
+[gd_scene load_steps=5 format=3 uid="uid://8d80gka37gim"]
+
+[ext_resource type="PackedScene" uid="uid://cv56efisq4p8a" path="res://m27.blend" id="1_11tmb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ydykr"]
+vertex_color_is_srgb = true
+albedo_color = Color(0.172549, 0.545098, 0.203922, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_e71ue"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nfnc0"]
 
 [node name="Root" type="Node3D"]
 
@@ -9,8 +17,12 @@ transform = Transform3D(1, 0, 0, 0, 0.985016, 0.172462, 0, -0.172462, 0.985016, 
 
 [node name="Plane" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.98696, 0, 0, 0, 1, 0, 0, 0, 2.23802, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_ydykr")
 mesh = SubResource("PlaneMesh_e71ue")
+surface_material_override/0 = SubResource("StandardMaterial3D_nfnc0")
 
 [node name="M27" type="CharacterBody3D" parent="."]
 
 [node name="Pivot" type="Node3D" parent="M27"]
+
+[node name="m27" parent="M27/Pivot" instance=ExtResource("1_11tmb")]
