@@ -10,3 +10,7 @@ transform = Transform3D(1, 0, 0, 0, 0.985016, 0.172462, 0, -0.172462, 0.985016, 
 [node name="Plane" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.98696, 0, 0, 0, 1, 0, 0, 0, 2.23802, 0, 0, 0)
 mesh = SubResource("PlaneMesh_e71ue")
+
+[node name="M27" type="CharacterBody3D" parent="."]
+
+[node name="Pivot" type="Node3D" parent="M27"]
