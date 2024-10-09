@@ -1,28 +1,34 @@
 extends CharacterBody3D
 
+# How fast the player moves in meters per second.
+@export var speed = 5
+# Rotation speed of the tank
+@export var rotation_speed = 2.0
+# The downward acceleration when in the air, in meters per second squared.
+@export var fall_acceleration = 75
 
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
+var target_velocity = Vector3.ZERO
 
+func _physics_process(delta):
+	var direction = Vector3.ZERO
+	var forward_input = Input.get_axis("ui_down", "ui_up")
+	var rotation_input = Input.get_axis("ui_left", "ui_right")
+	# Apply rotation
+	rotate_y(-rotation_input * rotation_speed * delta)
+	# calculate forward input
+	var forward_velocity = -global_transform.basis.z * forward_input * speed
 
-func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-
+	# Ground Velocity
+	target_velocity.x = forward_velocity.x
+	target_velocity.z = forward_velocity.z
+	
+	# Rotation
+	rotate_y(-rotation_input * rotation_speed * delta)
+	
+	# Vertical Velocity
+	if not is_on_floor(): # If in the air, fall towards the floor. Literally gravity
+		target_velocity.y = target_velocity.y - (fall_acceleration * delta)
+	
+	# Moving the Character
+	velocity = target_velocity
 	move_and_slide()
