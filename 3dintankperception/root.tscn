@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://8d80gka37gim"]
+[gd_scene load_steps=9 format=3 uid="uid://8d80gka37gim"]
 
 [ext_resource type="Script" path="res://M27.cs" id="1_jrn3n"]
+[ext_resource type="PackedScene" uid="uid://clhdixs8oorco" path="res://m27 copy.blend" id="2_03loi"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6fdt1"]
 
@@ -39,6 +40,8 @@ mesh = SubResource("CylinderMesh_3dnqm")
 
 [node name="Camera3D" type="Camera3D" parent="m27"]
 transform = Transform3D(1, 0, 0, 0, 0.977736, 0.20984, 0, -0.20984, 0.977736, 0, 0.7156, 0.72534)
+
+[node name="m27 copy" parent="m27" instance=ExtResource("2_03loi")]
 
 [node name="Plane" type="MeshInstance3D" parent="."]
 transform = Transform3D(13.47, 0, 0, 0, 13.47, 0, 0, 0, 13.47, 0, 0, 0)
