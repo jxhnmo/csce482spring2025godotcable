@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://8d80gka37gim"]
+[gd_scene load_steps=11 format=3 uid="uid://8d80gka37gim"]
 
 [ext_resource type="Script" path="res://M27.cs" id="1_jrn3n"]
 [ext_resource type="PackedScene" uid="uid://clhdixs8oorco" path="res://m27 copy.blend" id="2_03loi"]
@@ -19,10 +19,14 @@ size = Vector3(1, 1.39648, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_rdjpe"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_7kxr2"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_aut6q"]
+
 [node name="Root" type="Node3D"]
 
 [node name="m27" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.62731, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.328345, 16.053)
 script = ExtResource("1_jrn3n")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="m27"]
@@ -39,7 +43,7 @@ visible = false
 mesh = SubResource("CylinderMesh_3dnqm")
 
 [node name="Camera3D" type="Camera3D" parent="m27"]
-transform = Transform3D(1, 0, 0, 0, 0.977736, 0.20984, 0, -0.20984, 0.977736, 0, 0.7156, 0.72534)
+transform = Transform3D(1, 0, 0, 0, 0.977736, 0.20984, 0, -0.20984, 0.977736, 0, 4.20691, 6.08683)
 
 [node name="m27 copy" parent="m27" instance=ExtResource("2_03loi")]
 
@@ -62,4 +66,14 @@ transform = Transform3D(0.879707, -0.475517, 0, 0.475517, 0.879707, 0, 0, 0, 1, 
 mesh = SubResource("CylinderMesh_rdjpe")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.0113095, 0.999936, 0, -0.999936, -0.0113095, 0, 6.35555, 0)
+transform = Transform3D(1, 0, 0, 0, -0.0113095, 0.999936, 0, -0.999936, -0.0113095, 0, 11.747, 24.818)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(5, 0, 0, 0, 0.433013, 5, 0, -0.25, 8.66025, 0, 0, 0)
+shape = SubResource("BoxShape3D_7kxr2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(5, 0, 0, 0, 0.433013, 5, 0, -0.25, 8.66025, 0, 0, 0)
+mesh = SubResource("BoxMesh_aut6q")
