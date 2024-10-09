@@ -28,13 +28,27 @@ public partial class M27 : CharacterBody3D
 		{
 			RotateY(RotationSpeed * (float)delta); // Rotate left
 		}
+
+		// Get the forward direction based on the character's current rotation
+		Vector3 forward = Transform.Basis.Z;
+		Vector3 right = Transform.Basis.X;
+
 		if (Input.IsActionPressed("move_back"))
 		{
-			direction += Transform3D.Identity.Basis.Z; // Move backward in the direction of facing
+			direction += forward; // Move backward in the direction of facing
 		}
 		if (Input.IsActionPressed("move_forward"))
 		{
-			direction += -Transform3D.Identity.Basis.Z; // Move forward in the direction of facing
+			direction += -forward; // Move forward in the direction of facing
+		}
+
+		if (Input.IsActionPressed("move_right"))
+		{
+			direction += right; // Move right
+		}
+		if (Input.IsActionPressed("move_left"))
+		{
+			direction -= right; // Move left
 		}
 
 		// Normalize the direction vector
