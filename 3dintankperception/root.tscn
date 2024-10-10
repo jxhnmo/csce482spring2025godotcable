@@ -46,6 +46,7 @@ mesh = SubResource("CylinderMesh_3dnqm")
 transform = Transform3D(1, 0, 0, 0, 0.977736, 0.20984, 0, -0.20984, 0.977736, 0, 4.20691, 6.08683)
 
 [node name="m27 copy" parent="m27" instance=ExtResource("2_03loi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.63898, -18.668)
 
 [node name="Plane" type="MeshInstance3D" parent="."]
 transform = Transform3D(13.47, 0, 0, 0, 13.47, 0, 0, 0, 13.47, 0, 0, 0)
