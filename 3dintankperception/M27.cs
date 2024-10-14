@@ -93,11 +93,12 @@ public partial class M27 : CharacterBody3D
 		Vector3 position = GlobalTransform.origin;
 		Vector3 velocity = Velocity;
 		float mass = Mass; 
+		long timeInMillis = OS.GetTicksMsec(); // Get time in milliseconds
 
 		// ASSUMED MASS DEFINED IN CharacterBody3D 
 		//OR INHERITED FROM RigidBody 
 		//OR HARD CODED FOR M27
 		
-		GD.Print($"Position: {position}, Velocity: {velocity}, Mass: {mass}");
+		GD.Print($"Time: {timeInMillis} ms, Position: {position}, Velocity: {velocity}, Mass: {mass}");
 	}
 }
