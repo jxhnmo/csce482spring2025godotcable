@@ -14,7 +14,22 @@ public partial class M27 : CharacterBody3D
 	[Export]
 	public float RotationSpeed { get; set; } = 5.0f;
 
+	// Timer for logging
+	private Timer _loggingTimer;
+
+	// Target velocity
 	private Vector3 _targetVelocity = Vector3.Zero;
+
+	public override void _Ready()
+	{
+		// Create a timer to log every 200ms
+		_loggingTimer = new Timer();
+		_loggingTimer.WaitTime = 0.2f; // 200ms
+		_loggingTimer.OneShot = false; // Repeat timer
+		_loggingTimer.Autostart = true;
+		_loggingTimer.Connect("timeout", this, nameof(LogMovementData));
+		AddChild(_loggingTimer);
+	}
 
 	public override void _PhysicsProcess(double delta)
 	{
@@ -69,5 +84,20 @@ public partial class M27 : CharacterBody3D
 		// Moving the character
 		Velocity = _targetVelocity;
 		MoveAndSlide();
+	}
+
+
+	// Method to log movement data
+	private void LogMovementData()
+	{
+		Vector3 position = GlobalTransform.origin;
+		Vector3 velocity = Velocity;
+		float mass = Mass; 
+
+		// ASSUMED MASS DEFINED IN CharacterBody3D 
+		//OR INHERITED FROM RigidBody 
+		//OR HARD CODED FOR M27
+		
+		GD.Print($"Position: {position}, Velocity: {velocity}, Mass: {mass}");
 	}
 }
