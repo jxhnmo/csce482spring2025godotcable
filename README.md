@@ -15,7 +15,7 @@ Before setting up the project, ensure you have the following installed:
 - <a href="https://godotengine.org/asset-library/asset/1918">Jolt Physics Library</a> (integrated into Godot for this project)
 
 # Set up
-To incorporate Jolt into godo:
+To incorporate Jolt into Godot:
 - Extract the Jolt files into your project directory
 - Start or restart Godot
 - Open project settings
