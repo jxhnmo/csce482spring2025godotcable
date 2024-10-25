@@ -9,7 +9,7 @@ public partial class RigidBody3d : RigidBody3D
 
 	// The maximum angle (in radians) the tank can tilt before becoming immobile
 	private float maxTiltAngle = Mathf.Pi / 4;  // 45 degrees (you can adjust this)
-
+	
 	public override void _PhysicsProcess(double delta)
 	{
 		// Check if the tank is tipped over past the allowed threshold
