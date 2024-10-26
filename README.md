@@ -29,6 +29,6 @@ To incorporate Jolt into Godot:
 <a href="https://godotengine.org/download/windows/">Godot for Windows</a><br />
 <a href="https://docs.godotengine.org/en/stable/getting_started/first_3d_game/index.html">Learn 3D Game Dev in Godot</a><br />
 <a href="https://docs.godotengine.org/en/stable/tutorials/3d/introduction_to_3d.html#d-viewport">Working in 3D Space (Camera Movement)</a><br />
-<a href="https://www.youtube.com/watch?v=8sqfc-F21Sw&list=PLMkSWKN9VsZH9nLqAeFTjJr1bm3EJBDq9&index=1"></a>Playlist for Tread Movement<br />
+<a href="https://www.youtube.com/watch?v=8sqfc-F21Sw&list=PLMkSWKN9VsZH9nLqAeFTjJr1bm3EJBDq9&index=1">Playlist for Tread Movement</a><br />
 <a href="https://docs.godotengine.org/en/3.5/">Godot 3.5 Docs</a><br />
 <a href="https://docs.godotengine.org/en/4.3/">Godot 4.3 Docs</a><br />
