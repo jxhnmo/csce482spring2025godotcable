@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bvdmbc7dv5bby"]
-
-[ext_resource type="PackedScene" uid="uid://b57c8x3xudu6" path="res://models/assets/link.dae" id="1_6gcrc"]
-
-[node name="link" instance=ExtResource("1_6gcrc")]
-
-[node name="Cylinder" parent="." index="0"]
-transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0)
