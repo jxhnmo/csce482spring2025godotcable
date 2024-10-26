@@ -1,10 +1,11 @@
-extends Node3D
+extends Path3D
+
 
 var time = 0
 var speed = 2
 var offset = 0.5
 
-@onready var links = $m27_body/Node3D/Path3D.get_children()
+@onready var links = $".".get_children()
 
 func _process(delta):
 	time += delta
