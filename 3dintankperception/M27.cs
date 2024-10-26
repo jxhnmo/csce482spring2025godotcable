@@ -19,16 +19,20 @@ public partial class M27 : CharacterBody3D
 
 	// Target velocity
 	private Vector3 _targetVelocity = Vector3.Zero;
-
+	
+	private Label _infoLabel;
+	
 	public override void _Ready()
 	{
-		// Create a timer to log every 200ms
+		//Create a timer to log every 200ms
 		_loggingTimer = new Timer();
 		_loggingTimer.WaitTime = 0.2f; // 200ms
 		_loggingTimer.OneShot = false; // Repeat timer
 		_loggingTimer.Autostart = true;
 		_loggingTimer.Connect("timeout", this, nameof(LogMovementData));
 		AddChild(_loggingTimer);
+		_infoLabel = GetNode<Label>("CanvasLayer2/infoLabel");
+		GD.Print("Label found: " + (_infoLabel != null));
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -84,6 +88,17 @@ public partial class M27 : CharacterBody3D
 		// Moving the character
 		Velocity = _targetVelocity;
 		MoveAndSlide();
+		if (_infoLabel == null)
+		{
+			_infoLabel = GetNode<Label>("CanvasLayer2/Label");
+			if (_infoLabel == null)
+			{
+				GD.PrintErr("Unable to find Label node!");
+				return;
+			}
+		}
+		UpdateInfoLabel();
+		GD.Print("Label text: " + _infoLabel.Text);
 	}
 
 
@@ -101,4 +116,22 @@ public partial class M27 : CharacterBody3D
 		
 		GD.Print($"Time: {timeInMillis} ms, Position: {position}, Velocity: {velocity}, Mass: {mass}");
 	}
+
+	private void UpdateInfoLabel()
+	{
+		if (_infoLabel == null)
+		{
+			GD.PrintErr("_infoLabel is null in UpdateInfoLabel()");
+			return;
+		}
+
+		Vector3 position = GlobalTransform.Origin;
+		Vector3 velocity = Velocity;
+
+		string infoText = $"Position: ({position.X:F2}, {position.Y:F2}, {position.Z:F2})\n" +
+						  $"Velocity: ({velocity.X:F2}, {velocity.Y:F2}, {velocity.Z:F2})";
+
+		_infoLabel.Text = infoText;
+	}
+	
 }

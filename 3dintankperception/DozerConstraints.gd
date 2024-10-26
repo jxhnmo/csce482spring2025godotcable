@@ -21,7 +21,7 @@ var bucket_height = 0.0  # Current height of the bucket
 func move_dozer(direction: Vector3, delta: float):
 	# Limit the movement speed based on max speed
 	var target_velocity = direction * max_speed
-	move_and_slide(target_velocity)
+	move_and_slide()
 
 # Turning logic
 func turn_dozer(direction: float, delta: float):
