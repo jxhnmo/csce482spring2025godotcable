@@ -88,19 +88,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/yukijanvier/.nuget/packages/": {}
+    "/Users/jeffreycheung/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/yukijanvier/school/capstone-3d-in-tank-perception/test/test.csproj",
+      "projectUniqueName": "/Users/jeffreycheung/TAMU_CS/CSCE_482/capstone-3d-in-tank-perception/test/test.csproj",
       "projectName": "test",
-      "projectPath": "/Users/yukijanvier/school/capstone-3d-in-tank-perception/test/test.csproj",
-      "packagesPath": "/Users/yukijanvier/.nuget/packages/",
-      "outputPath": "/Users/yukijanvier/school/capstone-3d-in-tank-perception/test/.godot/mono/temp/obj/",
+      "projectPath": "/Users/jeffreycheung/TAMU_CS/CSCE_482/capstone-3d-in-tank-perception/test/test.csproj",
+      "packagesPath": "/Users/jeffreycheung/.nuget/packages/",
+      "outputPath": "/Users/jeffreycheung/TAMU_CS/CSCE_482/capstone-3d-in-tank-perception/test/.godot/mono/temp/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/yukijanvier/.nuget/NuGet/NuGet.Config"
+        "/Users/jeffreycheung/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -118,11 +118,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -156,11 +151,11 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[6.0.35, 6.0.35]"
+            "version": "[6.0.25, 6.0.25]"
           },
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[6.0.35, 6.0.35]"
+            "version": "[6.0.25, 6.0.25]"
           }
         ],
         "frameworkReferences": {
@@ -168,7 +163,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.403/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/RuntimeIdentifierGraph.json"
       }
     }
   }
