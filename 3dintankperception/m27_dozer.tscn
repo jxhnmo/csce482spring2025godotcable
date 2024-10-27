@@ -1,9 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://p0dsplwu8vuq"]
+[gd_scene load_steps=8 format=3 uid="uid://p0dsplwu8vuq"]
 
 [ext_resource type="Script" path="res://left_tread.gd" id="1_kruho"]
+[ext_resource type="Script" path="res://m27_dozer.gd" id="1_viote"]
 [ext_resource type="PackedScene" uid="uid://df0l1180hmt0x" path="res://models/m27_tread.blend" id="2_01gqd"]
 [ext_resource type="Script" path="res://right_tread.gd" id="3_qojyu"]
 [ext_resource type="PackedScene" uid="uid://ce6dbtmv37r1" path="res://models/m27_body.blend" id="4_ryage"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gxjgi"]
+size = Vector3(0.858887, 0.651489, 1.90625)
 
 [sub_resource type="Curve3D" id="Curve3D_sg6ns"]
 _data = {
@@ -12,374 +16,411 @@ _data = {
 }
 point_count = 5
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_gxjgi"]
-size = Vector3(0.858887, 0.651489, 1.90625)
-
 [node name="M27" type="VehicleBody3D"]
-
-[node name="Node3D" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1655, -1.2454)
-
-[node name="LeftTread" type="Path3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.280758, -0.157092, 0.456713)
-curve = SubResource("Curve3D_sg6ns")
-script = ExtResource("1_kruho")
-
-[node name="PathFollow3D" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D2" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D2" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D3" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D3" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D4" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D4" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D5" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D5" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D6" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D6" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D7" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D7" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D8" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D8" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D9" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D9" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D10" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D10" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D11" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D11" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D12" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D12" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D13" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D13" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D14" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D14" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D15" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D15" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D16" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D16" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D17" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D17" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D18" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D18" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D19" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D19" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D20" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D20" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D21" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D21" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D22" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D22" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D23" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D23" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D24" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D24" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D25" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D25" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D26" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D26" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D27" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D27" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D28" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D28" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D29" type="PathFollow3D" parent="Node3D/LeftTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/LeftTread/PathFollow3D29" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="RightTread" type="Path3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.347551, -0.157092, 0.456713)
-curve = SubResource("Curve3D_sg6ns")
-script = ExtResource("3_qojyu")
-
-[node name="PathFollow3D" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D2" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D2" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D3" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D3" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D4" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D4" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D5" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D5" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D6" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D6" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D7" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D7" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D8" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D8" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D9" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D9" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D10" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D10" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D11" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D11" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D12" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D12" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D13" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D13" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D14" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D14" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D15" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D15" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D16" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D16" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D17" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D17" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D18" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D18" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D19" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D19" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D20" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D20" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D21" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D21" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D22" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D22" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D23" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D23" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D24" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D24" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D25" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D25" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D26" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D26" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D27" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D27" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D28" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D28" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
-
-[node name="PathFollow3D29" type="PathFollow3D" parent="Node3D/RightTread"]
-transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
-
-[node name="m27_tread" parent="Node3D/RightTread/PathFollow3D29" instance=ExtResource("2_01gqd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+script = ExtResource("1_viote")
 
 [node name="m27_body" parent="." instance=ExtResource("4_ryage")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00561523, -0.0282931, -0.939129)
 shape = SubResource("BoxShape3D_gxjgi")
+
+[node name="LeftTread" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.280758, -0.322592, -0.788687)
+curve = SubResource("Curve3D_sg6ns")
+script = ExtResource("1_kruho")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D2" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D2" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D3" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D3" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D4" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D4" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D5" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D5" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D6" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D6" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D7" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D7" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D8" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D8" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D9" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D9" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D10" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D10" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D11" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D11" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D12" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D12" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D13" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D13" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D14" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D14" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D15" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D15" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D16" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D16" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D17" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D17" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D18" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D18" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D19" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D19" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D20" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D20" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D21" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D21" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D22" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D22" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D23" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D23" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D24" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D24" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D25" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D25" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D26" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D26" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D27" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D27" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D28" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D28" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D29" type="PathFollow3D" parent="LeftTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="LeftTread/PathFollow3D29" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="RightTread" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.347551, -0.322592, -0.788687)
+curve = SubResource("Curve3D_sg6ns")
+script = ExtResource("3_qojyu")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D2" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D2" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D3" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D3" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D4" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D4" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D5" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D5" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D6" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D6" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D7" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D7" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D8" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D8" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D9" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D9" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D10" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D10" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D11" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D11" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D12" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D12" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D13" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D13" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D14" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D14" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D15" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D15" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D16" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D16" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D17" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D17" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D18" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D18" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D19" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D19" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D20" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D20" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D21" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D21" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D22" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D22" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D23" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D23" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D24" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D24" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D25" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D25" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D26" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D26" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D27" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D27" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D28" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D28" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="PathFollow3D29" type="PathFollow3D" parent="RightTread"]
+transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.999981, 3.57628e-06, 0.00254852, 0.00361031)
+
+[node name="m27_tread" parent="RightTread/PathFollow3D29" instance=ExtResource("2_01gqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
+
+[node name="LeftWheel" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-0.35, 0, -3.0598e-08, 0, 0.35, 0, 3.0598e-08, 0, -0.35, 0.399, -0.172966, -1.27)
+use_as_traction = true
+wheel_rest_length = 0.025
+suspension_travel = 0.05
+suspension_stiffness = 50.0
+
+[node name="RightWheel" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-0.35, 0, -5.28485e-08, 0, 0.35, 0, 5.28485e-08, 0, -0.35, -0.398569, -0.172966, -1.27)
+use_as_traction = true
+wheel_rest_length = 0.025
+suspension_travel = 0.05
+suspension_stiffness = 50.0
+
+[node name="LeftWheelBack" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-0.35, 0, -3.0598e-08, 0, 0.35, 0, 3.0598e-08, 0, -0.35, 0.399, -0.150875, -0.799193)
+wheel_rest_length = 0.05
+wheel_friction_slip = 0.1
+suspension_travel = 0.1
+suspension_stiffness = 50.0
+
+[node name="RightWheelBack" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-0.35, 0, -5.28485e-08, 0, 0.35, 0, 5.28485e-08, 0, -0.35, -0.398569, -0.150875, -0.799193)
+wheel_rest_length = 0.05
+wheel_friction_slip = 0.1
+suspension_travel = 0.1
+suspension_stiffness = 50.0
+
+[node name="LeftWheelFront" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-0.35, 0, -3.0598e-08, 0, 0.35, 0, 3.0598e-08, 0, -0.35, 0.399, -0.150875, -1.6821)
+wheel_rest_length = 0.05
+wheel_friction_slip = 0.1
+suspension_travel = 0.1
+suspension_stiffness = 50.0
+
+[node name="RightWheelFront" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-0.35, 0, -5.28485e-08, 0, 0.35, 0, 5.28485e-08, 0, -0.35, -0.398569, -0.150875, -1.6821)
+wheel_rest_length = 0.05
+wheel_friction_slip = 0.1
+suspension_travel = 0.1
+suspension_stiffness = 50.0
