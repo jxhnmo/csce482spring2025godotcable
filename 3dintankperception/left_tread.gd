@@ -8,6 +8,7 @@ var offset = 0.5
 @onready var links = $".".get_children()
 
 func _process(delta):
+	
 	time += delta
 	
 	var count = 0
