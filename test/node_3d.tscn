@@ -58,6 +58,9 @@ surface_material_override/3 = SubResource("StandardMaterial3D_145do")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.478202, -0.0335512)
 shape = SubResource("BoxShape3D_5irpr")
 
+[node name="Camera3D2" type="Camera3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60519, 0)
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.840425, 0.541928, 0, -0.541928, 0.840425, 0, 37.2962, 18.0821)
 
