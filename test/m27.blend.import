@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://d1echwu78rkw"
+uid="uid://ec2gqejo8gjc"
 path="res://.godot/imported/m27.blend-b2c67acf851420df3e85b08465d85288.scn"
 
 [deps]
@@ -31,16 +31,7 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-_subresources={
-"nodes": {
-"PATH:Camera": {
-"import/skip_import": true
-},
-"PATH:Light": {
-"import/skip_import": true
-}
-}
-}
+_subresources={}
 blender/nodes/visible=0
 blender/nodes/active_collection_only=false
 blender/nodes/punctual_lights=true
