@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/m27_tread.blend-290845bb07debbc2aba2f2cd948fc
 
 [params]
 
-nodes/root_type=""
+nodes/root_type="MeshInstance3D"
 nodes/root_name=""
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
