@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://p0dsplwu8vuq"]
 
-[ext_resource type="Script" path="res://left_tread.gd" id="1_kruho"]
+[ext_resource type="Script" path="res://tread.gd" id="1_kruho"]
 [ext_resource type="Script" path="res://m27_dozer.gd" id="1_viote"]
 [ext_resource type="PackedScene" uid="uid://df0l1180hmt0x" path="res://models/m27_tread.blend" id="2_01gqd"]
 [ext_resource type="Script" path="res://right_tread.gd" id="3_qojyu"]
