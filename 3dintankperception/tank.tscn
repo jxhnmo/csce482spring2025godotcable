@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bdwn67jvg8r4j"]
+[gd_scene load_steps=8 format=3 uid="uid://bdwn67jvg8r4j"]
 
 [ext_resource type="Script" path="res://DozerTest.gd" id="1_4qhsr"]
 [ext_resource type="PackedScene" uid="uid://ce6dbtmv37r1" path="res://models/m27_body.blend" id="2_ibfkx"]
@@ -20,17 +20,7 @@ glow_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ssp3r"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_1cerv"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_kcvqg"]
-size = Vector3(2.21393, 0.779907, 3.00952)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_fvsq5"]
-
 [node name="Node3D" type="Node3D"]
-
-[node name="m27_body" parent="." instance=ExtResource("2_ibfkx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.60662, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_b23uh")
@@ -57,23 +47,11 @@ shape = SubResource("BoxShape3D_ssp3r")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.51906, 0)
 script = ExtResource("1_4qhsr")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="VehicleBody3D"]
-transform = Transform3D(2.19, 0, 0, 0, 0.71, 0, 0, 0, 3.05, 0, 0, 0)
-mesh = SubResource("BoxMesh_1cerv")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="VehicleBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0103455, 0.000305176, 0.00622559)
-shape = SubResource("BoxShape3D_kcvqg")
-
 [node name="LeftWheelForward" type="VehicleWheel3D" parent="VehicleBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.26541, -0.439451, 1.24866)
 wheel_radius = 0.55
 wheel_friction_slip = 0.1
 suspension_stiffness = 50.0
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="VehicleBody3D/LeftWheelForward"]
-transform = Transform3D(-4.37114e-08, -0.18, 0, 1, -7.86805e-09, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("CylinderMesh_fvsq5")
 
 [node name="RightWheelForward" type="VehicleWheel3D" parent="VehicleBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.265, -0.439047, 1.249)
@@ -81,29 +59,17 @@ wheel_radius = 0.55
 wheel_friction_slip = 0.1
 suspension_stiffness = 50.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="VehicleBody3D/RightWheelForward"]
-transform = Transform3D(-4.37114e-08, -0.18, 0, 1, -7.86805e-09, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("CylinderMesh_fvsq5")
-
 [node name="LeftWheelBack" type="VehicleWheel3D" parent="VehicleBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.26541, -0.439451, -1.26336)
 wheel_radius = 0.55
 wheel_friction_slip = 0.1
 suspension_stiffness = 50.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="VehicleBody3D/LeftWheelBack"]
-transform = Transform3D(-4.37114e-08, -0.18, 0, 1, -7.86805e-09, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("CylinderMesh_fvsq5")
-
 [node name="RightWheelBack" type="VehicleWheel3D" parent="VehicleBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.265, -0.439047, -1.263)
 wheel_radius = 0.55
 wheel_friction_slip = 0.1
 suspension_stiffness = 50.0
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="VehicleBody3D/RightWheelBack"]
-transform = Transform3D(-4.37114e-08, -0.18, 0, 1, -7.86805e-09, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("CylinderMesh_fvsq5")
 
 [node name="LeftWheel" type="VehicleWheel3D" parent="VehicleBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.26541, -0.439451, -0.0152591)
@@ -113,10 +79,6 @@ wheel_friction_slip = 100.0
 suspension_stiffness = 50.0
 damping_relaxation = 0.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="VehicleBody3D/LeftWheel"]
-transform = Transform3D(-4.37114e-08, -0.18, 0, 1, -7.86805e-09, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("CylinderMesh_fvsq5")
-
 [node name="RightWheel" type="VehicleWheel3D" parent="VehicleBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.265, -0.439, -0.015)
 use_as_traction = true
@@ -125,6 +87,6 @@ wheel_friction_slip = 100.0
 suspension_stiffness = 50.0
 damping_relaxation = 0.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="VehicleBody3D/RightWheel"]
-transform = Transform3D(-4.37114e-08, -0.18, 0, 1, -7.86805e-09, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("CylinderMesh_fvsq5")
+[node name="m27_body" parent="VehicleBody3D" instance=ExtResource("2_ibfkx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0836291, 0)
+skeleton = NodePath("../..")
