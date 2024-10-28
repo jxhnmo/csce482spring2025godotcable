@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/m27_body.blend-cc5561325f2365f37f31cab2417dc5
 
 [params]
 
-nodes/root_type=""
+nodes/root_type="VehicleBody3D"
 nodes/root_name=""
 nodes/apply_root_scale=true
 nodes/root_scale=1.0

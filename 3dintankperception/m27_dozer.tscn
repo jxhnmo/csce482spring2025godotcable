@@ -6,9 +6,6 @@
 [ext_resource type="Script" path="res://right_tread.gd" id="3_qojyu"]
 [ext_resource type="PackedScene" uid="uid://ce6dbtmv37r1" path="res://models/m27_body.blend" id="4_ryage"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_gxjgi"]
-size = Vector3(0.858887, 0.651489, 1.90625)
-
 [sub_resource type="Curve3D" id="Curve3D_sg6ns"]
 _data = {
 "points": PackedVector3Array(0, -0.00148302, 0.242326, 0, 0.00148302, -0.242326, 3.57628e-06, 0.00254852, 0.00361031, 0, 0, 0.2, 0, 0, -0.2, 3.57628e-06, 0.00199497, -0.914797, 0, 0, -0.3, 0, 0, 0.3, 3.57628e-06, 0.354376, -0.88481, 0, -0.00228274, -0.283056, 0, 0.00228274, 0.283056, 3.57628e-06, 0.341112, 0.0161873, 0, -0.0723247, 0.119103, 0, 0.0723247, -0.119103, 3.57628e-06, 0.00254852, 0.00361031),
@@ -16,17 +13,16 @@ _data = {
 }
 point_count = 5
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_71osw"]
+size = Vector3(1, 0.622131, 1.83612)
+
 [node name="M27" type="VehicleBody3D"]
 script = ExtResource("1_viote")
 
 [node name="m27_body" parent="." instance=ExtResource("4_ryage")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00561523, -0.0282931, -0.939129)
-shape = SubResource("BoxShape3D_gxjgi")
-
 [node name="LeftTread" type="Path3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.280758, -0.322592, -0.788687)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.280758, -0.322592, 0.420819)
 curve = SubResource("Curve3D_sg6ns")
 script = ExtResource("1_kruho")
 
@@ -205,7 +201,7 @@ transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.9999
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
 
 [node name="RightTread" type="Path3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.347551, -0.322592, -0.788687)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.281, -0.323, 0.421)
 curve = SubResource("Curve3D_sg6ns")
 script = ExtResource("3_qojyu")
 
@@ -384,43 +380,47 @@ transform = Transform3D(1, 0, 0, 0, 0.999981, -0.00611982, 0, 0.00611982, 0.9999
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0351152, 0, 0)
 
 [node name="LeftWheel" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-0.35, 0, -3.0598e-08, 0, 0.35, 0, 3.0598e-08, 0, -0.35, 0.399, -0.172966, -1.27)
+transform = Transform3D(-0.35, 0, -3.0598e-08, 0, 0.35, 0, 3.0598e-08, 0, -0.35, 0.45, -0.168203, 0.325717)
 use_as_traction = true
-wheel_rest_length = 0.025
-suspension_travel = 0.05
+wheel_rest_length = 0.015
+suspension_travel = 0.03
 suspension_stiffness = 50.0
 
 [node name="RightWheel" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-0.35, 0, -5.28485e-08, 0, 0.35, 0, 5.28485e-08, 0, -0.35, -0.398569, -0.172966, -1.27)
+transform = Transform3D(-0.35, 0, -5.28485e-08, 0, 0.35, 0, 5.28485e-08, 0, -0.35, -0.45, -0.168203, 0.325717)
 use_as_traction = true
-wheel_rest_length = 0.025
-suspension_travel = 0.05
+wheel_rest_length = 0.015
+suspension_travel = 0.03
 suspension_stiffness = 50.0
 
 [node name="LeftWheelBack" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-0.35, 0, -3.0598e-08, 0, 0.35, 0, 3.0598e-08, 0, -0.35, 0.399, -0.150875, -0.799193)
-wheel_rest_length = 0.05
+transform = Transform3D(-0.35, 0, -3.0598e-08, 0, 0.35, 0, 3.0598e-08, 0, -0.35, 0.45, -0.168259, 0.796524)
+wheel_rest_length = 0.015
 wheel_friction_slip = 0.1
-suspension_travel = 0.1
+suspension_travel = 0.03
 suspension_stiffness = 50.0
 
 [node name="RightWheelBack" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-0.35, 0, -5.28485e-08, 0, 0.35, 0, 5.28485e-08, 0, -0.35, -0.398569, -0.150875, -0.799193)
-wheel_rest_length = 0.05
+transform = Transform3D(-0.35, 0, -5.28485e-08, 0, 0.35, 0, 5.28485e-08, 0, -0.35, -0.45, -0.168259, 0.796524)
+wheel_rest_length = 0.015
 wheel_friction_slip = 0.1
-suspension_travel = 0.1
+suspension_travel = 0.03
 suspension_stiffness = 50.0
 
 [node name="LeftWheelFront" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-0.35, 0, -3.0598e-08, 0, 0.35, 0, 3.0598e-08, 0, -0.35, 0.399, -0.150875, -1.6821)
-wheel_rest_length = 0.05
+transform = Transform3D(-0.35, 0, -3.0598e-08, 0, 0.35, 0, 3.0598e-08, 0, -0.35, 0.45, -0.168259, -0.0863877)
+wheel_rest_length = 0.015
 wheel_friction_slip = 0.1
-suspension_travel = 0.1
+suspension_travel = 0.03
 suspension_stiffness = 50.0
 
 [node name="RightWheelFront" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-0.35, 0, -5.28485e-08, 0, 0.35, 0, 5.28485e-08, 0, -0.35, -0.398569, -0.150875, -1.6821)
-wheel_rest_length = 0.05
+transform = Transform3D(-0.35, 0, -5.28485e-08, 0, 0.35, 0, 5.28485e-08, 0, -0.35, -0.45, -0.168259, -0.0863877)
+wheel_rest_length = 0.015
 wheel_friction_slip = 0.1
-suspension_travel = 0.1
+suspension_travel = 0.03
 suspension_stiffness = 50.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0243225, 0.288483)
+shape = SubResource("BoxShape3D_71osw")
