@@ -67,6 +67,8 @@ wheel_rest_length = 0.049
 wheel_friction_slip = 0.1
 suspension_travel = 0.065
 suspension_stiffness = 50.0
+damping_compression = 1.0
+damping_relaxation = 1.0
 
 [node name="RightWheelForward" type="VehicleWheel3D" parent="M27"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.382, -0.102863, 0.417825)
@@ -75,6 +77,8 @@ wheel_rest_length = 0.049
 wheel_friction_slip = 0.1
 suspension_travel = 0.065
 suspension_stiffness = 50.0
+damping_compression = 1.0
+damping_relaxation = 1.0
 
 [node name="LeftWheelBack" type="VehicleWheel3D" parent="M27"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.38221, -0.0918806, -0.484328)
@@ -83,6 +87,8 @@ wheel_rest_length = 0.049
 wheel_friction_slip = 0.1
 suspension_travel = 0.065
 suspension_stiffness = 50.0
+damping_compression = 1.0
+damping_relaxation = 1.0
 
 [node name="RightWheelBack" type="VehicleWheel3D" parent="M27"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.382, -0.102863, -0.483968)
@@ -91,26 +97,32 @@ wheel_rest_length = 0.049
 wheel_friction_slip = 0.1
 suspension_travel = 0.065
 suspension_stiffness = 50.0
+damping_compression = 1.0
+damping_relaxation = 1.0
 
 [node name="LeftWheel" type="VehicleWheel3D" parent="M27"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.38221, -0.0918806, -0.0152591)
+brake = 1.5
 use_as_traction = true
 wheel_radius = 0.178
 wheel_rest_length = 0.049
-wheel_friction_slip = 100.0
+wheel_friction_slip = 1000.0
 suspension_travel = 0.065
 suspension_stiffness = 50.0
-damping_relaxation = 0.0
+damping_compression = 1.0
+damping_relaxation = 1.0
 
 [node name="RightWheel" type="VehicleWheel3D" parent="M27"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.382, -0.102816, -0.015)
+brake = 1.5
 use_as_traction = true
 wheel_radius = 0.178
 wheel_rest_length = 0.049
-wheel_friction_slip = 100.0
+wheel_friction_slip = 1000.0
 suspension_travel = 0.065
 suspension_stiffness = 50.0
-damping_relaxation = 0.0
+damping_compression = 1.0
+damping_relaxation = 1.0
 
 [node name="m27_body" parent="M27" instance=ExtResource("2_ibfkx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0836291, 0)
