@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bdwn67jvg8r4j"]
+[gd_scene load_steps=11 format=3 uid="uid://bdwn67jvg8r4j"]
 
 [ext_resource type="Script" path="res://DozerTest.gd" id="1_4qhsr"]
+[ext_resource type="PackedScene" uid="uid://ce6dbtmv37r1" path="res://models/m27_body.blend" id="2_ibfkx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pxr2w"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -28,6 +29,9 @@ size = Vector3(2.21393, 0.779907, 3.00952)
 
 [node name="Node3D" type="Node3D"]
 
+[node name="m27_body" parent="." instance=ExtResource("2_ibfkx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.60662, 0)
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_b23uh")
 
@@ -36,8 +40,7 @@ transform = Transform3D(-0.0034906, -0.999994, -4.37111e-08, 0, -4.37114e-08, 1,
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.601815, -0.312052, 0.735148, 0, 0.920505, 0.390731, -0.798635, 0.235148, -0.553974, 2.41081, 1.18912, -3.28249)
-fov = 61.1604
+transform = Transform3D(-0.882464, -0.183792, 0.432987, 0, 0.920505, 0.390731, -0.47038, 0.344806, -0.812312, 6.46898, 6.82534, -13.0388)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
