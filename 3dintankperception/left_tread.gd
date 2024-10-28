@@ -11,7 +11,7 @@ var offset = 0.72
 
 func _process(delta):
 	
-	speed = -tank.right / speed_div
+	speed = -tank.left / speed_div
 	
 	time += delta
 	var count = 0

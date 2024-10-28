@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://bdwn67jvg8r4j"]
+[gd_scene load_steps=13 format=3 uid="uid://bdwn67jvg8r4j"]
 
 [ext_resource type="Script" path="res://DozerTest.gd" id="1_4qhsr"]
 [ext_resource type="PackedScene" uid="uid://ce6dbtmv37r1" path="res://models/m27_body.blend" id="2_ibfkx"]
-[ext_resource type="Script" path="res://tread.gd" id="3_e2c6f"]
+[ext_resource type="Script" path="res://left_tread.gd" id="3_e2c6f"]
 [ext_resource type="PackedScene" uid="uid://df0l1180hmt0x" path="res://models/m27_tread.blend" id="4_de32s"]
+[ext_resource type="Script" path="res://right_tread.gd" id="5_l0q7c"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pxr2w"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -121,181 +122,181 @@ curve = SubResource("Curve3D_1qq5d")
 script = ExtResource("3_e2c6f")
 
 [node name="Tread" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread" instance=ExtResource("4_de32s")]
 
 [node name="Tread2" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread2" instance=ExtResource("4_de32s")]
 
 [node name="Tread3" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread3" instance=ExtResource("4_de32s")]
 
 [node name="Tread4" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread4" instance=ExtResource("4_de32s")]
 
 [node name="Tread5" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread5" instance=ExtResource("4_de32s")]
 
 [node name="Tread6" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread6" instance=ExtResource("4_de32s")]
 
 [node name="Tread7" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread7" instance=ExtResource("4_de32s")]
 
 [node name="Tread8" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread8" instance=ExtResource("4_de32s")]
 
 [node name="Tread9" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread9" instance=ExtResource("4_de32s")]
 
 [node name="Tread10" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread10" instance=ExtResource("4_de32s")]
 
 [node name="Tread11" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread11" instance=ExtResource("4_de32s")]
 
 [node name="Tread12" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread12" instance=ExtResource("4_de32s")]
 
 [node name="Tread13" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread13" instance=ExtResource("4_de32s")]
 
 [node name="Tread14" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread14" instance=ExtResource("4_de32s")]
 
 [node name="Tread15" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread15" instance=ExtResource("4_de32s")]
 
 [node name="Tread16" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread16" instance=ExtResource("4_de32s")]
 
 [node name="Tread17" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread17" instance=ExtResource("4_de32s")]
 
 [node name="Tread18" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread18" instance=ExtResource("4_de32s")]
 
 [node name="Tread19" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread19" instance=ExtResource("4_de32s")]
 
 [node name="Tread20" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread20" instance=ExtResource("4_de32s")]
 
 [node name="Tread21" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread21" instance=ExtResource("4_de32s")]
 
 [node name="Tread22" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread22" instance=ExtResource("4_de32s")]
 
 [node name="Tread23" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread23" instance=ExtResource("4_de32s")]
 
 [node name="Tread24" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread24" instance=ExtResource("4_de32s")]
 
 [node name="Tread25" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread25" instance=ExtResource("4_de32s")]
 
 [node name="Tread26" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread26" instance=ExtResource("4_de32s")]
 
 [node name="Tread27" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread27" instance=ExtResource("4_de32s")]
 
 [node name="Tread28" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread28" instance=ExtResource("4_de32s")]
 
 [node name="Tread29" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread29" instance=ExtResource("4_de32s")]
 
 [node name="Tread30" type="PathFollow3D" parent="M27/LeftTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/LeftTread/Tread30" instance=ExtResource("4_de32s")]
@@ -303,184 +304,184 @@ rotation_mode = 4
 [node name="RightTread" type="Path3D" parent="M27"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.289, -0.23, -0.021)
 curve = SubResource("Curve3D_1qq5d")
-script = ExtResource("3_e2c6f")
+script = ExtResource("5_l0q7c")
 
 [node name="Tread" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread" instance=ExtResource("4_de32s")]
 
 [node name="Tread2" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread2" instance=ExtResource("4_de32s")]
 
 [node name="Tread3" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread3" instance=ExtResource("4_de32s")]
 
 [node name="Tread4" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread4" instance=ExtResource("4_de32s")]
 
 [node name="Tread5" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread5" instance=ExtResource("4_de32s")]
 
 [node name="Tread6" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread6" instance=ExtResource("4_de32s")]
 
 [node name="Tread7" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread7" instance=ExtResource("4_de32s")]
 
 [node name="Tread8" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread8" instance=ExtResource("4_de32s")]
 
 [node name="Tread9" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread9" instance=ExtResource("4_de32s")]
 
 [node name="Tread10" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread10" instance=ExtResource("4_de32s")]
 
 [node name="Tread11" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread11" instance=ExtResource("4_de32s")]
 
 [node name="Tread12" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread12" instance=ExtResource("4_de32s")]
 
 [node name="Tread13" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread13" instance=ExtResource("4_de32s")]
 
 [node name="Tread14" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread14" instance=ExtResource("4_de32s")]
 
 [node name="Tread15" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread15" instance=ExtResource("4_de32s")]
 
 [node name="Tread16" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread16" instance=ExtResource("4_de32s")]
 
 [node name="Tread17" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread17" instance=ExtResource("4_de32s")]
 
 [node name="Tread18" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread18" instance=ExtResource("4_de32s")]
 
 [node name="Tread19" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread19" instance=ExtResource("4_de32s")]
 
 [node name="Tread20" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread20" instance=ExtResource("4_de32s")]
 
 [node name="Tread21" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread21" instance=ExtResource("4_de32s")]
 
 [node name="Tread22" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread22" instance=ExtResource("4_de32s")]
 
 [node name="Tread23" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread23" instance=ExtResource("4_de32s")]
 
 [node name="Tread24" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread24" instance=ExtResource("4_de32s")]
 
 [node name="Tread25" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread25" instance=ExtResource("4_de32s")]
 
 [node name="Tread26" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread26" instance=ExtResource("4_de32s")]
 
 [node name="Tread27" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread27" instance=ExtResource("4_de32s")]
 
 [node name="Tread28" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread28" instance=ExtResource("4_de32s")]
 
 [node name="Tread29" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread29" instance=ExtResource("4_de32s")]
 
 [node name="Tread30" type="PathFollow3D" parent="M27/RightTread"]
-transform = Transform3D(-1, 3.39031e-06, -7.48148e-05, 0, 0.998975, 0.0452696, 7.48916e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
+transform = Transform3D(-1, 3.39032e-06, -7.48149e-05, 0, 0.998975, 0.0452696, 7.48917e-05, 0.0452696, -0.998975, 0, 0.00248486, -0.00129479)
 rotation_mode = 4
 
 [node name="m27_tread" parent="M27/RightTread/Tread30" instance=ExtResource("4_de32s")]
