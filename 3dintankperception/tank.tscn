@@ -48,7 +48,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.525266, 0)
 script = ExtResource("1_4qhsr")
 
 [node name="LeftWheelForward" type="VehicleWheel3D" parent="VehicleBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.26541, -0.439451, 1.24866)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.38221, -0.0510174, 0.417485)
 wheel_radius = 0.178
 wheel_rest_length = 0.049
 wheel_friction_slip = 0.1
@@ -56,7 +56,7 @@ suspension_travel = 0.065
 suspension_stiffness = 50.0
 
 [node name="RightWheelForward" type="VehicleWheel3D" parent="VehicleBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.265, -0.439047, 1.249)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.382, -0.0620001, 0.417825)
 wheel_radius = 0.178
 wheel_rest_length = 0.049
 wheel_friction_slip = 0.1
@@ -64,7 +64,7 @@ suspension_travel = 0.065
 suspension_stiffness = 50.0
 
 [node name="LeftWheelBack" type="VehicleWheel3D" parent="VehicleBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.26541, -0.439451, -1.26336)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.38221, -0.0510174, -0.484328)
 wheel_radius = 0.178
 wheel_rest_length = 0.049
 wheel_friction_slip = 0.1
@@ -72,7 +72,7 @@ suspension_travel = 0.065
 suspension_stiffness = 50.0
 
 [node name="RightWheelBack" type="VehicleWheel3D" parent="VehicleBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.265, -0.439047, -1.263)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.382, -0.0620001, -0.483968)
 wheel_radius = 0.178
 wheel_rest_length = 0.049
 wheel_friction_slip = 0.1
@@ -80,7 +80,7 @@ suspension_travel = 0.065
 suspension_stiffness = 50.0
 
 [node name="LeftWheel" type="VehicleWheel3D" parent="VehicleBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.26541, -0.439451, -0.0152591)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.38221, -0.0510174, -0.0152591)
 use_as_traction = true
 wheel_radius = 0.178
 wheel_rest_length = 0.049
@@ -90,7 +90,7 @@ suspension_stiffness = 50.0
 damping_relaxation = 0.0
 
 [node name="RightWheel" type="VehicleWheel3D" parent="VehicleBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.265, -0.439, -0.015)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.382, -0.0619531, -0.015)
 use_as_traction = true
 wheel_radius = 0.178
 wheel_rest_length = 0.049
