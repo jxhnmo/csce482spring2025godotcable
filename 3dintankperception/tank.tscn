@@ -44,46 +44,58 @@ transform = Transform3D(18.75, 0, 0, 0, 3.4, 0, 0, 0, 24.24, 0, -1.63707, -0.792
 shape = SubResource("BoxShape3D_ssp3r")
 
 [node name="VehicleBody3D" type="VehicleBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.51906, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.525266, 0)
 script = ExtResource("1_4qhsr")
 
 [node name="LeftWheelForward" type="VehicleWheel3D" parent="VehicleBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.26541, -0.439451, 1.24866)
-wheel_radius = 0.55
+wheel_radius = 0.178
+wheel_rest_length = 0.049
 wheel_friction_slip = 0.1
+suspension_travel = 0.065
 suspension_stiffness = 50.0
 
 [node name="RightWheelForward" type="VehicleWheel3D" parent="VehicleBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.265, -0.439047, 1.249)
-wheel_radius = 0.55
+wheel_radius = 0.178
+wheel_rest_length = 0.049
 wheel_friction_slip = 0.1
+suspension_travel = 0.065
 suspension_stiffness = 50.0
 
 [node name="LeftWheelBack" type="VehicleWheel3D" parent="VehicleBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.26541, -0.439451, -1.26336)
-wheel_radius = 0.55
+wheel_radius = 0.178
+wheel_rest_length = 0.049
 wheel_friction_slip = 0.1
+suspension_travel = 0.065
 suspension_stiffness = 50.0
 
 [node name="RightWheelBack" type="VehicleWheel3D" parent="VehicleBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.265, -0.439047, -1.263)
-wheel_radius = 0.55
+wheel_radius = 0.178
+wheel_rest_length = 0.049
 wheel_friction_slip = 0.1
+suspension_travel = 0.065
 suspension_stiffness = 50.0
 
 [node name="LeftWheel" type="VehicleWheel3D" parent="VehicleBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.26541, -0.439451, -0.0152591)
 use_as_traction = true
-wheel_radius = 0.55
+wheel_radius = 0.178
+wheel_rest_length = 0.049
 wheel_friction_slip = 100.0
+suspension_travel = 0.065
 suspension_stiffness = 50.0
 damping_relaxation = 0.0
 
 [node name="RightWheel" type="VehicleWheel3D" parent="VehicleBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.265, -0.439, -0.015)
 use_as_traction = true
-wheel_radius = 0.55
+wheel_radius = 0.178
+wheel_rest_length = 0.049
 wheel_friction_slip = 100.0
+suspension_travel = 0.065
 suspension_stiffness = 50.0
 damping_relaxation = 0.0
 
