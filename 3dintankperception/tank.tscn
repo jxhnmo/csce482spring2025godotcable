@@ -22,6 +22,7 @@ glow_enabled = true
 [sub_resource type="BoxMesh" id="BoxMesh_oad8t"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ssp3r"]
+size = Vector3(1, 3.39557, 24.4509)
 
 [sub_resource type="Curve3D" id="Curve3D_1qq5d"]
 _data = {
@@ -53,7 +54,7 @@ mesh = SubResource("BoxMesh_oad8t")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(18.75, 0, 0, 0, 3.4, 0, 0, 0, 24.24, 0, -1.63707, -0.79247)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.6277, -0.811391)
 shape = SubResource("BoxShape3D_ssp3r")
 
 [node name="M27" type="VehicleBody3D" parent="."]
