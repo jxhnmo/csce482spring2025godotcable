@@ -15,9 +15,10 @@ func _physics_process(delta: float) -> void:
 	right = int((Input.get_action_raw_strength("right_tread_forward")
 		- Input.get_action_raw_strength("right_tread_backward")) * 10)
 	
-	print(left)
-	print(right)
-	print("--------")
+	# Debug output
+	#print(left)
+	#print(right)
+	#print("--------")
 	
 	$LeftWheel.engine_force = left * speed
 	$RightWheel.engine_force = right * speed
