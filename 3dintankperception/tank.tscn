@@ -31,7 +31,7 @@ _data = {
 point_count = 8
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tygfx"]
-size = Vector3(0.702148, 0.579834, 1.22614)
+size = Vector3(0.702148, 0.579834, 2.44124)
 
 [node name="Node3D" type="Node3D"]
 
@@ -106,7 +106,7 @@ brake = 1.5
 use_as_traction = true
 wheel_radius = 0.178
 wheel_rest_length = 0.049
-wheel_friction_slip = 1000.0
+wheel_friction_slip = 1.0
 suspension_travel = 0.065
 suspension_stiffness = 50.0
 damping_compression = 1.0
@@ -118,7 +118,7 @@ brake = 1.5
 use_as_traction = true
 wheel_radius = 0.178
 wheel_rest_length = 0.049
-wheel_friction_slip = 1000.0
+wheel_friction_slip = 1.0
 suspension_travel = 0.065
 suspension_stiffness = 50.0
 damping_compression = 1.0
@@ -499,5 +499,5 @@ rotation_mode = 4
 [node name="m27_tread" parent="M27/RightTread/Tread30" instance=ExtResource("4_de32s")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="M27"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000488281, 0.0859485, 0.0017395)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000488281, 0.0859485, -0.0197836)
 shape = SubResource("BoxShape3D_tygfx")
