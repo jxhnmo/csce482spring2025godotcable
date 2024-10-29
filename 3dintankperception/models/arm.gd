@@ -1,4 +1,4 @@
-extends Node3D
+extends CharacterBody3D
 
 var arm_speed = 0.5
 

@@ -1,6 +1,6 @@
 extends VehicleBody3D
 
-var speed = 20
+var speed = 5
 var left
 var right
 
