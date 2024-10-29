@@ -62,13 +62,12 @@ shape = SubResource("BoxShape3D_ssp3r")
 
 [node name="M27" type="VehicleBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.525266, 0)
-mass = 1077.0
+brake = 2.0
 script = ExtResource("1_4qhsr")
 
 [node name="LeftWheelForward" type="VehicleWheel3D" parent="M27"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.38221, -0.0918806, 0.417485)
-engine_force = 90.0
-use_as_traction = true
+brake = 2.0
 wheel_radius = 0.178
 wheel_rest_length = 0.049
 wheel_friction_slip = 0.1
@@ -79,8 +78,7 @@ damping_relaxation = 1.0
 
 [node name="RightWheelForward" type="VehicleWheel3D" parent="M27"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.382, -0.102863, 0.417825)
-engine_force = 90.0
-use_as_traction = true
+brake = 2.0
 wheel_radius = 0.178
 wheel_rest_length = 0.049
 wheel_friction_slip = 0.1
@@ -91,8 +89,7 @@ damping_relaxation = 1.0
 
 [node name="LeftWheelBack" type="VehicleWheel3D" parent="M27"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.38221, -0.0918806, -0.484328)
-engine_force = 90.0
-use_as_traction = true
+brake = 2.0
 wheel_radius = 0.178
 wheel_rest_length = 0.049
 wheel_friction_slip = 0.1
@@ -103,8 +100,7 @@ damping_relaxation = 1.0
 
 [node name="RightWheelBack" type="VehicleWheel3D" parent="M27"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.382, -0.102863, -0.483968)
-engine_force = 90.0
-use_as_traction = true
+brake = 2.0
 wheel_radius = 0.178
 wheel_rest_length = 0.049
 wheel_friction_slip = 0.1
@@ -115,8 +111,7 @@ damping_relaxation = 1.0
 
 [node name="LeftWheel" type="VehicleWheel3D" parent="M27"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.38221, -0.0918806, -0.0152591)
-engine_force = 90.0
-brake = 1.5
+brake = 2.0
 use_as_traction = true
 wheel_radius = 0.178
 wheel_rest_length = 0.049
@@ -128,8 +123,7 @@ damping_relaxation = 1.0
 
 [node name="RightWheel" type="VehicleWheel3D" parent="M27"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.382, -0.102816, -0.015)
-engine_force = 90.0
-brake = 1.5
+brake = 2.0
 use_as_traction = true
 wheel_radius = 0.178
 wheel_rest_length = 0.049
