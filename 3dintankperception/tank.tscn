@@ -62,6 +62,7 @@ shape = SubResource("BoxShape3D_ssp3r")
 
 [node name="M27" type="VehicleBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.525266, 0)
+mass = 1077.0
 script = ExtResource("1_4qhsr")
 
 [node name="LeftWheelForward" type="VehicleWheel3D" parent="M27"]
