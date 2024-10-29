@@ -1,10 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://bdwn67jvg8r4j"]
+[gd_scene load_steps=15 format=3 uid="uid://bdwn67jvg8r4j"]
 
 [ext_resource type="Script" path="res://DozerTest.gd" id="1_4qhsr"]
 [ext_resource type="PackedScene" uid="uid://ce6dbtmv37r1" path="res://models/m27_body.blend" id="2_ibfkx"]
 [ext_resource type="Script" path="res://left_tread.gd" id="3_e2c6f"]
 [ext_resource type="PackedScene" uid="uid://df0l1180hmt0x" path="res://models/m27_tread.blend" id="4_de32s"]
 [ext_resource type="Script" path="res://right_tread.gd" id="5_l0q7c"]
+[ext_resource type="PackedScene" uid="uid://de0ripd3866nb" path="res://models/arm.glb" id="6_eg5dq"]
+[ext_resource type="Script" path="res://models/arm.gd" id="7_to8d8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pxr2w"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -502,3 +504,7 @@ rotation_mode = 4
 [node name="CollisionShape3D" type="CollisionShape3D" parent="M27"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000488281, 0.0859485, -0.0197836)
 shape = SubResource("BoxShape3D_tygfx")
+
+[node name="arm" parent="M27" instance=ExtResource("6_eg5dq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.286277, 0)
+script = ExtResource("7_to8d8")
