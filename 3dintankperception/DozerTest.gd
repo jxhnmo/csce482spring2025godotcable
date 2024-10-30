@@ -1,6 +1,6 @@
 extends VehicleBody3D
 
-var speed = 5
+var speed = 3
 var left
 var right
 var center_of_mass_marker: MeshInstance3D
