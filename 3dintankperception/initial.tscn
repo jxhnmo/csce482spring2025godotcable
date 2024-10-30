@@ -499,3 +499,12 @@ shape = SubResource("BoxShape3D_ra4f4")
 [node name="arm" parent="M27" instance=ExtResource("7_oidbh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.286277, 0)
 script = ExtResource("8_qu27c")
+
+[node name="CanvasLayer_UI" type="CanvasLayer" parent="M27"]
+
+[node name="infoLabel" type="Label" parent="M27/CanvasLayer_UI"]
+offset_left = 19.0
+offset_top = 22.0
+offset_right = 201.0
+offset_bottom = 80.0
+text = "woahs!"
