@@ -5,7 +5,8 @@ var speed = 3
 var left
 var right
 var center_of_mass_marker: MeshInstance3D
-var first_person_active = true
+var current_camera = 0
+var cameras
 
 # UI elements
 var info_label: Label
@@ -28,6 +29,9 @@ func _ready():
 	
 	$FirstPersonCamera.current = true
 	$ThirdPersonCamera.current = false
+	$AuxCamera.current = false
+	
+	cameras = [$FirstPersonCamera, $ThirdPersonCamera, $AuxCamera]
 	
 	# Get the existing info_label
 	info_label = $CanvasLayer_UI/infoLabel
@@ -65,9 +69,9 @@ func _process(delta):
 	log_data()
 
 func toggle_camera_view():
-	first_person_active = !first_person_active
-	$FirstPersonCamera.current = first_person_active
-	$ThirdPersonCamera.current = !first_person_active
+	cameras[current_camera].current = false
+	current_camera = (current_camera + 1) % 3
+	cameras[current_camera].current = true
 
 func _physics_process(delta: float) -> void:
 	# get keyboard

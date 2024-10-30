@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://di2pakiesly0s"]
+[gd_scene load_steps=15 format=3 uid="uid://di2pakiesly0s"]
 
 [ext_resource type="ArrayMesh" uid="uid://douxg0vqgqyd3" path="res://models/terrain_squares.obj" id="1_xditc"]
 [ext_resource type="Script" path="res://DozerTest.gd" id="2_rxu1w"]
@@ -26,7 +26,11 @@ _data = {
 point_count = 8
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ra4f4"]
-size = Vector3(0.702148, 0.579834, 2.44124)
+size = Vector3(0.702148, 0.579834, 1.53121)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1tjbp"]
+radius = 0.103801
+height = 1.43576
 
 [node name="StaticBody3D" type="StaticBody3D"]
 
@@ -45,7 +49,7 @@ transform = Transform3D(0.129338, -0.385552, 0.913576, 0.0540449, 0.922686, 0.38
 transform = Transform3D(0.399839, 0.410034, -0.819756, -0.179754, 0.91207, 0.368533, 0.898786, 0, 0.438387, -24.9817, 47.2705, 0)
 
 [node name="M27" type="VehicleBody3D" parent="."]
-transform = Transform3D(-0.162672, 0, 0.98668, 0, 1, 0, -0.98668, 0, -0.162672, 20.0666, 4.63871, -5.13975)
+transform = Transform3D(-0.162672, 0, 0.98668, 0, 1, 0, -0.98668, 0, -0.162672, 20.0666, 2.35171, -5.13975)
 script = ExtResource("2_rxu1w")
 
 [node name="FirstPersonCamera" type="Camera3D" parent="M27"]
@@ -53,6 +57,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.681499, 0.47361)
 
 [node name="ThirdPersonCamera" type="Camera3D" parent="M27"]
 transform = Transform3D(1, 0, 0, 0, 0.990389, 0.138309, 0, -0.138309, 0.990389, 0, 2.20891, 3.63034)
+
+[node name="AuxCamera" type="Camera3D" parent="M27"]
+transform = Transform3D(-0.55583, -0.42394, 0.715073, -0.0170305, 0.865816, 0.500072, -0.831122, 0.265777, -0.488466, 2.69737, 1.46607, -1.74183)
 
 [node name="LeftWheelForward" type="VehicleWheel3D" parent="M27"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.38221, -0.0918806, 0.417485)
@@ -493,7 +500,7 @@ rotation_mode = 4
 [node name="m27_tread" parent="M27/RightTread/Tread30" instance=ExtResource("5_76ay1")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="M27"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000488281, 0.0859485, -0.0197836)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000486374, 0.199543, -0.0666752)
 shape = SubResource("BoxShape3D_ra4f4")
 
 [node name="arm" parent="M27" instance=ExtResource("7_oidbh")]
@@ -508,3 +515,11 @@ offset_top = 22.0
 offset_right = 201.0
 offset_bottom = 80.0
 text = "woahs!"
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="M27"]
+transform = Transform3D(1, 0, 4.44089e-16, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.188496, -0.131582, -0.0123978)
+shape = SubResource("CapsuleShape3D_1tjbp")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="M27"]
+transform = Transform3D(1, 0, 4.44089e-16, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.188, -0.132, -0.012)
+shape = SubResource("CapsuleShape3D_1tjbp")
