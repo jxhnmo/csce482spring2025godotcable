@@ -4,6 +4,7 @@ var speed = 3
 var left
 var right
 var center_of_mass_marker: MeshInstance3D
+var first_person_active = true
 
 func _ready():
 	#pass
@@ -16,6 +17,10 @@ func _ready():
 
 	# Add marker as a child of the VehicleBody3D
 	add_child(center_of_mass_marker)
+	
+	$FirstPersonCamera.current = true
+	$ThirdPersonCamera.current = false
+
 
 func _process(delta):
 	# Get the current center of mass position
@@ -23,6 +28,14 @@ func _process(delta):
 	
 	# Update the position of the center of mass marker in local space
 	center_of_mass_marker.transform.origin = com_position
+	
+	if Input.is_action_just_pressed("toggle_view"):
+		toggle_camera_view()
+
+func toggle_camera_view():
+	first_person_active = !first_person_active
+	$FirstPersonCamera.current = first_person_active
+	$ThirdPersonCamera.current = !first_person_active
 	
 func _physics_process(delta: float) -> void:
 	
