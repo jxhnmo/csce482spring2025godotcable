@@ -88,6 +88,12 @@ func _physics_process(delta: float) -> void:
 	else:
 		$LeftWheel.engine_force = left * speed
 		$RightWheel.engine_force = right * speed
+		
+		$LeftWheelForward.engine_force = left * speed
+		$RightWheelForward.engine_force = right * speed
+		
+		$LeftWheelBack.engine_force = left * speed
+		$RightWheelBack.engine_force = right * speed
 
 func is_upright() -> float:
 	var object_up = global_transform.basis.y.normalized()
