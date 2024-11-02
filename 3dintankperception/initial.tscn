@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://di2pakiesly0s"]
+[gd_scene load_steps=14 format=3 uid="uid://di2pakiesly0s"]
 
 [ext_resource type="ArrayMesh" uid="uid://douxg0vqgqyd3" path="res://models/terrain_squares.obj" id="1_xditc"]
 [ext_resource type="Script" path="res://DozerTest.gd" id="2_rxu1w"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://right_tread.gd" id="6_acm2m"]
 [ext_resource type="PackedScene" uid="uid://de0ripd3866nb" path="res://models/arm.glb" id="7_oidbh"]
 [ext_resource type="Script" path="res://models/arm.gd" id="8_qu27c"]
-[ext_resource type="Script" path="res://camera_rig.gd" id="9_c0kfk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v8pu2"]
 albedo_color = Color(0.396078, 0.14902, 0.278431, 1)
@@ -519,7 +518,6 @@ text = "woahs!"
 
 [node name="CameraRig" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9037, 6.52685, 0)
-script = ExtResource("9_c0kfk")
 
 [node name="Camera3D" type="Camera3D" parent="CameraRig"]
 transform = Transform3D(-0.073386, -0.416931, 0.905971, -0.0226138, 0.908882, 0.416439, -0.997047, 0.0100734, -0.0761276, 15.0559, -0.67036, -5.2191)
