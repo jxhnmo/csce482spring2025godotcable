@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://7iqalfa2pels"]
+[gd_scene load_steps=19 format=3 uid="uid://7iqalfa2pels"]
 
 [ext_resource type="Script" path="res://m27_test.gd" id="1_um0wl"]
 [ext_resource type="ArrayMesh" uid="uid://si04ha1jivla" path="res://models/m27_tank_component.obj" id="1_utg0b"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://left_test_tread.gd" id="3_42qme"]
 [ext_resource type="Script" path="res://m27_body_movement.gd" id="4_2jmc0"]
 [ext_resource type="ArrayMesh" uid="uid://ck2erpfmny2rm" path="res://models/m27_tread.obj" id="4_8n4qa"]
+[ext_resource type="ArrayMesh" uid="uid://dca6k7xlp5657" path="res://models/m27_arm_component.obj" id="7_rsby5"]
+[ext_resource type="Script" path="res://m27_arm_movement.gd" id="8_cukpi"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xjx6o"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -679,34 +681,39 @@ script = ExtResource("4_2jmc0")
 shape = SubResource("ConcavePolygonShape3D_omcoe")
 
 [node name="left_middle" type="VehicleWheel3D" parent="m_27"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.539338, -0.0600985, -0.0546167)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.610125, -0.0764589, -0.0546167)
 use_as_traction = true
 wheel_radius = 0.33
 
 [node name="right_middle" type="VehicleWheel3D" parent="m_27"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.539, -0.0599999, -0.0546167)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.61, -0.076, -0.055)
 use_as_traction = true
 wheel_radius = 0.33
 
 [node name="left_front" type="VehicleWheel3D" parent="m_27"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.539338, -0.0600985, 0.748152)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.610125, -0.0764589, 0.748152)
 wheel_radius = 0.33
-wheel_friction_slip = 1.5
+wheel_friction_slip = 0.1
 
 [node name="right_front" type="VehicleWheel3D" parent="m_27"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.539, -0.0599999, 0.748152)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.61, -0.076, 0.748)
 wheel_radius = 0.33
-wheel_friction_slip = 1.5
+wheel_friction_slip = 0.1
 
 [node name="left_back" type="VehicleWheel3D" parent="m_27"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.539338, -0.0600985, -0.805594)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.610125, -0.0764589, -0.805594)
 wheel_radius = 0.33
-wheel_friction_slip = 1.5
+wheel_friction_slip = 0.1
 
 [node name="right_back" type="VehicleWheel3D" parent="m_27"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.539, -0.0599999, -0.805594)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.61, -0.076, -0.806)
 wheel_radius = 0.33
-wheel_friction_slip = 1.5
+wheel_friction_slip = 0.1
+
+[node name="m27_arm" type="MeshInstance3D" parent="m_27"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0122492, 0.0117282)
+mesh = ExtResource("7_rsby5")
+script = ExtResource("8_cukpi")
 
 [node name="Ground" type="MeshInstance3D" parent="."]
 transform = Transform3D(14.12, 0, 0, 0, 14.12, 0, 0, 0, 14.12, 0, 0, 0)
