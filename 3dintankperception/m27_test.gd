@@ -1,6 +1,6 @@
 extends VehicleBody3D
 
-var speed = 20
+var power = 500
 var left
 var right
 
@@ -22,12 +22,12 @@ func _physics_process(delta: float) -> void:
 	
 	# handle only one input
 	if not left and right:
-		$left_middle.engine_force = right * speed
+		$left_middle.engine_force = right * power
 	elif left and not right:
-		$right_middle.engine_force = left * speed
+		$right_middle.engine_force = left * power
 	else:
-		$left_middle.engine_force = left * speed
-		$right_middle.engine_force = right * speed
+		$left_middle.engine_force = left * power
+		$right_middle.engine_force = right * power
 		
 		#$LeftWheelForward.engine_force = left * speed
 		#$RightWheelForward.engine_force = right * speed
