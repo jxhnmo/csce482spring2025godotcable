@@ -26,12 +26,12 @@ func _ready():
 
 	# Add marker as a child of the VehicleBody3D
 	add_child(center_of_mass_marker)
-	cameras = [$FirstPersonCamera, $ThirdPersonCamera, $AuxCamera, get_node("../CameraRig/Camera3D")]
-	
-	$FirstPersonCamera.current = true
-	$ThirdPersonCamera.current = false
-	$AuxCamera.current = false
-	cameras[3].current = false
+	#cameras = [$FirstPersonCamera, $ThirdPersonCamera, $AuxCamera, get_node("../CameraRig/Camera3D")]
+	#
+	#$FirstPersonCamera.current = true
+	#$ThirdPersonCamera.current = false
+	#$AuxCamera.current = false
+	#cameras[3].current = false
 	
 	
 	
@@ -65,16 +65,16 @@ func _process(delta):
 	# Update the position of the center of mass marker in local space
 	center_of_mass_marker.transform.origin = com_position
 	
-	if Input.is_action_just_pressed("toggle_view"):
-		toggle_camera_view()
+	#if Input.is_action_just_pressed("toggle_view"):
+		#toggle_camera_view()
 	
 	update_info_label()
 	log_data()
 
-func toggle_camera_view():
-	cameras[current_camera].current = false
-	current_camera = (current_camera + 1) % cameras.size()
-	cameras[current_camera].current = true
+#func toggle_camera_view():
+	#cameras[current_camera].current = false
+	#current_camera = (current_camera + 1) % cameras.size()
+	#cameras[current_camera].current = true
 
 func _physics_process(delta: float) -> void:
 	# get keyboard
