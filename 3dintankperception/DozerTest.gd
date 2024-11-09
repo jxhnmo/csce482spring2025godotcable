@@ -12,7 +12,7 @@ var cameras
 var info_label: Label
 
 # Logging
-const LOG_FILE_PATH = "user://tank_log.csv" # note this will be in the user dir (search up where that is for ur machine)
+const LOG_FILE_PATH = "user://tank_log_curr1.csv" # note this will be in the user dir (search up where that is for ur machine)
 var log_file: FileAccess
 
 func _ready():
@@ -121,22 +121,42 @@ func update_info_label():
 		print("Info label not found")
 
 func log_data():
-	log_file = FileAccess.open(LOG_FILE_PATH, FileAccess.WRITE)
+	var log_file = FileAccess.open(LOG_FILE_PATH, FileAccess.READ_WRITE)
 	if log_file:
 		var angle_relative_to_ground = is_upright()
 		var is_flipped = angle_relative_to_ground > 45
 		var velocity = linear_velocity
 		var position = global_transform.origin
 		
+	
+		var current_time_us = Time.get_ticks_usec()
+		
+	
+		var datetime = Time.get_datetime_dict_from_system()
+		var microseconds = current_time_us % 1000000
+		var datetime_string = "%04d-%02d-%02d %02d:%02d:%02d.%06d" % [
+			datetime.year, datetime.month, datetime.day,
+			datetime.hour, datetime.minute, datetime.second,
+			microseconds
+		]
+		
 		var log_entry = "%s,%.2f,%.2f,%.2f,%.2f,%s,%.2f,%.2f,%.2f" % [
-			Time.get_datetime_string_from_system(),
+			datetime_string,
 			position.x, position.y, position.z,
 			angle_relative_to_ground, str(is_flipped),
 			velocity.x, velocity.y, velocity.z
 		]
 		
+		# Janky way of saving data every iteration because if the game prematurely end the files doesn't close
+		log_file.seek_end()  
 		log_file.store_line(log_entry)
-		print(log_entry)  # Log to stdout as well
+		log_file.flush() 
+		log_file.close()  
+		print(log_entry)  
+	else:
+		print("Failed to open log file")
+
+
 
 func _exit_tree():
 	if log_file:
