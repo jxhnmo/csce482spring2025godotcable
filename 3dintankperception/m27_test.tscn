@@ -49,7 +49,7 @@ data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0
 [node name="Node3D" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 7.17948, -6.28846)
+transform = Transform3D(-0.866023, -0.433016, 0.250001, -0.290673, 0.842834, 0.452923, -0.406832, 0.319574, -0.85578, 0, 4.82069, -6.28846)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -57,6 +57,7 @@ environment = SubResource("Environment_i8a13")
 
 [node name="m_27" type="VehicleBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22719, 0)
+engine_force = 1024.0
 script = ExtResource("1_um0wl")
 
 [node name="m27_tank" type="MeshInstance3D" parent="m_27"]
@@ -682,33 +683,37 @@ shape = SubResource("ConcavePolygonShape3D_omcoe")
 
 [node name="left_middle" type="VehicleWheel3D" parent="m_27"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.610125, -0.0764589, -0.0546167)
+engine_force = 1024.0
 use_as_traction = true
 wheel_radius = 0.33
+wheel_friction_slip = 1.0
 
 [node name="right_middle" type="VehicleWheel3D" parent="m_27"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.61, -0.076, -0.055)
+engine_force = 1024.0
 use_as_traction = true
 wheel_radius = 0.33
+wheel_friction_slip = 1.0
 
 [node name="left_front" type="VehicleWheel3D" parent="m_27"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.610125, -0.0764589, 0.748152)
 wheel_radius = 0.33
-wheel_friction_slip = 0.1
+wheel_friction_slip = 1.0
 
 [node name="right_front" type="VehicleWheel3D" parent="m_27"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.61, -0.076, 0.748)
 wheel_radius = 0.33
-wheel_friction_slip = 0.1
+wheel_friction_slip = 1.0
 
 [node name="left_back" type="VehicleWheel3D" parent="m_27"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.610125, -0.0764589, -0.805594)
 wheel_radius = 0.33
-wheel_friction_slip = 0.1
+wheel_friction_slip = 1.0
 
 [node name="right_back" type="VehicleWheel3D" parent="m_27"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.61, -0.076, -0.806)
 wheel_radius = 0.33
-wheel_friction_slip = 0.1
+wheel_friction_slip = 1.0
 
 [node name="m27_arm" type="MeshInstance3D" parent="m_27"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0122492, 0.0117282)

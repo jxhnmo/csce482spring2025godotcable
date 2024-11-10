@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bdwn67jvg8r4j"]
+[gd_scene load_steps=11 format=3 uid="uid://bdwn67jvg8r4j"]
 
 [ext_resource type="Script" path="res://DozerTest.gd" id="1_4qhsr"]
 [ext_resource type="PackedScene" uid="uid://ce6dbtmv37r1" path="res://models/m27_body.blend" id="2_ibfkx"]
@@ -7,24 +7,7 @@
 [ext_resource type="Script" path="res://right_tread.gd" id="5_l0q7c"]
 [ext_resource type="PackedScene" uid="uid://de0ripd3866nb" path="res://models/arm.glb" id="6_eg5dq"]
 [ext_resource type="Script" path="res://models/arm.gd" id="7_to8d8"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pxr2w"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-
-[sub_resource type="Sky" id="Sky_cncsk"]
-sky_material = SubResource("ProceduralSkyMaterial_pxr2w")
-
-[sub_resource type="Environment" id="Environment_b23uh"]
-background_mode = 2
-sky = SubResource("Sky_cncsk")
-tonemap_mode = 2
-glow_enabled = true
-
-[sub_resource type="BoxMesh" id="BoxMesh_oad8t"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ssp3r"]
-size = Vector3(18.2733, 3.39557, 24.4509)
+[ext_resource type="Script" path="res://camera_3d.gd" id="8_65ncm"]
 
 [sub_resource type="Curve3D" id="Curve3D_1qq5d"]
 _data = {
@@ -37,27 +20,6 @@ point_count = 8
 size = Vector3(0.702148, 0.579834, 2.44124)
 
 [node name="Node3D" type="Node3D"]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_b23uh")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.0034906, -0.999994, -4.37111e-08, 0, -4.37114e-08, 1, -0.999994, 0.0034906, 1.52579e-10, 0, 3.39324, 0)
-shadow_enabled = true
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.691047, -0.282425, 0.66535, 0, 0.920505, 0.390731, -0.72281, 0.270014, -0.636112, 3.13346, 1.3597, -2.72002)
-
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(18.33, 0, 0, 0, 3.4, 0, 0, 0, 24.42, 0, -1.63707, -0.79247)
-mesh = SubResource("BoxMesh_oad8t")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.038269, -1.6277, -0.811391)
-shape = SubResource("BoxShape3D_ssp3r")
 
 [node name="M27" type="VehicleBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.525266, 0)
@@ -508,3 +470,25 @@ shape = SubResource("BoxShape3D_tygfx")
 [node name="arm" parent="M27" instance=ExtResource("6_eg5dq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.286277, 0)
 script = ExtResource("7_to8d8")
+
+[node name="CameraBase" type="Node3D" parent="M27"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.413158, 0)
+
+[node name="Camera3D" type="Camera3D" parent="M27/CameraBase"]
+transform = Transform3D(1, 0, 0, 0, 0.925051, 0.379844, 0, -0.379844, 0.925051, 0, 1.71717, 2.83672)
+near = 0.1
+script = ExtResource("8_65ncm")
+min_distance = 4.0
+max_distance = 5.0
+
+[node name="InteriorCameraPosition" type="Marker3D" parent="M27"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.554445, -0.0179634)
+
+[node name="TopDownCameraPosition" type="Marker3D" parent="M27"]
+transform = Transform3D(-1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.74228e-08, -1, 4.37114e-08, 0, 7.47663, 0)
+
+[node name="CanvasLayer_UI" type="CanvasLayer" parent="M27"]
+
+[node name="infoLabel" type="Label" parent="M27/CanvasLayer_UI"]
+offset_right = 40.0
+offset_bottom = 23.0
