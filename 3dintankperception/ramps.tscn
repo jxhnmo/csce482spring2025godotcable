@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://0qc63yv10qo6"]
+[gd_scene load_steps=5 format=3 uid="uid://brsl1c3mws8wg"]
 
 [ext_resource type="ArrayMesh" uid="uid://ce1pp87xb0tnb" path="res://models/ramp_heights.obj" id="1_0mapp"]
 [ext_resource type="PackedScene" uid="uid://7iqalfa2pels" path="res://m27_test.tscn" id="2_yq587"]
