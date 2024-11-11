@@ -28,8 +28,8 @@ func _ready():
 	if not $VBoxContainer/QuitButton.pressed.is_connected(Callable(self, "_on_QuitButton_pressed")):
 		$VBoxContainer/QuitButton.pressed.connect(_on_QuitButton_pressed)
 		
-	if not $VBoxContainer/ConfigButton.pressed.is_connected(Callable(self, "_on_ConfigButton_pressed")):
-		$VBoxContainer/ConfigButton.pressed.connect(_on_ConfigButton_pressed)
+	#if not $VBoxContainer/ConfigButton.pressed.is_connected(Callable(self, "_on_ConfigButton_pressed")):
+		#$VBoxContainer/ConfigButton.pressed.connect(_on_ConfigButton_pressed)
 
 func _on_OptionButton_item_selected(index):
 	var selected_text = option_button.get_item_text(index)

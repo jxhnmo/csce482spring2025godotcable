@@ -15,6 +15,12 @@ var info_label: Label
 const LOG_FILE_PATH = "user://tank_log_curr1.csv" # note this will be in the user dir (search up where that is for ur machine)
 var log_file: FileAccess
 
+var help_menu_scene = preload("res://help_menu.tscn")
+var help_menu_instance = null
+var help_button: Button
+
+var restart_button: Button
+
 func _ready():
 	
 	# Create a small sphere mesh for the center of mass marker
@@ -32,6 +38,8 @@ func _ready():
 	print_scene_tree()
 	# Initialize logging
 	initialize_logging()
+	create_help_button()
+	create_restart_button()
 
 func _process(delta):
 	# Get the current center of mass position
@@ -62,11 +70,7 @@ func _physics_process(delta: float) -> void:
 		$left_middle.engine_force = left * power
 		$right_middle.engine_force = right * power
 		
-		#$LeftWheelForward.engine_force = left * speed
-		#$RightWheelForward.engine_force = right * speed
-		#
-		#$LeftWheelBack.engine_force = left * speed
-		#$RightWheelBack.engine_force = right * speed
+
 	
 	print($left_middle.engine_force, $right_middle.engine_force)
 
@@ -143,6 +147,66 @@ func log_data():
 		print(log_entry)  
 	else:
 		print("Failed to open log file")
+
+func create_help_button():
+	help_button = Button.new()
+	help_button.text = "Help"
+	help_button.pressed.connect(_on_help_button_pressed)
+	
+	help_button.anchor_left = 1
+	help_button.anchor_top = 0
+	help_button.anchor_right = 1
+	help_button.anchor_bottom = 0
+	help_button.offset_left = -100 
+	help_button.offset_top = 10
+	help_button.offset_right = -10
+	help_button.offset_bottom = 40  
+	
+	$CanvasLayer_UI.add_child(help_button)
+
+func _on_help_button_pressed():
+	if help_menu_instance == null:
+		help_menu_instance = help_menu_scene.instantiate()
+		add_child(help_menu_instance)
+		
+		if help_menu_instance is Control:
+			help_menu_instance.anchor_left = 0.5
+			help_menu_instance.anchor_top = 0.5
+			help_menu_instance.anchor_right = 0.5
+			help_menu_instance.anchor_bottom = 0.5
+			help_menu_instance.offset_left = -help_menu_instance.size.x / 2
+			help_menu_instance.offset_top = -help_menu_instance.size.y / 2
+			help_menu_instance.offset_right = help_menu_instance.size.x / 2
+			help_menu_instance.offset_bottom = help_menu_instance.size.y / 2
+	else:
+		help_menu_instance.queue_free()
+		help_menu_instance = null
+
+
+func create_restart_button():
+	restart_button = Button.new()
+	restart_button.text = "Restart"
+	restart_button.pressed.connect(_on_restart_button_pressed)
+
+	restart_button.anchor_left = 1
+	restart_button.anchor_top = 0
+	restart_button.anchor_right = 1
+	restart_button.anchor_bottom = 0
+	restart_button.offset_left = -100  
+	restart_button.offset_right = -10
+	restart_button.offset_top = 50 
+	restart_button.offset_bottom = 80  
+	
+	$CanvasLayer_UI.add_child(restart_button)
+
+func _on_restart_button_pressed():
+
+	if help_menu_instance:
+		help_menu_instance.queue_free()
+	
+
+	get_tree().change_scene_to_file("res://menu.tscn")
+
 
 
 func _exit_tree():
