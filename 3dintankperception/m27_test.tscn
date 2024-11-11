@@ -648,6 +648,7 @@ shape = SubResource("ConvexPolygonShape3D_yr5ql")
 
 [node name="m27_body" type="MeshInstance3D" parent="m_27"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0363594, 0)
+visible = false
 mesh = ExtResource("2_rif2h")
 skeleton = NodePath("../..")
 script = ExtResource("4_2jmc0")
@@ -693,6 +694,7 @@ wheel_friction_slip = 1.0
 
 [node name="m27_arm" type="MeshInstance3D" parent="m_27"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0122492, 0.0117282)
+visible = false
 mesh = ExtResource("7_rsby5")
 script = ExtResource("8_cukpi")
 
