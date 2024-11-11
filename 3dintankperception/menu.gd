@@ -5,7 +5,7 @@ var selected_map = "res://original.tscn"
 
 func _ready():
 	option_button = OptionButton.new()
-	$VBoxContainer.add_child(option_button)
+	$CenterContainer/VBoxContainer.add_child(option_button)
 	
 	option_button.position = Vector2(100, 100)
 	option_button.custom_minimum_size = Vector2(200, 50)
@@ -17,18 +17,19 @@ func _ready():
 
 	option_button.connect("item_selected", Callable(self, "_on_OptionButton_item_selected"))
 
-	if not $VBoxContainer/StartButton.pressed.is_connected(Callable(self, "_on_StartButton_pressed")):
-		$VBoxContainer/StartButton.pressed.connect(_on_StartButton_pressed)
+	if not $CenterContainer/VBoxContainer/StartButton.pressed.is_connected(Callable(self, "_on_StartButton_pressed")):
+		$CenterContainer/VBoxContainer/StartButton.pressed.connect(_on_StartButton_pressed)
 	
 	# Connect Help and Quit buttons
-	if not $VBoxContainer/HelpButton.pressed.is_connected(Callable(self, "_on_HelpButton_pressed")):
-		$VBoxContainer/HelpButton.pressed.connect(_on_HelpButton_pressed)
+	if not $CenterContainer/VBoxContainer/HelpButton.pressed.is_connected(Callable(self, "_on_HelpButton_pressed")):
+		$CenterContainer/VBoxContainer/HelpButton.pressed.connect(_on_HelpButton_pressed)
 	
-	if not $VBoxContainer/QuitButton.pressed.is_connected(Callable(self, "_on_QuitButton_pressed")):
-		$VBoxContainer/QuitButton.pressed.connect(_on_QuitButton_pressed)
+	if not $CenterContainer/VBoxContainer/QuitButton.pressed.is_connected(Callable(self, "_on_QuitButton_pressed")):
+		$CenterContainer/VBoxContainer/QuitButton.pressed.connect(_on_QuitButton_pressed)
 		
 	#if not $VBoxContainer/ConfigButton.pressed.is_connected(Callable(self, "_on_ConfigButton_pressed")):
 		#$VBoxContainer/ConfigButton.pressed.connect(_on_ConfigButton_pressed)
+
 
 func _on_OptionButton_item_selected(index):
 	var selected_text = option_button.get_item_text(index)
