@@ -12,7 +12,7 @@ var cameras
 var info_label: Label
 
 # Logging
-const LOG_FILE_PATH = "user://tank_log_curr1.csv" # note this will be in the user dir (search up where that is for ur machine)
+const LOG_FILE_PATH = "user://m27_log.csv" # note this will be in the user dir (search up where that is for ur machine)
 var log_file: FileAccess
 
 var help_menu_scene = preload("res://help_menu.tscn")
