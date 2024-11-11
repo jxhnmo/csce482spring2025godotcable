@@ -71,3 +71,7 @@ body_down={
 
 3d/physics_engine="JoltPhysics3D"
 jolt_3d/continuous_cd/max_penetration=0.0
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true
