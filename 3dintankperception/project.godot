@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="3dInTankPerception"
-run/main_scene="res://initial.tscn"
+run/main_scene="res://menu.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -70,3 +70,4 @@ body_down={
 [physics]
 
 3d/physics_engine="JoltPhysics3D"
+jolt_3d/continuous_cd/max_penetration=0.0

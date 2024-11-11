@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ce1pp87xb0tnb"
+path="res://.godot/imported/ramp_heights.obj-486f139c7f1ac82adc51cd4d8fe8587f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/ramp_heights.obj-486f139c7f1ac82adc51cd4d8fe8587f.mesh"]
+
+source_file="res://models/ramp_heights.obj"
+dest_files=["res://.godot/imported/ramp_heights.obj-486f139c7f1ac82adc51cd4d8fe8587f.mesh", "res://.godot/imported/ramp_heights.obj-486f139c7f1ac82adc51cd4d8fe8587f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
