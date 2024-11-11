@@ -22,4 +22,4 @@ shape = SubResource("ConcavePolygonShape3D_ulodb")
 transform = Transform3D(1, 0, 0, 0, 0.0204887, 0.99979, 0, -0.99979, 0.0204887, 0, 25.7285, 0)
 
 [node name="Node3D" parent="." instance=ExtResource("2_yq587")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.868, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68853, 0)
