@@ -13,6 +13,7 @@ func _ready():
 	option_button.add_item("Map Original")
 	option_button.add_item("Map Squares")
 	option_button.add_item("Map Lumpy")
+	option_button.add_item("Map Crater")
 	option_button.add_item("Map Ramps")
 
 	option_button.connect("item_selected", Callable(self, "_on_OptionButton_item_selected"))
@@ -40,6 +41,8 @@ func _on_OptionButton_item_selected(index):
 			selected_map = "res://squares.tscn"
 		"Map Lumpy":
 			selected_map = "res://lumpy.tscn"
+		"Map Crater":
+			selected_map = "res://crater.tscn"
 		"Map Ramps":
 			selected_map = "res://ramps.tscn"
 		_:
