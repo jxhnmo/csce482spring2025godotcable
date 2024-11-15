@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b2grgokey6c0u"]
 
-[ext_resource type="Script" path="res://help_menu.gd" id="1_nm0tt"]
+[ext_resource type="Script" path="res://scripts/help_menu.gd" id="1_nm0tt"]
 
 [sub_resource type="Theme" id="Theme_8pan6"]
 
