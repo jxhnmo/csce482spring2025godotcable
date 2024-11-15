@@ -1,13 +1,14 @@
-[gd_scene load_steps=18 format=3 uid="uid://7iqalfa2pels"]
+[gd_scene load_steps=19 format=3 uid="uid://7iqalfa2pels"]
 
-[ext_resource type="Script" path="res://scripts/m27_test.gd" id="1_um0wl"]
+[ext_resource type="Script" path="res://scripts/m27_movement/m27_main.gd" id="1_um0wl"]
 [ext_resource type="ArrayMesh" uid="uid://si04ha1jivla" path="res://models/m27_tank_component.obj" id="1_utg0b"]
 [ext_resource type="ArrayMesh" uid="uid://fft3ev7l7kcs" path="res://models/m27_body_component.obj" id="2_rif2h"]
-[ext_resource type="Script" path="res://scripts/left_test_tread.gd" id="3_42qme"]
-[ext_resource type="Script" path="res://scripts/m27_body_movement.gd" id="4_2jmc0"]
+[ext_resource type="Script" path="res://scripts/m27_movement/left_tread_animation.gd" id="3_42qme"]
+[ext_resource type="Script" path="res://scripts/m27_movement/m27_body_movement.gd" id="4_2jmc0"]
 [ext_resource type="ArrayMesh" uid="uid://ck2erpfmny2rm" path="res://models/m27_tread.obj" id="4_8n4qa"]
+[ext_resource type="Script" path="res://scripts/m27_movement/right_tread_animation.gd" id="5_5up50"]
 [ext_resource type="ArrayMesh" uid="uid://dca6k7xlp5657" path="res://models/m27_arm_component.obj" id="7_rsby5"]
-[ext_resource type="Script" path="res://scripts/m27_arm_movement.gd" id="8_cukpi"]
+[ext_resource type="Script" path="res://scripts/m27_movement/m27_arm_movement.gd" id="8_cukpi"]
 [ext_resource type="Script" path="res://scripts/camera_3d.gd" id="9_roaii"]
 
 [sub_resource type="Curve3D" id="Curve3D_y5oba"]
@@ -350,7 +351,7 @@ mesh = ExtResource("4_8n4qa")
 [node name="m27_right_tread" type="Path3D" parent="m_27/m27_tank"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.485178, -0.352, -0.798)
 curve = SubResource("Curve3D_y5oba")
-script = ExtResource("3_42qme")
+script = ExtResource("5_5up50")
 
 [node name="tread" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
 transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
