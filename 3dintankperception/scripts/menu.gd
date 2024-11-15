@@ -1,7 +1,7 @@
 extends Control
 
 var option_button
-var selected_map = "res://original.tscn"
+var selected_map = "res://maps/original.tscn"
 
 func _ready():
 	option_button = OptionButton.new()
@@ -39,22 +39,22 @@ func _on_OptionButton_item_selected(index):
 	print("Selected: " + selected_text)
 	match selected_text:
 		"Map Original":
-			selected_map = "res://original.tscn"
+			selected_map = "res://maps/original.tscn"
 		"Map Squares":
-			selected_map = "res://squares.tscn"
+			selected_map = "res://maps/squares.tscn"
 		"Map Squares 2":
-			selected_map = "res://squares2.tscn"
+			selected_map = "res://maps/squares2.tscn"
 		"Map Lumpy":
-			selected_map = "res://lumpy.tscn"
+			selected_map = "res://maps/lumpy.tscn"
 		"Map Crater":
-			selected_map = "res://crater.tscn"
+			selected_map = "res://maps/crater.tscn"
 		"Map Big":
-			selected_map = "res://big.tscn"
+			selected_map = "res://maps/big.tscn"
 		"Map Ramps":
-			selected_map = "res://ramps.tscn"
+			selected_map = "res://maps/ramps.tscn"
 		
 		_:
-			selected_map = "res://original.tscn"  
+			selected_map = "res://maps/original.tscn"  
 
 func _on_StartButton_pressed():
 	print("Loading map: " + selected_map)
