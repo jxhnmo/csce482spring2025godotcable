@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://4t5n5rkomnxy"]
 
-[ext_resource type="PackedScene" uid="uid://7iqalfa2pels" path="res://M27.tscn" id="1_kbsd0"]
+[ext_resource type="PackedScene" uid="uid://7iqalfa2pels" path="res://drones/M27.tscn" id="1_kbsd0"]
 [ext_resource type="ArrayMesh" uid="uid://foyymhahg6pb" path="res://models/terrain_big.obj" id="2_yjpom"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7mu70"]

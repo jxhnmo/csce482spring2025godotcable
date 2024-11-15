@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://brjrjudlriqpx"]
 
 [ext_resource type="ArrayMesh" uid="uid://douxg0vqgqyd3" path="res://models/terrain_squares.obj" id="1_i4iun"]
-[ext_resource type="PackedScene" uid="uid://7iqalfa2pels" path="res://M27.tscn" id="2_po3fu"]
+[ext_resource type="PackedScene" uid="uid://7iqalfa2pels" path="res://drones/M27.tscn" id="2_po3fu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v8pu2"]
 albedo_color = Color(0.396078, 0.14902, 0.278431, 1)
