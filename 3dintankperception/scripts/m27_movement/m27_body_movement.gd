@@ -1,25 +1,3 @@
-#extends RigidBody3D
-#
-#var arm_speed = 4.0 # Speed factor for applying force
-#
-#
-## Called when the node enters the scene tree for the first time.
-#func _ready() -> void:
-	#self.mass = 10
-	#gravity_scale = 0
-#
-## Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-	#var force = Vector3(0, 0, 0)
-#
-	## Apply force up or down based on input actions, constrained by joint limits
-	#if Input.is_action_pressed("body_down"):
-		#force.y -= arm_speed
-	#elif Input.is_action_pressed("body_up"):
-		#force.y += arm_speed
-#
-	## Apply the force to move the arm along the Y-axis
-	#apply_central_force(force)
 extends RigidBody3D
 
 # Variables to control the speed of the arm movement and limits
