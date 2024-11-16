@@ -1,7 +1,7 @@
 extends RigidBody3D
 
 # Variables to control the speed of the arm movement and limits
-var arm_speed = 0.2 # Speed factor for controlling the arm
+var body_speed = 0.2 # Speed factor for controlling the arm
 var upper_limit # Upper limit for movement
 var lower_limit = 0.0 # Lower limit for movement
 
@@ -25,7 +25,7 @@ func _ready() -> void:
 		slider_joint.upper_limit = upper_limit
 		slider_joint.lower_limit = lower_limit
 
-	# Disable gravity for the arm so it doesn't float away
+	# Disable gravity for the body so it doesn't float away
 	gravity_scale = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,9 +34,9 @@ func _process(delta: float) -> void:
 
 	# Adjust velocity based on input
 	if Input.is_action_pressed("body_down"):
-		velocity.y -= arm_speed
+		velocity.y -= body_speed
 	elif Input.is_action_pressed("body_up"):
-		velocity.y += arm_speed
+		velocity.y += body_speed
 
 	# Set the linear velocity to move the arm along the Y-axis
 	linear_velocity = velocity
