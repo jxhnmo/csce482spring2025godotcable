@@ -23,8 +23,8 @@
 extends RigidBody3D
 
 # Variables to control the speed of the arm movement and limits
-var arm_speed = 5.0 # Speed factor for controlling the arm
-var upper_limit = 0.05 # Upper limit for movement
+var arm_speed = 0.2 # Speed factor for controlling the arm
+var upper_limit # Upper limit for movement
 var lower_limit = 0.0 # Lower limit for movement
 
 # Exported variables to assign the joint and nodes' paths in the editor
