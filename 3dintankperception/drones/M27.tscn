@@ -8,7 +8,7 @@
 [ext_resource type="ArrayMesh" uid="uid://ck2erpfmny2rm" path="res://models/m27_tread.obj" id="4_8n4qa"]
 [ext_resource type="Script" path="res://scripts/m27_movement/right_tread_animation.gd" id="5_5up50"]
 [ext_resource type="ArrayMesh" uid="uid://dca6k7xlp5657" path="res://models/m27_arm_component.obj" id="7_rsby5"]
-[ext_resource type="Script" path="res://drones/hinge_script.gd" id="8_0ui87"]
+[ext_resource type="Script" path="res://scripts/m27_movement/hinge_script.gd" id="8_0ui87"]
 [ext_resource type="Script" path="res://scripts/m27_movement/m27_arm_movement.gd" id="8_cukpi"]
 [ext_resource type="Script" path="res://scripts/camera_3d.gd" id="9_roaii"]
 
