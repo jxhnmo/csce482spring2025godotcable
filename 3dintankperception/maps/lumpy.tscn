@@ -23,11 +23,5 @@ surface_material_override/1 = SubResource("StandardMaterial3D_6lkhs")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConcavePolygonShape3D_vxu6w")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.179067, -0.872735, 0.454168, -0.157199, 0.481079, 0.862468, -0.971197, 0.0830443, -0.223338, 7.43482, 17.7777, -16.6264)
-
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.296056, -0.70206, -0.647659, 0.733248, -0.267489, 0.625137, -0.612125, -0.659971, 0.435592, -2.31045, 16.583, -10.9879)
-
 [node name="Node3D" parent="." instance=ExtResource("2_38wlx")]
-transform = Transform3D(-0.992968, 0, 0.118387, 0, 1, 0, -0.118387, 0, -0.992968, -6.53793, -0.994836, -12.8503)
+transform = Transform3D(-0.992968, 0, 0.118387, 0, 1, 0, -0.118387, 0, -0.992968, -6.53793, -1.73855, -12.8503)

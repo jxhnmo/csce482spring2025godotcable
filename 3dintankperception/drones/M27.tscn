@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://7iqalfa2pels"]
+[gd_scene load_steps=21 format=3 uid="uid://7iqalfa2pels"]
 
 [ext_resource type="Script" path="res://scripts/m27_movement/m27_main.gd" id="1_um0wl"]
 [ext_resource type="ArrayMesh" uid="uid://si04ha1jivla" path="res://models/m27_tank_component.obj" id="1_utg0b"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/m27_movement/hinge_script.gd" id="8_0ui87"]
 [ext_resource type="Script" path="res://scripts/m27_movement/m27_arm_movement.gd" id="8_cukpi"]
 [ext_resource type="Script" path="res://scripts/camera_3d.gd" id="9_roaii"]
+[ext_resource type="Script" path="res://scripts/light_rig.gd" id="12_nwcf6"]
 
 [sub_resource type="Curve3D" id="Curve3D_y5oba"]
 _data = {
@@ -761,10 +762,13 @@ min_distance = 4.0
 max_distance = 5.0
 
 [node name="InteriorCameraPosition" type="Marker3D" parent="m_27"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.8912, -0.0179634)
+transform = Transform3D(-1, 8.76404e-16, -8.74228e-08, -2.35553e-08, 0.963017, 0.269441, 8.41896e-08, 0.269441, -0.963017, -0.0283213, 2.13656, -0.306775)
 
 [node name="TopDownCameraPosition" type="Marker3D" parent="m_27"]
 transform = Transform3D(-1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.74228e-08, -1, 4.37114e-08, 0, 7.47663, 0)
+
+[node name="ReverseCameraPosition" type="Marker3D" parent="m_27"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.021045, 1.3439, -0.455923)
 
 [node name="CanvasLayer_UI" type="CanvasLayer" parent="m_27"]
 
@@ -772,3 +776,22 @@ transform = Transform3D(-1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.7
 offset_right = 40.0
 offset_bottom = 23.0
 metadata/_edit_use_anchors_ = true
+
+[node name="LightRig" type="Node3D" parent="m_27"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.42067)
+script = ExtResource("12_nwcf6")
+
+[node name="TopBack" type="DirectionalLight3D" parent="m_27/LightRig"]
+transform = Transform3D(1, 0, 0, 0, 0.550437, 0.834877, 0, -0.834877, 0.550437, -15.6723, 55.3144, 8.52707)
+
+[node name="TopFront" type="DirectionalLight3D" parent="m_27/LightRig"]
+transform = Transform3D(1, 0, 0, 0, -0.515232, 0.85705, 0, -0.85705, -0.515233, -13.0981, 55.3144, -32.9184)
+
+[node name="TopLeft" type="DirectionalLight3D" parent="m_27/LightRig"]
+transform = Transform3D(0.839734, 2.37352e-08, -0.542999, 0.542999, -3.67059e-08, 0.839734, 0, -1, -4.37114e-08, -41.8221, 55.3144, -11.6959)
+
+[node name="TopRight" type="DirectionalLight3D" parent="m_27/LightRig"]
+transform = Transform3D(0.65235, -3.31297e-08, 0.757918, -0.757918, -2.85151e-08, 0.65235, 0, -1, -4.37114e-08, 11.7981, 55.3144, -9.82417)
+
+[node name="HeadLights" type="DirectionalLight3D" parent="m_27/LightRig"]
+transform = Transform3D(1, 0, 0, 0, -0.998788, -0.0492158, 0, 0.0492158, -0.998788, 0, 1.0115, -0.339901)

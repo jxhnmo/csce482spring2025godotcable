@@ -29,6 +29,7 @@ var desired_fov := fov
 enum CameraType {
 	EXTERIOR,
 	INTERIOR,
+	REVERSE,
 	TOP_DOWN,
 	MAX,  # Represents the size of the CameraType enum.
 }
@@ -59,14 +60,12 @@ func _physics_process(_delta: float) -> void:
 		from_target.y = height
 
 		pos = target + from_target
-
 		look_at_from_position(pos, target, Vector3.UP)
 	elif camera_type == CameraType.TOP_DOWN:
 		position.x = get_parent().global_transform.origin.x
 		position.z = get_parent().global_transform.origin.z
 		# Force rotation to prevent camera from being slanted after switching cameras while on a slope.
 		rotation_degrees = Vector3(270, 180, 0)
-
 	# Dynamic field of view based on car speed, with smoothing to prevent sudden changes on impact.
 	desired_fov = clamp(base_fov + (abs(global_position.length() - previous_position.length()) - FOV_CHANGE_MIN_SPEED) * FOV_SPEED_FACTOR, base_fov, 100)
 	fov = lerpf(fov, desired_fov, FOV_SMOOTH_FACTOR)
@@ -83,9 +82,11 @@ func update_camera() -> void:
 			transform = initial_transform
 		CameraType.INTERIOR:
 			global_transform = get_node(^"../../InteriorCameraPosition").global_transform
+		CameraType.REVERSE:
+			global_transform = get_node(^"../../ReverseCameraPosition").global_transform
 		CameraType.TOP_DOWN:
 			global_transform = get_node(^"../../TopDownCameraPosition").global_transform
 
 	# This detaches the camera transform from the parent spatial node, but only
 	# for exterior and top-down cameras.
-	set_as_top_level(camera_type != CameraType.INTERIOR)
+	set_as_top_level(camera_type != CameraType.INTERIOR and camera_type != CameraType.REVERSE)
