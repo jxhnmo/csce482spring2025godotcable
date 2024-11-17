@@ -24,7 +24,7 @@ surface_material_override/1 = SubResource("StandardMaterial3D_6lkhs")
 shape = SubResource("ConcavePolygonShape3D_vxu6w")
 
 [node name="Node3D" parent="." instance=ExtResource("2_38wlx")]
-transform = Transform3D(-0.992968, 0, 0.118387, 0, 1, 0, -0.118387, 0, -0.992968, -6.53793, -0.994836, -12.8503)
+transform = Transform3D(-0.992968, 0, 0.118387, 0, 1, 0, -0.118387, 0, -0.992968, -6.53793, -1.73855, -12.8503)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.765663, 0.643242, 0, -0.643242, 0.765663, -17.0727, 55.3144, 8.52707)
