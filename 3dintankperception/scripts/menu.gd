@@ -16,7 +16,7 @@ func load_config():
 		load_settings_from_config()
 
 func load_settings_from_config():
-	selected_map = config.get_value("Map", "selected", "res://maps/original.tscn")
+	selected_map = config.get_value("Map", "selected")
 	# Load other settings as needed
 
 func create_default_config():
