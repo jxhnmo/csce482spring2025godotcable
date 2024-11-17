@@ -21,6 +21,7 @@ var help_menu_instance = null
 var help_button: Button
 
 var restart_button: Button
+var quit_button: Button
 
 var selected_map = ""
 var config_file = "user://settings.cfg"
@@ -66,6 +67,7 @@ func _ready():
 	initialize_logging()
 	create_help_button()
 	create_restart_button()
+	create_quit_button()
 
 func _process(delta):
 	# Get the current center of mass position
@@ -236,7 +238,29 @@ func _on_restart_button_pressed():
 	
 	get_tree().change_scene_to_file(selected_map)
 
+func create_quit_button():
+	quit_button = Button.new()
+	quit_button.text = "Quit"
+	quit_button.pressed.connect(_on_quit_button_pressed)
 
+	quit_button.anchor_left = 1
+	quit_button.anchor_top = 0
+	quit_button.anchor_right = 1
+	quit_button.anchor_bottom = 0
+	quit_button.offset_left = -100  
+	quit_button.offset_right = -10
+	quit_button.offset_top = 90
+	quit_button.offset_bottom = 80  
+	
+	$CanvasLayer_UI.add_child(quit_button)
+	
+func _on_quit_button_pressed():
+
+	if help_menu_instance:
+		help_menu_instance.queue_free()
+	
+	
+	get_tree().change_scene_to_file("../menu.tscn")
 
 func _exit_tree():
 	if log_file:
