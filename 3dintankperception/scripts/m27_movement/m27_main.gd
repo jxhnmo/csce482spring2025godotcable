@@ -37,6 +37,7 @@ func _ready():
 	# Get the existing info_label
 	info_label = $CanvasLayer_UI/infoLabel
 	print_scene_tree()
+	
 	# Initialize logging
 	initialize_logging()
 	create_help_button()
