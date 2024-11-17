@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://scripts/m27_movement/hinge_script.gd" id="8_0ui87"]
 [ext_resource type="Script" path="res://scripts/m27_movement/m27_arm_movement.gd" id="8_cukpi"]
 [ext_resource type="Script" path="res://scripts/camera_3d.gd" id="9_roaii"]
-[ext_resource type="Script" path="res://drones/light_rig.gd" id="12_nwcf6"]
+[ext_resource type="Script" path="res://scripts/light_rig.gd" id="12_nwcf6"]
 
 [sub_resource type="Curve3D" id="Curve3D_y5oba"]
 _data = {
