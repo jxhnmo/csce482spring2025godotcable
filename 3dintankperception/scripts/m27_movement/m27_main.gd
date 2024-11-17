@@ -22,8 +22,32 @@ var help_button: Button
 
 var restart_button: Button
 
+var selected_map = ""
+var config_file = "user://settings.cfg"
+var config = ConfigFile.new()
+
+func load_config():
+	var err = config.load(config_file)
+	if err != OK:
+		print("No config file found. Creating a new one.")
+		create_default_config()
+	else:
+		print("Config file loaded successfully.")
+		load_settings_from_config()
+
+func load_settings_from_config():
+	selected_map = config.get_value("Map", "selected")
+	# Load other settings as needed
+
+func create_default_config():
+	config.set_value("Map", "selected", "res://maps/original.tscn")
+	config.set_value("Physics", "wheel_mass", 1.0)
+	config.set_value("Physics", "body_mass", 1.0)
+	config.set_value("Physics", "arm_body_mass", 1.0)
+	config.save(config_file)
+
 func _ready():
-	
+	load_config()
 	# Create a small sphere mesh for the center of mass marker
 	center_of_mass_marker = MeshInstance3D.new()
 	center_of_mass_marker.mesh = SphereMesh.new()
@@ -209,8 +233,8 @@ func _on_restart_button_pressed():
 	if help_menu_instance:
 		help_menu_instance.queue_free()
 	
-
-	get_tree().change_scene_to_file("res://menu.tscn")
+	
+	get_tree().change_scene_to_file(selected_map)
 
 
 

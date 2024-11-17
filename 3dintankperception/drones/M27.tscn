@@ -57,295 +57,295 @@ curve = SubResource("Curve3D_y5oba")
 script = ExtResource("3_42qme")
 
 [node name="tread" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread2" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread2"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread3" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread3"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread4" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread4"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread5" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread5"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread6" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread6"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread7" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread7"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread8" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread8"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread9" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread9"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread10" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread10"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread11" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread11"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread12" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread12"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread13" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread13"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread14" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread14"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread15" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread15"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread16" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread16"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread17" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread17"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread18" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread18"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread19" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread19"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread20" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread20"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread21" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread21"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread22" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread22"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread23" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread23"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread24" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread24"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread25" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread25"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread26" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread26"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread27" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread27"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread28" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread28"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread29" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread29"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread30" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread30"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread31" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread31"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread32" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread32"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread33" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread33"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread34" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread34"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread35" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread35"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread36" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread36"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread37" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread37"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread38" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread38"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread39" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread39"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread40" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread40"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread41" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread41"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread42" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread42"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread43" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread43"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread44" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread44"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread45" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread45"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread46" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread46"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread47" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread47"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread48" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread48"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread49" type="PathFollow3D" parent="m_27/m27_tank/m27_left_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_left_tread/tread49"]
 mesh = ExtResource("4_8n4qa")
@@ -356,295 +356,295 @@ curve = SubResource("Curve3D_y5oba")
 script = ExtResource("5_5up50")
 
 [node name="tread" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread2" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread2"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread3" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread3"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread4" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread4"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread5" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread5"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread6" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread6"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread7" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread7"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread8" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread8"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread9" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread9"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread10" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread10"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread11" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread11"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread12" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread12"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread13" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread13"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread14" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread14"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread15" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread15"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread16" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread16"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread17" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread17"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread18" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread18"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread19" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread19"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread20" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread20"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread21" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread21"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread22" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread22"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread23" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread23"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread24" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread24"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread25" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread25"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread26" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread26"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread27" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread27"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread28" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread28"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread29" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread29"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread30" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread30"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread31" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread31"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread32" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread32"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread33" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread33"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread34" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread34"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread35" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread35"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread36" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread36"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread37" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread37"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread38" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread38"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread39" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread39"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread40" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread40"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread41" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread41"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread42" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread42"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread43" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread43"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread44" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread44"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread45" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread45"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread46" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread46"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread47" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread47"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread48" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread48"]
 mesh = ExtResource("4_8n4qa")
 
 [node name="tread49" type="PathFollow3D" parent="m_27/m27_tank/m27_right_tread"]
-transform = Transform3D(-1, 1.22161e-09, 1.50991e-07, 0, 0.999967, -0.00809037, -1.50996e-07, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
+transform = Transform3D(-1, -7.07283e-10, -8.74199e-08, 0, 0.999967, -0.00809037, 8.74228e-08, -0.00809037, -0.999967, 2.07424e-05, -0.00710791, 0.000850022)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_tank/m27_right_tread/tread49"]
 mesh = ExtResource("4_8n4qa")
