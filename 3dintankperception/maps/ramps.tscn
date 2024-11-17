@@ -19,6 +19,3 @@ surface_material_override/14 = SubResource("StandardMaterial3D_8oudx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConcavePolygonShape3D_ulodb")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.0204887, 0.99979, 0, -0.99979, 0.0204887, 0, 25.7285, 0)

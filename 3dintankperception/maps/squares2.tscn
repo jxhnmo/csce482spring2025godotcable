@@ -24,15 +24,3 @@ shape = SubResource("ConcavePolygonShape3D_uaqgy")
 
 [node name="Node3D" parent="." instance=ExtResource("2_a0lj7")]
 transform = Transform3D(0.117312, 0, -0.993095, 0, 1, 0, 0.993095, 0, 0.117312, -8.15397, 3.501, -16.2732)
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.765663, 0.643242, 0, -0.643242, 0.765663, -17.0727, 55.3144, 8.52707)
-
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.999963, -0.00541444, -0.00668723, 0, -0.77719, 0.629266, -0.00860437, -0.629243, -0.777161, -13.0981, 55.3144, -32.9184)
-
-[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.308303, -0.611908, 0.728366, 0, 0.765663, 0.643242, -0.951288, -0.198314, 0.236056, -41.8221, 55.3144, -15.379)
-
-[node name="DirectionalLight3D4" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.568074, 0.529374, -0.630124, -1.41753e-08, 0.765663, 0.643242, 0.822978, -0.365409, 0.434953, 11.7981, 55.3144, -14.0371)

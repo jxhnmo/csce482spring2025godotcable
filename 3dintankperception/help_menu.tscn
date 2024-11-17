@@ -65,6 +65,36 @@ layout_mode = 2
 text = "Switch Camera views [R]
 "
 
+[node name="Label11" type="Label" parent="Label/VBoxContainer"]
+layout_mode = 2
+text = "Toggle All Lights [L]
+"
+
+[node name="Label12" type="Label" parent="Label/VBoxContainer"]
+layout_mode = 2
+text = "Toggle Top Front Light [1]
+"
+
+[node name="Label13" type="Label" parent="Label/VBoxContainer"]
+layout_mode = 2
+text = "Toggle Top Back Light [2]
+"
+
+[node name="Label14" type="Label" parent="Label/VBoxContainer"]
+layout_mode = 2
+text = "Toggle Top Right Light [3]
+"
+
+[node name="Label15" type="Label" parent="Label/VBoxContainer"]
+layout_mode = 2
+text = "Toggle Top Left Light [4]
+"
+
+[node name="Label16" type="Label" parent="Label/VBoxContainer"]
+layout_mode = 2
+text = "Toggle Top Headlight [5]
+"
+
 [node name="HSeparator2" type="HSeparator" parent="Label/VBoxContainer"]
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
