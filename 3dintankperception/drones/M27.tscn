@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://7iqalfa2pels"]
+[gd_scene load_steps=20 format=3 uid="uid://7iqalfa2pels"]
 
 [ext_resource type="Script" path="res://scripts/m27_movement/m27_main.gd" id="1_um0wl"]
 [ext_resource type="ArrayMesh" uid="uid://si04ha1jivla" path="res://models/m27_tank_component.obj" id="1_utg0b"]
@@ -8,6 +8,7 @@
 [ext_resource type="ArrayMesh" uid="uid://ck2erpfmny2rm" path="res://models/m27_tread.obj" id="4_8n4qa"]
 [ext_resource type="Script" path="res://scripts/m27_movement/right_tread_animation.gd" id="5_5up50"]
 [ext_resource type="ArrayMesh" uid="uid://dca6k7xlp5657" path="res://models/m27_arm_component.obj" id="7_rsby5"]
+[ext_resource type="Script" path="res://scripts/m27_movement/hinge_script.gd" id="8_0ui87"]
 [ext_resource type="Script" path="res://scripts/m27_movement/m27_arm_movement.gd" id="8_cukpi"]
 [ext_resource type="Script" path="res://scripts/camera_3d.gd" id="9_roaii"]
 
@@ -715,9 +716,12 @@ wheel_friction_slip = 0.1
 [node name="JoltHingeJoint3D" type="JoltHingeJoint3D" parent="m_27"]
 limit_enabled = true
 limit_upper = 0.436332
+motor_enabled = true
+motor_max_torque = 100.0
 node_a = NodePath("..")
 node_b = NodePath("../m27_arm")
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.0624406, 0.0158596)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.280646, 0.0158596)
+script = ExtResource("8_0ui87")
 
 [node name="m27_arm" type="RigidBody3D" parent="m_27"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.035431, 0.0117282)
