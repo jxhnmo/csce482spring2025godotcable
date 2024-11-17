@@ -762,7 +762,7 @@ min_distance = 4.0
 max_distance = 5.0
 
 [node name="InteriorCameraPosition" type="Marker3D" parent="m_27"]
-transform = Transform3D(-1, 0, -8.74228e-08, -1.41881e-08, 0.986743, 0.162293, 8.62638e-08, 0.162293, -0.986743, -0.0283213, 2.13656, -0.306775)
+transform = Transform3D(-1, 8.76404e-16, -8.74228e-08, -2.35553e-08, 0.963017, 0.269441, 8.41896e-08, 0.269441, -0.963017, -0.0283213, 2.13656, -0.306775)
 
 [node name="TopDownCameraPosition" type="Marker3D" parent="m_27"]
 transform = Transform3D(-1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.74228e-08, -1, 4.37114e-08, 0, 7.47663, 0)
