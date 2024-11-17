@@ -7,6 +7,16 @@ var selected_map = "res://maps/original.tscn"
 var config_file = "user://settings.cfg"
 var config = ConfigFile.new()
 
+var map_descriptions = {
+	"Map Original": "The classic map with basic terrain.",
+	"Map Squares": "A map with a grid layout and square terrain.",
+	"Map Squares 2": "A more advanced version of the Map Squares.",
+	"Map Lumpy": "A bumpy map with uneven terrain.",
+	"Map Crater": "A map with large craters and holes in the ground.",
+	"Map Big": "An expansive map with a lot of space to explore.",
+	"Map Ramps": "A map with various ramps and obstacles."
+}
+
 func load_config():
 	var err = config.load(config_file)
 	if err != OK:
@@ -43,7 +53,6 @@ func _ready():
 	option_button.position = Vector2(100, 100)
 	option_button.custom_minimum_size = Vector2(200, 50)
 	
-	description_label.position = Vector2(200, 200)
 
 	option_button.add_item("Map Original")
 	option_button.add_item("Map Squares")
@@ -91,6 +100,12 @@ func _on_OptionButton_item_selected(index):
 		_:
 			selected_map = config.get_value("Map", "selected")
 			#selected_map = "res://maps/original.tscn"  
+			
+		# Update the description label
+	if map_descriptions.has(selected_text):
+		description_label.text = map_descriptions[selected_text]
+	else:
+		description_label.text = "No description available."
 
 func _on_StartButton_pressed():
 	save_config()
