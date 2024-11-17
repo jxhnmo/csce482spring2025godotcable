@@ -1,7 +1,8 @@
 extends VehicleBody3D
 
 
-var power = 500
+var power = 400
+var turn_power = 500
 var left
 var right
 var center_of_mass_marker: MeshInstance3D
@@ -63,16 +64,19 @@ func _physics_process(delta: float) -> void:
 	
 	# handle only one input
 	if not left and right:
-		$left_middle.engine_force = right * power
+		$right_middle.engine_force = right * turn_power
 	elif left and not right:
-		$right_middle.engine_force = left * power
+		$left_middle.engine_force = left * turn_power
+	elif (left < 0 and right > 0) or (left > 0 and right < 0):
+		$left_middle.engine_force = left * turn_power
+		$right_middle.engine_force = right * turn_power
 	else:
 		$left_middle.engine_force = left * power
 		$right_middle.engine_force = right * power
 		
 
 	
-	print($left_middle.engine_force, $right_middle.engine_force)
+	#print($left_middle.engine_force, $right_middle.engine_force)
 
 func print_scene_tree():
 	print_node(self, 0)
@@ -144,7 +148,7 @@ func log_data():
 		log_file.store_line(log_entry)
 		log_file.flush() 
 		log_file.close()  
-		print(log_entry)  
+		#print(log_entry)  
 	else:
 		print("Failed to open log file")
 

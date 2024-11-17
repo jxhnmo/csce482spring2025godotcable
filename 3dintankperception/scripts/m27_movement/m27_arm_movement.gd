@@ -25,22 +25,15 @@ func _ready() -> void:
 		hinge_joint.use_limits = true
 		hinge_joint.upper_limit = upper_limit
 		hinge_joint.lower_limit = lower_limit
+		hinge_joint.motor_enabled = true
+		hinge_joint.global_rotation_degrees = Vector3.ZERO
 
 	# Disable gravity for the body so it doesn't float away
 	gravity_scale = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var velocity = Vector3(0, 0, 0)
-
-	# Adjust velocity based on input
-	if Input.is_action_pressed("arm_down"):
-		velocity.y -= arm_speed
-	elif Input.is_action_pressed("arm_up"):
-		velocity.y += arm_speed
-	# Set the linear velocity to move the arm along the Y-axis
-	linear_velocity = velocity
-
-	# Ensure the arm stops moving once the input is released
-	if !Input.is_action_pressed("arm_down") and !Input.is_action_pressed("arm_up"):
-		linear_velocity = Vector3.ZERO
+	pass
+		
+func _physics_process(delta: float) -> void:
+	pass
