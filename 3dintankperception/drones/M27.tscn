@@ -762,6 +762,9 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.8
 [node name="TopDownCameraPosition" type="Marker3D" parent="m_27"]
 transform = Transform3D(-1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.74228e-08, -1, 4.37114e-08, 0, 7.47663, 0)
 
+[node name="ReverseCameraPosition" type="Marker3D" parent="m_27"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.021045, 1.3439, -0.455923)
+
 [node name="CanvasLayer_UI" type="CanvasLayer" parent="m_27"]
 
 [node name="infoLabel" type="Label" parent="m_27/CanvasLayer_UI"]
