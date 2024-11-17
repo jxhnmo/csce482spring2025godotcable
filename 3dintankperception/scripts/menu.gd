@@ -1,6 +1,7 @@
 extends Control
 
 var option_button
+var description_label
 var selected_map = "res://maps/original.tscn"
 
 var config_file = "user://settings.cfg"
@@ -36,8 +37,13 @@ func _ready():
 	option_button = OptionButton.new()
 	$CenterContainer/VBoxContainer.add_child(option_button)
 	
+	description_label = Label.new()
+	$CenterContainer/VBoxContainer.add_child(description_label)
+	
 	option_button.position = Vector2(100, 100)
 	option_button.custom_minimum_size = Vector2(200, 50)
+	
+	description_label.position = Vector2(200, 200)
 
 	option_button.add_item("Map Original")
 	option_button.add_item("Map Squares")
