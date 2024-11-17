@@ -31,7 +31,7 @@ points = PackedVector3Array(0.585735, 0.174094, 0.918419, -0.260528, -0.25, 0.00
 size = Vector3(1.2356, 0.948364, 1.70605)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jxf8l"]
-size = Vector3(1, 0.769836, 0.635193)
+size = Vector3(1.13721, 0.717567, 2.55267)
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_w5b0g"]
 length = 0.282127
@@ -712,16 +712,23 @@ brake = 0.1
 wheel_radius = 0.33
 wheel_friction_slip = 0.1
 
-[node name="m27_arm" type="MeshInstance3D" parent="m_27"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0122492, 0.0117282)
-mesh = ExtResource("7_rsby5")
+[node name="JoltHingeJoint3D" type="JoltHingeJoint3D" parent="m_27"]
+limit_enabled = true
+limit_upper = 0.436332
+node_a = NodePath("..")
+node_b = NodePath("../m27_arm")
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.0624406, 0.0158596)
+
+[node name="m27_arm" type="RigidBody3D" parent="m_27"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.035431, 0.0117282)
 script = ExtResource("8_cukpi")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="m_27/m27_arm"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="m_27/m27_arm/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 0.968522, 0.248927, 0, -0.248927, 0.968522, 0, 0.204862, 2.13987)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="m_27/m27_arm"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000244141, 0.147424, 1.2986)
 shape = SubResource("BoxShape3D_jxf8l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="m_27/m27_arm"]
+mesh = ExtResource("7_rsby5")
 
 [node name="front_collision" type="CollisionShape3D" parent="m_27"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.468305, -0.0257535, 1.08831)

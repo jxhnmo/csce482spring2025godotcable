@@ -2,8 +2,8 @@ extends RigidBody3D
 
 # Variables to control the speed of the arm movement and limits
 var body_speed = 0.2 # Speed factor for controlling the arm
-var upper_limit # Upper limit for movement
-var lower_limit = 0.0 # Lower limit for movement
+var upper_limit# Upper limit for movement
+var lower_limit # Lower limit for movement
 
 # Exported variables to assign the joint and nodes' paths in the editor
 @export var joint_node_path: NodePath
@@ -37,7 +37,6 @@ func _process(delta: float) -> void:
 		velocity.y -= body_speed
 	elif Input.is_action_pressed("body_up"):
 		velocity.y += body_speed
-
 	# Set the linear velocity to move the arm along the Y-axis
 	linear_velocity = velocity
 
