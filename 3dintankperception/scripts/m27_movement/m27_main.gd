@@ -26,6 +26,9 @@ var selected_map = ""
 var config_file = "user://settings.cfg"
 var config = ConfigFile.new()
 
+#reference hinge script
+var hinge_script
+
 func load_config():
 	var err = config.load(config_file)
 	if err != OK:
@@ -62,10 +65,12 @@ func _ready():
 	info_label = $CanvasLayer_UI/infoLabel
 	print_scene_tree()
 	
+	hinge_script = $JoltHingeJoint3D
 	# Initialize logging
 	initialize_logging()
 	create_help_button()
 	create_restart_button()
+	
 
 func _process(delta):
 	# Get the current center of mass position
@@ -115,7 +120,7 @@ func print_node(node: Node, indent: int):
 func initialize_logging():
 	log_file = FileAccess.open(LOG_FILE_PATH, FileAccess.WRITE)
 	if log_file:
-		log_file.store_line("Timestamp,Position_X,Position_Y,Position_Z,Angle,IsFlipped,Velocity_X,Velocity_Y,Velocity_Z")
+		log_file.store_line("Timestamp,Position_X,Position_Y,Position_Z,Angle,IsFlipped,Velocity_X,Velocity_Y,Velocity_Z,Relative_Arm_Angle")
 	else:
 		print("Failed to open log file")
 
@@ -148,7 +153,7 @@ func log_data():
 		var is_flipped = angle_relative_to_ground > 45
 		var velocity = linear_velocity
 		var position = global_transform.origin
-		
+		var arm_angle = hinge_script.angle_data if hinge_script else 0.0
 	
 		var current_time_us = Time.get_ticks_usec()
 		
@@ -161,11 +166,12 @@ func log_data():
 			microseconds
 		]
 		
-		var log_entry = "%s,%.2f,%.2f,%.2f,%.2f,%s,%.2f,%.2f,%.2f" % [
+		var log_entry = "%s,%.2f,%.2f,%.2f,%.2f,%s,%.2f,%.2f,%.2f,%.2f" % [
 			datetime_string,
 			position.x, position.y, position.z,
 			angle_relative_to_ground, str(is_flipped),
-			velocity.x, velocity.y, velocity.z
+			velocity.x, velocity.y, velocity.z,
+			arm_angle
 		]
 		
 		# Janky way of saving data every iteration because if the game prematurely end the files doesn't close
