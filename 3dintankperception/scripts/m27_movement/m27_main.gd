@@ -15,6 +15,13 @@ var info_label: Label
 # Logging
 const LOG_FILE_PATH = "user://m27_log.csv" # note this will be in the user dir (search up where that is for ur machine)
 var log_file: FileAccess
+const STUCK_THRESHOLD = 0.25
+const STUCK_TIME = 3.0  # secondsf
+const STUCK_LOG_PATH = "user://stuck_locations.csv"
+var last_position: Vector3
+var stuck_timer: float = 0.0
+var stuck_log_file: FileAccess
+var angle_to_ground
 
 var help_menu_scene = preload("res://help_menu.tscn")
 var help_menu_instance = null
@@ -68,6 +75,10 @@ func _ready():
 	hinge_script = $JoltHingeJoint3D
 	# Initialize logging
 	initialize_logging()
+	
+	last_position = global_transform.origin
+	initialize_stuck_logging()
+	
 	create_help_button()
 	create_restart_button()
 	
@@ -84,6 +95,8 @@ func _process(delta):
 	
 	update_info_label()
 	log_data()
+	check_if_stuck(delta)
+
 
 func _physics_process(delta: float) -> void:
 	# get keyboard
@@ -128,6 +141,7 @@ func is_upright() -> float:
 	var object_up = global_transform.basis.y.normalized()
 	var world_up = Vector3.UP
 	var angle = acos(object_up.dot(world_up))
+	angle_to_ground = rad_to_deg(angle)
 	return rad_to_deg(angle)
 
 func update_info_label():
@@ -242,6 +256,59 @@ func _on_restart_button_pressed():
 	
 	get_tree().change_scene_to_file(selected_map)
 
+func initialize_stuck_logging():
+	stuck_log_file = FileAccess.open(STUCK_LOG_PATH, FileAccess.WRITE)
+	if stuck_log_file:
+		stuck_log_file.store_line("Timestamp,Position_X,Position_Y,Position_Z,Angle_To_Ground")
+	else:
+		print("Failed to open stuck log file")
+
+func check_if_stuck(delta):
+	var current_position = global_transform.origin
+	var velocity = linear_velocity
+	
+	# Check if movement is below threshold
+	if velocity.length() < STUCK_THRESHOLD and (current_position - last_position).length() < STUCK_THRESHOLD:
+		stuck_timer += delta
+		if stuck_timer >= STUCK_TIME:
+			log_stuck_location()
+			stuck_timer = 0.0  # Reset timer after logging
+	else:
+		stuck_timer = 0.0  # Reset timer if moving
+	
+	last_position = current_position
+
+func log_stuck_location():
+	var stuck_log_file = FileAccess.open(STUCK_LOG_PATH, FileAccess.READ_WRITE)
+	
+
+	if stuck_log_file:
+		var position = global_transform.origin
+		var current_time_us = Time.get_ticks_usec()
+		
+		var datetime = Time.get_datetime_dict_from_system()
+		var microseconds = current_time_us % 1000000
+		var datetime_string = "%04d-%02d-%02d %02d:%02d:%02d.%06d" % [
+			datetime.year, datetime.month, datetime.day,
+			datetime.hour, datetime.minute, datetime.second,
+			microseconds
+		]
+		
+		var log_entry = "%s,%.2f,%.2f,%.2f,%.2f" % [
+			datetime_string,
+			position.x, position.y, position.z,
+			angle_to_ground
+		]
+
+		
+		stuck_log_file.seek_end()
+		stuck_log_file.store_line(log_entry)
+		stuck_log_file.flush()
+		stuck_log_file.close()
+		
+		print("Logged stuck location: ", log_entry)
+	else:
+		print("Failed to open stuck log file")
 
 
 func _exit_tree():
