@@ -240,7 +240,7 @@ func _on_restart_button_pressed():
 
 func create_quit_button():
 	quit_button = Button.new()
-	quit_button.text = "Quit"
+	quit_button.text = "Back"
 	quit_button.pressed.connect(_on_quit_button_pressed)
 
 	quit_button.anchor_left = 1
