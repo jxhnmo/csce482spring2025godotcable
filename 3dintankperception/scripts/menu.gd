@@ -8,13 +8,13 @@ var config_file = "user://settings.cfg"
 var config = ConfigFile.new()
 
 var map_descriptions = {
-	"Map Original": "The classic map with basic terrain.",
+	"Map Original": "The classic map with\nbasic terrain.",
 	"Map Squares": "A map with a grid layout and square terrain.",
 	"Map Squares 2": "A more advanced version of the Map Squares.",
-	"Map Lumpy": "A bumpy map with uneven terrain.",
+	"Map Lumpy": "A bumpy map with\nuneven terrain.",
 	"Map Crater": "A map with large craters and holes in the ground.",
 	"Map Big": "An expansive map with a lot of space to explore.",
-	"Map Ramps": "A map with various ramps and obstacles."
+	"Map Ramps": "A map with various\nramps and obstacles."
 }
 
 func load_config():
@@ -49,7 +49,16 @@ func _ready():
 	
 	description_label = Label.new()
 	description_label.autowrap_mode = true
+	description_label.clip_text = false
+	
 	$CenterContainer/VBoxContainer.add_child(description_label)
+	
+	var original_map_name = "Map Original"
+	description_label.text = map_descriptions[original_map_name]
+	
+	# Select the original map in the OptionButton
+	option_button.select(option_button.get_item_index(option_button.get_item_count() - 1))  # Select the last item (Map Ramps)
+	option_button.select(0)  # Then select the first item (Map Original)
 	
 	option_button.position = Vector2(100, 100)
 	option_button.custom_minimum_size = Vector2(200, 50)
@@ -107,6 +116,7 @@ func _on_OptionButton_item_selected(index):
 		description_label.text = map_descriptions[selected_text]
 	else:
 		description_label.text = "No description available."
+		
 
 func _on_StartButton_pressed():
 	save_config()
