@@ -3,7 +3,7 @@ extends Path3D
 
 var time = 0
 var speed_div = 5
-var speed
+var speed = 1
 var offset = 0.72
 
 @onready var links = $".".get_children()
