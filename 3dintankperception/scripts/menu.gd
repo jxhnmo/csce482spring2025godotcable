@@ -48,6 +48,7 @@ func _ready():
 	$CenterContainer/VBoxContainer.add_child(option_button)
 	
 	description_label = Label.new()
+	description_label.autowrap_mode = true
 	$CenterContainer/VBoxContainer.add_child(description_label)
 	
 	option_button.position = Vector2(100, 100)
