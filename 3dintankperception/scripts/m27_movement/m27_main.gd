@@ -331,7 +331,8 @@ func _on_quit_button_pressed():
 	if help_menu_instance:
 		help_menu_instance.queue_free()
 	
-	
+	config.set_value("Map", "selected", "res://maps/original.tscn")
+	config.save(config_file)
 	get_tree().change_scene_to_file("../menu.tscn")
 
 func _exit_tree():
