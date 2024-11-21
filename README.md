@@ -17,7 +17,7 @@ This code has been run and tested using the following internal and external comp
     - MacOS Sonoma 14.5
     - TODO Victor Env
     - TODO Josh Env
-    - TODO Jeff Env
+    - MacOS Sequoia 15.1
 
 - Language / Runtimes
     - Python 3.12
