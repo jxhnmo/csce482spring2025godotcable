@@ -5,6 +5,7 @@
 ## Table of Contents
 An interactive list of sections for easy navigation, especially for longer
 READMEs
+
 ## Requirements
 This code has been run and tested using the following internal and external
 components
@@ -30,6 +31,7 @@ Tools
 • Jira
 • Atom IDE v?
 • Others
+
 ## External Dependencies
 - Docker - Download latest version at https://www.docker.com/products/docker-
 desktop
@@ -38,6 +40,7 @@ https://devcenter.heroku.com/articles/heroku-cli
 - Git - Downloat latest version at https://git-scm.com/book/en/v2/Getting-
 Started-Installing-Git
 - GitHub Desktop (Not needed, but HELPFUL) at https://desktop.github.com/
+
 ## Environmental Variables/Files
 We have environment variables setup for Authentication. The tutorial can be
 found here: https://medium.com/craft-academy/encrypted- credentials-
@@ -107,17 +110,21 @@ https://github.com/PatelHarshank/ZLPInterviewer/actions
 Click the New button in the top right of your app list and select Create
 new pipeline:
 <insert remaining instructions for set-up in the cloud or locally>
+
 ## Usage
 Clear instructions on how to use the project
 Code examples demonstrating basic functionality
 Screenshots or GIFs to illustrate the project in action
+
 ## Features
 List of key features and capabilities
+
 ## Documentation
 Links to more comprehensive documentation
 API references for libraries or frameworks
 Troubleshooting tips or FAQs
 - https://www.w3schools.com/howto/howto_js_filter_table.asp
+
 ## Credits and Acknowledgments
 List of contributors and maintainers
 Acknowledgment of third-party resources or libraries used
@@ -126,6 +133,7 @@ sorting algorithm
 - OpenAI's GPT-3.5 for generating parts of the documentation
 - [CoolLibrary](https://github.com/coollibrary/coollibrary) for providing the
 base functionality
+
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE)
 file for details.
@@ -135,8 +143,10 @@ by [Jane Smith](https://github.com/janesmith), used under the MIT License.
 This project uses the following third-party libraries:
 - Library1 (MIT License)
 - Library2 (Apache 2.0 License)
+
 ## Contact Information
 Any questions, contact information is below.
+
 * John Mo johnmo@tamu.edu
 * Jordan Daryanani Jordandary@tamu.edu
 * Jonathan Zhao jonz64@tamu.edu
