@@ -137,8 +137,8 @@ This project uses the following third-party libraries:
 - Library2 (Apache 2.0 License)
 ## Contact Information
 Any questions, contact information is below.
-John Mo johnmo@tamu.edu
-Jordan Daryanani Jordandary@tamu.edu
-Jonathan Zhao jonz64@tamu.edu
-Thomas Holt tmholt02@tamu.edu
-Mustafa Tekin mt37863@tamu.edu
+* John Mo johnmo@tamu.edu
+* Jordan Daryanani Jordandary@tamu.edu
+* Jonathan Zhao jonz64@tamu.edu
+* Thomas Holt tmholt02@tamu.edu
+* Mustafa Tekin mt37863@tamu.edu
