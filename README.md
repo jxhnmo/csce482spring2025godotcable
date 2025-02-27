@@ -2,7 +2,7 @@
 ## Godot Cable Modelling
 3D modelling of cable physics in Godot Game Engine. The project creates a simulation environment in which 3D cables are dragged along the ground by a robot and interacts with the environment. The goal is to create realistic movement of the cables.
 
-##Table of Contents
+## Table of Contents
 An interactive list of sections for easy navigation, especially for longer
 READMEs
 ## Requirements
