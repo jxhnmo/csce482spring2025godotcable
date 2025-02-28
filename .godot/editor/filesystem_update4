@@ -1,0 +1,6 @@
+res://main.tscn
+res://main.cs
+res://RopeNode.cs
+res://RigidNode.cs
+res://Rope.cs
+res://RopeElement.cs

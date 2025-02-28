@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dy3nrmx6qe32c"]
+
+[ext_resource type="Script" path="res://main.cs" id="1_58vfd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ktjj6"]
+radius = 24.4131
+
+[node name="MainNode" type="Node2D"]
+script = ExtResource("1_58vfd")
+
+[node name="Parent" type="Node2D" parent="."]
+position = Vector2(127, 82)
+
+[node name="Target" type="Node2D" parent="Parent"]
+position = Vector2(-7, 107)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Parent/Target"]
+position = Vector2(-98, 54)
+freeze = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Parent/Target/RigidBody2D"]
+position = Vector2(361, 272)
+shape = SubResource("CircleShape2D_ktjj6")

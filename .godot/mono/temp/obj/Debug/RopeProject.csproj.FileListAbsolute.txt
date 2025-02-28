@@ -1,0 +1,17 @@
+C:\Users\tmhol\OneDrive\Documents\ropeproject\.godot\mono\temp\obj\Debug\RopeProject.csproj.AssemblyReference.cache
+C:\Users\tmhol\OneDrive\Documents\ropeproject\.godot\mono\temp\obj\Debug\RopeProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\tmhol\OneDrive\Documents\ropeproject\.godot\mono\temp\obj\Debug\RopeProject.AssemblyInfoInputs.cache
+C:\Users\tmhol\OneDrive\Documents\ropeproject\.godot\mono\temp\obj\Debug\RopeProject.AssemblyInfo.cs
+C:\Users\tmhol\OneDrive\Documents\ropeproject\.godot\mono\temp\obj\Debug\RopeProject.csproj.CoreCompileInputs.cache
+C:\Users\tmhol\OneDrive\Documents\ropeproject\.godot\mono\temp\bin\Debug\RopeProject.deps.json
+C:\Users\tmhol\OneDrive\Documents\ropeproject\.godot\mono\temp\bin\Debug\RopeProject.runtimeconfig.json
+C:\Users\tmhol\OneDrive\Documents\ropeproject\.godot\mono\temp\bin\Debug\RopeProject.dll
+C:\Users\tmhol\OneDrive\Documents\ropeproject\.godot\mono\temp\bin\Debug\RopeProject.pdb
+C:\Users\tmhol\OneDrive\Documents\ropeproject\.godot\mono\temp\bin\Debug\GodotSharp.dll
+C:\Users\tmhol\OneDrive\Documents\ropeproject\.godot\mono\temp\bin\Debug\GodotSharpEditor.dll
+C:\Users\tmhol\OneDrive\Documents\ropeproject\.godot\mono\temp\obj\Debug\RopeProj.91E8E39A.Up2Date
+C:\Users\tmhol\OneDrive\Documents\ropeproject\.godot\mono\temp\obj\Debug\RopeProject.dll
+C:\Users\tmhol\OneDrive\Documents\ropeproject\.godot\mono\temp\obj\Debug\refint\RopeProject.dll
+C:\Users\tmhol\OneDrive\Documents\ropeproject\.godot\mono\temp\obj\Debug\RopeProject.pdb
+C:\Users\tmhol\OneDrive\Documents\ropeproject\.godot\mono\temp\obj\Debug\RopeProject.genruntimeconfig.cache
+C:\Users\tmhol\OneDrive\Documents\ropeproject\.godot\mono\temp\obj\Debug\ref\RopeProject.dll
