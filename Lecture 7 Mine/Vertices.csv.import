@@ -1,0 +1,14 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://diehnv6u1cx4y"
+
+[deps]
+
+source_file="res://Lecture 7 Mine/Vertices.csv"
+
+[params]
+
+compress=true
+delimiter=0

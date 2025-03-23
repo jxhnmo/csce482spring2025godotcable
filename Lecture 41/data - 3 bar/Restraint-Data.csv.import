@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://cas8lmxt48amh"
+
+[deps]
+
+files=["res://Lecture 41/data - 3 bar/Restraint-Data.2.translation"]
+
+source_file="res://Lecture 41/data - 3 bar/Restraint-Data.csv"
+dest_files=["res://Lecture 41/data - 3 bar/Restraint-Data.2.translation"]
+
+[params]
+
+compress=true
+delimiter=0

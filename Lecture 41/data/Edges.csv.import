@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://esou1wi8je33"
+
+[deps]
+
+files=["res://Lecture 41/data/Edges.2.translation"]
+
+source_file="res://Lecture 41/data/Edges.csv"
+dest_files=["res://Lecture 41/data/Edges.2.translation"]
+
+[params]
+
+compress=true
+delimiter=0
