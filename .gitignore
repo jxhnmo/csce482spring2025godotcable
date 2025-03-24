@@ -6,3 +6,4 @@ test/.godot
 .godot/
 .godot
 /android/
+*.translation
