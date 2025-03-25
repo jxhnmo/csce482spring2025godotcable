@@ -26,14 +26,21 @@ private double E, A, gamma;
 	private int[] restrainedDoF;
 	private int[,] forceLocationData;
 	private int nDoF;
-	double[] lengths;
+	private double[] lengths;
 	private Vector<Double> forceVector;
+	private Vector<Double> forceVectorInitial;
 	private Matrix<double>[] TMs;
 	private List<Tuple<int, double>> SW_at_supports;
+	private float currentLoadStepProgress = 1.0f;
+    private float ppmMultiplier = 1.0f;
+	private String[] dataLocations = {
+		"Lecture 41/data/", 
+		"Lecture 41/data - 3 bar/", 
+		"Lecture 41/data - 6 bar/"
+	};
 
-	[Export] public System.String pathPrefix = "Lecture 41/data/";
-	[Export] public float pixelsPerMeter = 100.0f;
-	[Export] public float pixelsPerNewton = 1.0f;
+	[Export] public System.String PathPrefix = "Lecture 41/data/";
+	[Export] public float PixelsPerMeter = 200.0f;
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
@@ -52,9 +59,9 @@ private double E, A, gamma;
 		nDoF = 0;
 
 		// Load nodal coordinates
-		if (File.Exists(pathPrefix + "Vertices.csv"))
+		if (File.Exists(PathPrefix + "Vertices.csv"))
 		{
-			nodes = ReadCsvAsDouble(pathPrefix + "Vertices.csv");
+			nodes = ReadCsvAsDouble(PathPrefix + "Vertices.csv");
 			GD.Print("1. 🟢 Vertices.csv imported");
 			GD.Print(nodes);
 		}
@@ -64,9 +71,9 @@ private double E, A, gamma;
 		}
 
 		// Load member definitions
-		if (File.Exists(pathPrefix + "Edges.csv"))
+		if (File.Exists(PathPrefix + "Edges.csv"))
 		{
-			members = ReadCsvAsInt(pathPrefix + "Edges.csv");
+			members = ReadCsvAsInt(PathPrefix + "Edges.csv");
 			nDoF = members.Cast<int>().Max() * 2; // Total degrees of freedom
 			GD.Print("2. 🟢 Edges.csv imported");
 		}
@@ -76,9 +83,9 @@ private double E, A, gamma;
 		}
 
 		// Load restraint data
-		if (File.Exists(pathPrefix + "Restraint-Data.csv"))
+		if (File.Exists(PathPrefix + "Restraint-Data.csv"))
 		{
-			int[,] restraintData = ReadCsvAsInt(pathPrefix + "Restraint-Data.csv");
+			int[,] restraintData = ReadCsvAsInt(PathPrefix + "Restraint-Data.csv");
 			List<int> flatData = restraintData.Cast<int>().Where(x => x != 0).ToList();
 			restrainedDoF = flatData.ToArray(); 
 			restrainedIndex = flatData.Select(x => x - 1).ToArray();
@@ -92,9 +99,9 @@ private double E, A, gamma;
 		}
 
 		// Load force location data
-		if (File.Exists(pathPrefix + "Force-Data.csv"))
+		if (File.Exists(PathPrefix + "Force-Data.csv"))
 		{
-			forceLocationData = ReadCsvAsInt(pathPrefix + "Force-Data.csv");
+			forceLocationData = ReadCsvAsInt(PathPrefix + "Force-Data.csv");
 			GD.Print("4. 🟢 Force-Data.csv imported");
 		}
 		else
@@ -141,7 +148,7 @@ private double E, A, gamma;
 		return data;
 	}
 
-	public override void _Ready()
+	private void Initialize()
 	{
 		LoadStructure();
 		
@@ -178,8 +185,6 @@ private double E, A, gamma;
 				if (index >= 0 && index < forceVector.Count)
 					forceVector[index] = P; // Apply force
 		}
-
-		GD.Print($"forceVector: {forceVector}\n");
 		
 
 		//#### Calculate inital length for each member based on initial position. ####//
@@ -199,7 +204,7 @@ private double E, A, gamma;
 		GD.Print("Member Lengths: " + string.Join(", ", lengths));
 
 		//#### Calculate and add self-weight to force vector ####//
-		List<Tuple<int, double>> SW_at_supports = new List<Tuple<int, double>>();
+		SW_at_supports = new List<Tuple<int, double>>();
 		if (swt)
 		{
 			for (int n = 0; n < members.GetLength(0); n++)
@@ -225,6 +230,8 @@ private double E, A, gamma;
 				}
 			}
 		}
+
+		forceVectorInitial = forceVector.Clone();
 		GD.Print("Force Vector: " + forceVector);
 		GD.Print("SW at Supports:");
 		foreach (var sw in SW_at_supports)
@@ -268,51 +275,68 @@ private double E, A, gamma;
 		Color nodeColor = Colors.Red;
 		Color memberColor = Colors.White;
 		Color forceColor = Colors.Red;
-		float forceThreshold = .5f;
+		float forceThreshold = 0.5f;
 
-		int numNodes = nodes.GetLength(0); // Number of nodes
-		int numMembers = members.GetLength(0); // Number of members
+		int numNodes = nodes.GetLength(0);
+		int numMembers = members.GetLength(0);
 
-		// Draw members (lines)
+		// === Draw Members (Undeformed) ===
 		for (int i = 0; i < numMembers; i++)
 		{
 			int node_i = members[i, 0] - 1;
 			int node_j = members[i, 1] - 1;
 
-			Vector2 start = new Vector2((float)nodes[node_i, 0], -(float)nodes[node_i, 1]) * pixelsPerMeter;
-			Vector2 end = new Vector2((float)nodes[node_j, 0], -(float)nodes[node_j, 1]) * pixelsPerMeter;
+			Vector2 start = new Vector2((float)nodes[node_i, 0], -(float)nodes[node_i, 1]) * PixelsPerMeter * ppmMultiplier;
+			Vector2 end = new Vector2((float)nodes[node_j, 0], -(float)nodes[node_j, 1]) * PixelsPerMeter * ppmMultiplier;
 
 			DrawLine(start, end, memberColor, 2f, true);
 		}
 
-		// Draw forces as arrows
-		for (int nodeIndex = 0; nodeIndex < nodes.GetLength(0); nodeIndex++)
+		// === Compute Max Force Magnitude for Normalization ===
+		float maxForceMag = 0;
+		for (int nodeIndex = 0; nodeIndex < numNodes; nodeIndex++)
 		{
-			float forceX = 0;
-			float forceY = (float)forceVector[nodeIndex * 2 + 1];
-			float forceMag = MathF.Sqrt(forceY * forceY + forceX * forceX);
+			float forceX = (float)forceVectorInitial[nodeIndex * 2];
+			float forceY = (float)forceVectorInitial[nodeIndex * 2 + 1];
+			float forceMag = MathF.Sqrt(forceX * forceX + forceY * forceY);
+			maxForceMag = MathF.Max(maxForceMag, forceMag);
+		}
+
+		float maxArrowLength = 50f; // Define max arrow length for visualization
+
+		// === Draw External Forces (Green) ===
+		for (int nodeIndex = 0; nodeIndex < numNodes; nodeIndex++)
+		{
+			float forceX = (float)forceVectorInitial[nodeIndex * 2];
+			float forceY = (float)forceVectorInitial[nodeIndex * 2 + 1];
+			float forceMag = MathF.Sqrt(forceX * forceX + forceY * forceY);
 
 			if (forceMag > forceThreshold)
 			{
-				Vector2 basePos = new Vector2((float)nodes[nodeIndex, 0], -(float)nodes[nodeIndex, 1]) * pixelsPerMeter;
-				Vector2 forceVec = new Vector2(forceX, -forceY) * pixelsPerNewton; // Flip Y for Godot coordinates
+				Vector2 basePos = new Vector2((float)nodes[nodeIndex, 0], -(float)nodes[nodeIndex, 1]) * PixelsPerMeter * ppmMultiplier;
+				Vector2 forceVec = new Vector2(forceX, -forceY);
+
+				if (forceMag > 1e-6) // Normalize force arrow length
+				{
+					forceVec = forceVec.Normalized() * (forceMag / maxForceMag * maxArrowLength);
+				}
 
 				Vector2 endPos = basePos + forceVec;
-
-				DrawLine(basePos, endPos, forceColor, 2f);
-				ForceLabel(endPos, forceMag, forceColor);
+				DrawLine(basePos, endPos, Colors.Green, 2f);
+				ForceLabel(endPos, forceMag, Colors.Green);
 			}
 		}
 
-		// Draw nodes with restraint markers
+		// === Draw Nodes with Restraint Markers ===
 		for (int i = 0; i < numNodes; i++)
 		{
-			Vector2 pos = new Vector2((float)nodes[i, 0], -(float)nodes[i, 1]) * pixelsPerMeter;
+			Vector2 pos = new Vector2((float)nodes[i, 0], -(float)nodes[i, 1]) * PixelsPerMeter * ppmMultiplier;
 
 			int i_hor = i * 2;
 			int i_ver = i * 2 + 1;
 			bool restrainedX = restrainedIndex.Contains(i_hor);
 			bool restrainedY = restrainedIndex.Contains(i_ver);
+			
 			if (restrainedX) {
 				DrawLine(pos + new Vector2(-25, 0), pos + new Vector2(25, 0), Colors.Black, 3f);
 			}
@@ -323,13 +347,12 @@ private double E, A, gamma;
 			DrawCircle(pos, 4f, nodeColor);
 		}
 	}
+
 	
 
 	private void ForceLabel(Vector2 location, float newtons, Color color)
 	{
 		float kN = newtons / 1000.0f;
-		if (Math.Abs(kN) < 1.0f)
-			return;
 
 		string forceText = $"{Math.Round(kN, 2)} kN";
 
@@ -719,7 +742,8 @@ private double E, A, gamma;
 	private Matrix<double> FI_FINAL;
 	private Matrix<double> EXTFORCES;
 	private Matrix<double> MBRFORCES;
-	private void RunIncrementalLoadConvergence()
+
+    private void RunIncrementalLoadConvergence()
 	{
 		GD.Print("Attempting RunIncrementalLoadConvergence() {");
 		// === Initialise data containers to hold converged data for each external load increment ===
@@ -896,11 +920,11 @@ private double E, A, gamma;
 		int numMembers = members.GetLength(0);
 
 		// Pull the final increment data
-		int lastCol = UG_FINAL.ColumnCount - 1;
-		Vector<double> ug = UG_FINAL.Column(lastCol);
-		Vector<double> fi = FI_FINAL.Column(lastCol);
-		Vector<double> extForces = EXTFORCES.Column(lastCol);
-		Vector<double> mbrForces = MBRFORCES.Column(lastCol); // Assumes this is stored as a Matrix<double>
+		int targCol = (int)((UG_FINAL.ColumnCount - 1) * currentLoadStepProgress + 0.5f);
+		Vector<double> ug = UG_FINAL.Column(targCol);
+		Vector<double> fi = FI_FINAL.Column(targCol);
+		Vector<double> extForces = EXTFORCES.Column(targCol);
+		Vector<double> mbrForces = MBRFORCES.Column(targCol); // Assumes this is stored as a Matrix<double>
 
 		double maxForceMag = extForces.Select(Math.Abs).Max();
 
@@ -915,14 +939,14 @@ private double E, A, gamma;
 			Vector2 posJ = new Vector2((float)nodes[nodeJ, 0], -(float)nodes[nodeJ, 1]);
 
 			// Displaced positions
-			Vector2 dispI = new Vector2((float)ug[nodeI * 2], -(float)ug[nodeI * 2 + 1]) * pixelsPerMeter;
-			Vector2 dispJ = new Vector2((float)ug[nodeJ * 2], -(float)ug[nodeJ * 2 + 1]) * pixelsPerMeter;
+			Vector2 dispI = new Vector2((float)ug[nodeI * 2], -(float)ug[nodeI * 2 + 1]) * PixelsPerMeter * ppmMultiplier;
+			Vector2 dispJ = new Vector2((float)ug[nodeJ * 2], -(float)ug[nodeJ * 2 + 1]) * PixelsPerMeter * ppmMultiplier;
 
-			Vector2 defI = (posI * pixelsPerMeter) + dispI;
-			Vector2 defJ = (posJ * pixelsPerMeter) + dispJ;
+			Vector2 defI = (posI * PixelsPerMeter * ppmMultiplier) + dispI;
+			Vector2 defJ = (posJ * PixelsPerMeter * ppmMultiplier) + dispJ;
 
 			// Undeformed in dashed color
-			DrawLine(posI * pixelsPerMeter, posJ * pixelsPerMeter, Colors.Gray, 1f, true);
+			DrawLine(posI * PixelsPerMeter * ppmMultiplier, posJ * PixelsPerMeter * ppmMultiplier, Colors.Gray, 1f, true);
 
 			// Deformed member line colored by force
 			float force = (float)mbrForces[i];
@@ -944,8 +968,8 @@ private double E, A, gamma;
 			int iHor = i * 2;
 			int iVer = i * 2 + 1;
 
-			Vector2 basePos = new Vector2((float)nodes[i, 0], -(float)nodes[i, 1]) * pixelsPerMeter;
-			Vector2 disp = new Vector2((float)ug[iHor], -(float)ug[iVer]) * pixelsPerMeter;
+			Vector2 basePos = new Vector2((float)nodes[i, 0], -(float)nodes[i, 1]) * PixelsPerMeter * ppmMultiplier;
+			Vector2 disp = new Vector2((float)ug[iHor], -(float)ug[iVer]) * PixelsPerMeter * ppmMultiplier;
 			Vector2 newPos = basePos + disp;
 
 			// Draw node circle
@@ -983,8 +1007,39 @@ private double E, A, gamma;
 	}
 
 
-	public override void _Draw() {
-		DrawFinal();
+	public override void _Ready()
+	{
+		Initialize();
 	}
+
+
+	public override void _Draw() {
+		if (currentLoadStepProgress == 0.0f) {
+			DrawInitial();
+		}
+		else {
+			DrawFinal();
+		}
+	}
+
+
+    private void OnLoadStepValueChanged(float value)
+    {
+        currentLoadStepProgress = value;
+        QueueRedraw();
+    }
+
+	private void OnZoomValueChanged(float value)
+    {
+        ppmMultiplier = value;
+        QueueRedraw();
+    }
+
+	private void OnSceneValueChanged(int index)
+    {
+        PathPrefix = dataLocations[index];
+		Initialize();
+        QueueRedraw();
+    }
 
 }

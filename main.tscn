@@ -1,11 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://dy3nrmx6qe32c"]
+[gd_scene load_steps=3 format=3 uid="uid://dy3nrmx6qe32c"]
 
 [ext_resource type="Script" path="res://Lecture 41/FEMCable.cs" id="2_7wyxi"]
+[ext_resource type="PackedScene" uid="uid://di20na8bm07a6" path="res://Controls.tscn" id="2_k2kfv"]
 
 [node name="MainNode" type="Node2D"]
 
 [node name="FEMCableNode" type="Node2D" parent="."]
-position = Vector2(163, 182)
+position = Vector2(104, 241)
 script = ExtResource("2_7wyxi")
-pixelsPerMeter = 150.0
-pixelsPerNewton = 0.735
+
+[node name="Controls" parent="." instance=ExtResource("2_k2kfv")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 787.0
+offset_top = 9.0
+offset_right = 1187.0
+offset_bottom = 632.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[connection signal="value_changed" from="Controls/VBoxContainer/LoadProgressContainer/LoadProgressSlider" to="FEMCableNode" method="OnLoadStepValueChanged"]
+[connection signal="value_changed" from="Controls/VBoxContainer/ZoomContainer/ZoomSlider" to="FEMCableNode" method="OnZoomValueChanged"]
+[connection signal="item_selected" from="Controls/VBoxContainer/ScenePickerContainer/OptionButton" to="FEMCableNode" method="OnSceneValueChanged"]
+
+[editable path="Controls"]
