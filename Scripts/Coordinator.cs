@@ -14,7 +14,7 @@ public partial class Coordinator : Node
     private float length;
     private int segmentCount;
 
-    private List<CablePloter> ploters = new List<CablePloter>();
+    private List<CablePlotter> plotters = new List<CablePlotter>();
 
     public void SetStartPointX(float value) => GD.Print(startPoint.X = value);
     public void SetStartPointY(float value) => startPoint.Y = value;
@@ -43,40 +43,40 @@ public partial class Coordinator : Node
     public void GeneratePlots()
     {
         GD.Print("GeneratePlots()...");
-        foreach (CablePloter ploter in ploters)
+        foreach (CablePlotter plotter in plotters)
         {
-            ploter.Generate(startPoint, endPoint, mass, length, segmentCount);
+            plotter.Generate(startPoint, endPoint, mass, length, segmentCount);
         }
     }
 
-    public void AddPloter(CablePloter ploter)
+    public void AddPlotter(CablePlotter plotter)
     {
-        if (!ploters.Contains(ploter))
+        if (!plotters.Contains(plotter))
         {
-            ploters.Add(ploter);
+            plotters.Add(plotter);
         }
     }
 
-    public void ClearPloters()
+    public void ClearPlotters()
     {
-        ploters.Clear();
+        plotters.Clear();
     }
 
     public void SetVisible(int index, bool visible)
     {
-        if (index < 0 || index >= ploters.Count)
+        if (index < 0 || index >= plotters.Count)
         {
-            GD.PrintErr($"SetVisible: Index {index} out of range for ploters list.");
+            GD.PrintErr($"SetVisible: Index {index} out of range for plotters list.");
             return;
         }
 
         if (visible) {
             GD.Print($"Showing {index}");
-            ploters[index].ShowPlot();
+            plotters[index].ShowPlot();
         }
         else {
             GD.Print($"Hiding {index}");
-            ploters[index].HidePlot();
+            plotters[index].HidePlot();
         }
     }
 
@@ -84,14 +84,14 @@ public partial class Coordinator : Node
 
     public override void _Ready()
     {
-        var parabola = new ParabolaPloter();
-        var abs = new AbsPloter();
+        var parabola = new ParabolaPlotter();
+        var abs = new AbsPlotter();
 
         WorldRoot.AddChild(parabola);
         WorldRoot.AddChild(abs);
 
-        AddPloter(parabola);
-        AddPloter(abs);
+        AddPlotter(parabola);
+        AddPlotter(abs);
 
         IsReady = true;
     }

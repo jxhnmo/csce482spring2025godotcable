@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class ParabolaPloter : Node2D, CablePloter
+public partial class ParabolaPlotter : Node2D, CablePlotter
 {
 	private Line2D line;
 	private bool show = false;
