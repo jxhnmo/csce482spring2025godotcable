@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public partial class AbsPloter : Node2D, CablePloter
 {
 	private Line2D line;
-	private bool show;
+	private bool show = false;
 
 	public override void _Ready()
 	{
@@ -17,23 +17,31 @@ public partial class AbsPloter : Node2D, CablePloter
 		};
 
 		AddChild(line);
-		HidePlot();
+		line.Visible = show;
 	}
 
 	
 
 	public void HidePlot() {
 		show = false;
+		if (line != null && line.IsInsideTree()) {
+			line.Hide();
+		}
 	}
 
 	public void ShowPlot() {
 		show = true;
+		if (line != null && line.IsInsideTree()) {
+			line.Show();
+		}
 	}
 
 	public void Generate(Vector2 startMeters, Vector2 endMeters, float mass, float length, int segments)
 	{
-		if (line == null)
+		if (line == null) {
+			Ready += () => Generate(startMeters, endMeters, mass, length, segments);
 			return;
+		}
 
 		line.ClearPoints();
 		List<Vector2> points = new();

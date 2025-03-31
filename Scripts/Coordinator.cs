@@ -7,6 +7,7 @@ public partial class Coordinator : Node
 {
     [Export] public CameraDragZoom WorldCamera;
     [Export] public Node2D WorldRoot;
+    public bool IsReady { get; private set; } = false;
     private Vector2 startPoint;
     private Vector2 endPoint;
     private float mass;
@@ -61,6 +62,24 @@ public partial class Coordinator : Node
         ploters.Clear();
     }
 
+    public void SetVisible(int index, bool visible)
+    {
+        if (index < 0 || index >= ploters.Count)
+        {
+            GD.PrintErr($"SetVisible: Index {index} out of range for ploters list.");
+            return;
+        }
+
+        if (visible) {
+            GD.Print($"Showing {index}");
+            ploters[index].ShowPlot();
+        }
+        else {
+            GD.Print($"Hiding {index}");
+            ploters[index].HidePlot();
+        }
+    }
+
     public void ResetCamera() => WorldCamera.ResetCamera();
 
     public override void _Ready()
@@ -73,11 +92,9 @@ public partial class Coordinator : Node
 
         AddPloter(parabola);
         AddPloter(abs);
-        GeneratePlots();
-        parabola.Show();
-        abs.Show();
-    }
 
+        IsReady = true;
+    }
 
     public const float PixelsPerMeter = 75.0f;
 

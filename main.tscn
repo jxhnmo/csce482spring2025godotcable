@@ -15,6 +15,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Coordinator" type="Node" parent="." node_paths=PackedStringArray("WorldCamera", "WorldRoot")]
+script = ExtResource("1_a1noq")
+WorldCamera = NodePath("../HBoxContainer/PanelContainer2/SubViewportContainer/WorldViewport/Camera2D")
+WorldRoot = NodePath("../HBoxContainer/PanelContainer2/SubViewportContainer/WorldViewport/WorldRoot")
+
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -39,7 +44,7 @@ theme_override_constants/margin_bottom = 10
 
 [node name="UserControls" parent="HBoxContainer/PanelContainer1/MarginContainer" instance=ExtResource("2_40380")]
 layout_mode = 2
-CoordinatorPath = NodePath("../../../Coordinator")
+CoordinatorPath = NodePath("../../../../Coordinator")
 
 [node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer"]
 layout_mode = 2
@@ -74,10 +79,3 @@ script = ExtResource("4_h65es")
 [node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/PanelContainer2/SubViewportContainer/WorldViewport/WorldRoot"]
 visible = false
 texture = ExtResource("5_fo2ce")
-
-[node name="Node2D" type="Node2D" parent="HBoxContainer/PanelContainer2"]
-
-[node name="Coordinator" type="Node" parent="HBoxContainer" node_paths=PackedStringArray("WorldCamera", "WorldRoot")]
-script = ExtResource("1_a1noq")
-WorldCamera = NodePath("../PanelContainer2/SubViewportContainer/WorldViewport/Camera2D")
-WorldRoot = NodePath("../PanelContainer2/SubViewportContainer/WorldViewport/WorldRoot")
