@@ -4,11 +4,12 @@ using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using MathNet.Numerics.LinearAlgebra;
+using System.Diagnostics;
 
 public partial class FEMCable : Node2D
 {
 
-private double E, A, gamma;
+	private double E, A, gamma;
 	private bool swt;
 	private List<double> Areas;
 	private List<double> P0;
@@ -1006,10 +1007,14 @@ private double E, A, gamma;
 		}
 	}
 
-
 	public override void _Ready()
 	{
+		var stopwatch = Stopwatch.StartNew();
+
 		Initialize();
+
+		stopwatch.Stop();
+		GD.Print($"Initialize() took {stopwatch.ElapsedMilliseconds} ms");
 	}
 
 

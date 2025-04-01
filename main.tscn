@@ -1,27 +1,81 @@
-[gd_scene load_steps=3 format=3 uid="uid://dy3nrmx6qe32c"]
+[gd_scene load_steps=7 format=3 uid="uid://dy3nrmx6qe32c"]
 
-[ext_resource type="Script" path="res://Lecture 41/FEMCable.cs" id="2_7wyxi"]
-[ext_resource type="PackedScene" uid="uid://di20na8bm07a6" path="res://Controls.tscn" id="2_k2kfv"]
+[ext_resource type="Script" path="res://Scripts/Coordinator.cs" id="1_a1noq"]
+[ext_resource type="PackedScene" uid="uid://cl8v8vnftiyeq" path="res://UserControls.tscn" id="2_40380"]
+[ext_resource type="Script" path="res://Scripts/WorldViewport.cs" id="3_n21wb"]
+[ext_resource type="Script" path="res://Scripts/GridLines.cs" id="4_h65es"]
+[ext_resource type="Script" path="res://Scripts/CameraDragZoom.cs" id="4_v46wn"]
+[ext_resource type="Texture2D" uid="uid://pm780dkmkv82" path="res://icon.svg" id="5_fo2ce"]
 
-[node name="MainNode" type="Node2D"]
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="FEMCableNode" type="Node2D" parent="."]
-position = Vector2(104, 241)
-script = ExtResource("2_7wyxi")
+[node name="Coordinator" type="Node" parent="." node_paths=PackedStringArray("WorldCamera", "WorldRoot")]
+script = ExtResource("1_a1noq")
+WorldCamera = NodePath("../HBoxContainer/PanelContainer2/SubViewportContainer/WorldViewport/Camera2D")
+WorldRoot = NodePath("../HBoxContainer/PanelContainer2/SubViewportContainer/WorldViewport/WorldRoot")
 
-[node name="Controls" parent="." instance=ExtResource("2_k2kfv")]
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 787.0
-offset_top = 9.0
-offset_right = 1187.0
-offset_bottom = 632.0
-grow_horizontal = 1
-grow_vertical = 1
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[connection signal="value_changed" from="Controls/VBoxContainer/LoadProgressContainer/LoadProgressSlider" to="FEMCableNode" method="OnLoadStepValueChanged"]
-[connection signal="value_changed" from="Controls/VBoxContainer/ZoomContainer/ZoomSlider" to="FEMCableNode" method="OnZoomValueChanged"]
-[connection signal="item_selected" from="Controls/VBoxContainer/ScenePickerContainer/OptionButton" to="FEMCableNode" method="OnSceneValueChanged"]
+[node name="PanelContainer1" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
 
-[editable path="Controls"]
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/PanelContainer1"]
+layout_mode = 2
+color = Color(0.243834, 0.258919, 0.263992, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/PanelContainer1"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="UserControls" parent="HBoxContainer/PanelContainer1/MarginContainer" instance=ExtResource("2_40380")]
+layout_mode = 2
+CoordinatorPath = NodePath("../../../../Coordinator")
+
+[node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/PanelContainer2"]
+layout_mode = 2
+color = Color(0.329434, 0.348118, 0.354403, 1)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/PanelContainer2"]
+layout_mode = 2
+stretch = true
+
+[node name="WorldViewport" type="SubViewport" parent="HBoxContainer/PanelContainer2/SubViewportContainer"]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(941, 648)
+render_target_update_mode = 4
+script = ExtResource("3_n21wb")
+
+[node name="Camera2D" type="Camera2D" parent="HBoxContainer/PanelContainer2/SubViewportContainer/WorldViewport"]
+offset = Vector2(1.685, 0)
+script = ExtResource("4_v46wn")
+MinZoom = 0.025
+
+[node name="WorldRoot" type="Node2D" parent="HBoxContainer/PanelContainer2/SubViewportContainer/WorldViewport"]
+
+[node name="GridLines" type="Node2D" parent="HBoxContainer/PanelContainer2/SubViewportContainer/WorldViewport/WorldRoot"]
+script = ExtResource("4_h65es")
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/PanelContainer2/SubViewportContainer/WorldViewport/WorldRoot"]
+visible = false
+texture = ExtResource("5_fo2ce")
