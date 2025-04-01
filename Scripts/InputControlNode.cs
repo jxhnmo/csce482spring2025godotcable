@@ -46,6 +46,8 @@ public partial class InputControlNode : Control
         coordinator.SetVisible(0, GetNode<CheckBox>("HBoxContainerParabola/CheckBoxParabola").ButtonPressed);
         GetNode<CheckBox>("HBoxContainerAbs/CheckBoxAbs").Toggled += pressed => coordinator.SetVisible(1, pressed);
         coordinator.SetVisible(1, GetNode<CheckBox>("HBoxContainerAbs/CheckBoxAbs").ButtonPressed);
+        GetNode<CheckBox>("HBoxContainerFEM/CheckBoxFEM").Toggled += pressed => coordinator.SetVisible(2, pressed);
+        coordinator.SetVisible(2, GetNode<CheckBox>("HBoxContainerFEM/CheckBoxFEM").ButtonPressed);
 
         // Generate Plots Button
         GetNode<Button>("GeneratePlots").Pressed += () => coordinator.GeneratePlots();

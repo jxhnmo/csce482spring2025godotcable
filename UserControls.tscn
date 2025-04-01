@@ -40,7 +40,7 @@ layout_mode = 2
 min_value = -1000.0
 max_value = 1000.0
 step = 0.1
-value = 4.0
+value = 5.0
 
 [node name="EndY" type="SpinBox" parent="HBoxContainerEnd"]
 layout_mode = 2
@@ -109,7 +109,6 @@ layout_mode = 2
 
 [node name="CheckBoxParabola" type="CheckBox" parent="HBoxContainerParabola"]
 layout_mode = 2
-button_pressed = true
 
 [node name="_Label_35" type="Label" parent="HBoxContainerParabola"]
 custom_minimum_size = Vector2(100, 0)
@@ -127,6 +126,19 @@ layout_mode = 2
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "V - Plot
+"
+
+[node name="HBoxContainerFEM" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="CheckBoxFEM" type="CheckBox" parent="HBoxContainerFEM"]
+layout_mode = 2
+button_pressed = true
+
+[node name="_Label_37" type="Label" parent="HBoxContainerFEM"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "FEM Cable
 "
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

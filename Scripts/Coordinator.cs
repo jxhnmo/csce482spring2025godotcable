@@ -86,12 +86,15 @@ public partial class Coordinator : Node
     {
         var parabola = new ParabolaPlotter();
         var abs = new AbsPlotter();
+        var fem = new FEMLine();
 
         WorldRoot.AddChild(parabola);
         WorldRoot.AddChild(abs);
+        WorldRoot.AddChild(fem);
 
         AddPlotter(parabola);
         AddPlotter(abs);
+        AddPlotter(fem);
 
         IsReady = true;
     }
