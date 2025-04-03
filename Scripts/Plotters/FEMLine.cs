@@ -115,10 +115,14 @@ public partial class FEMLine : Node2D, CablePlotter
 		L = endPoint.X - startPoint.X;
 		h_diff = endPoint.Y - startPoint.Y;
 
-		// Placeholder example - replace with full logic moved from _Ready
-		double a = SolveForA();
-		(double x0, double C) = SolveForX0AndC(a);
-		Vector2[] points = GenerateCatenaryCurve(a, x0, C);
+		double H = SolveForH(L, L_cat, gamma * 9.81); // sw = gamma * g
+        (double x0, double C) = SolveForX0AndC_Asym(H, L, h_diff, gamma * 9.81);
+        Vector2[] points = GenerateAsymmetricCatenaryCurve(H, x0, C, L, gamma * 9.81);
+
+        double y_min = (H / (gamma * 9.81)) + C;
+        double V = 0.5 * L_cat * gamma * 9.81;
+        double T_max = Math.Sqrt(H * H + V * V);
+        GD.Print($"Sag: {Math.Round(y_min, 3)} m | Max Tension at Supports: {Math.Round(T_max, 1)} N");
 
 		float[] xPoints = new float[points.Length];
 		float[] yPoints = new float[points.Length];
@@ -380,76 +384,88 @@ public partial class FEMLine : Node2D, CablePlotter
 	}
 
 	// EQUATIONS START HERE
-	private double SolveForA()
-	{
-		// Initial guess based on geometry
-		double a_guess = L / 2;
-		double a = a_guess;
-		double tolerance = 1e-6;
-		int maxIterations = 100;
-		
-		for (int i = 0; i < maxIterations; i++)
-		{
-			double f_a = 2 * a * Math.Sinh(L / (2 * a)) - L_cat;
-			double df_a = 2 * (Math.Sinh(L / (2 * a)) - (L / (2 * a)) * Math.Cosh(L / (2 * a))); // Derivative
-			
-			if (Math.Abs(f_a) < tolerance)
-				return a;
+	private double SolveForH(double L, double L_cat, double sw)
+    {
+        double tolerance = 0.5;
+        for (double H = 10; H <= 20000; H += 1)
+        {
+            double L_approx = ComputeCableLength(H, L, sw);
+            if (Math.Abs(L_approx - L_cat) < tolerance){
+                return H;
+            }
+        }
 
-			a -= f_a / df_a; // Newton-Raphson update
-		}
+        GD.PrintErr("No valid H found within search range.");
+        return 0;
+    }
 
-		GD.PrintErr("Error: No valid solution found for 'a'. Check input parameters.");
-		return 0;
-	}
+    private double ComputeCableLength(double H, double L, double sw)
+    {
+        int segments = 1000;
+        double[] x = new double[segments];
+        double dx = L / (segments - 1);
+        for (int i = 0; i < segments; i++)
+            x[i] = -L / 2 + i * dx;
 
-	private (double, double) SolveForX0AndC(double a)
-	{
-		double x0 = 0, C = 0;
-		double tolerance = 1e-6;
-		int maxIterations = 100;
-		
-		for (int i = 0; i < maxIterations; i++)
-		{
-			double eq1 = a * Math.Cosh(-x0 / a) + C;
-			double eq2 = a * Math.Cosh((L - x0) / a) + C - h_diff;
+        double[] y = new double[segments];
+        for (int i = 0; i < segments; i++)
+            y[i] = (H / sw) * (Math.Cosh(sw / H * x[i]) - 1);
 
-			double d_eq1_x0 = -Math.Sinh(-x0 / a);
-			double d_eq2_x0 = -Math.Sinh((L - x0) / a);
-			
-			double d_eq1_C = 1;
-			double d_eq2_C = 1;
+        double length = 0;
+        for (int i = 0; i < segments - 1; i++)
+        {
+            double dy = y[i + 1] - y[i];
+            length += Math.Sqrt(dx * dx + dy * dy);
+        }
+        return length;
+    }
 
-			double det = d_eq1_x0 * d_eq2_C - d_eq2_x0 * d_eq1_C;
-			if (Math.Abs(det) < tolerance) break;
+    private (double, double) SolveForX0AndC_Asym(double H, double L, double h_diff, double sw)
+    {
+        double x0 = 0, C = 0;
+        double tolerance = 1e-6;
+        int maxIter = 100;
 
-			double dx0 = (eq1 * d_eq2_C - eq2 * d_eq1_C) / det;
-			double dC = (d_eq1_x0 * eq2 - d_eq2_x0 * eq1) / det;
+        for (int i = 0; i < maxIter; i++)
+        {
+            double eq1 = (H / sw) * Math.Cosh(-x0 * sw / H) + C;
+            double eq2 = (H / sw) * Math.Cosh((L - x0) * sw / H) + C - h_diff;
 
-			x0 -= dx0;
-			C -= dC;
+            double d_eq1_x0 = -Math.Sinh(-x0 * sw / H);
+            double d_eq2_x0 = -Math.Sinh((L - x0) * sw / H);
 
-			if (Math.Abs(dx0) < tolerance && Math.Abs(dC) < tolerance)
-				return (x0, C);
-		}
+            double d_eq1_C = 1;
+            double d_eq2_C = 1;
 
-		GD.PrintErr("Error: No valid solution found for x0 and C.");
-		return (0, 0);
-	}
+            double det = d_eq1_x0 * d_eq2_C - d_eq2_x0 * d_eq1_C;
+            if (Math.Abs(det) < tolerance)
+                break;
 
-	private Vector2[] GenerateCatenaryCurve(double a, double x0, double C)
-	{
-		Vector2[] points = new Vector2[n + 1];
+            double dx0 = (eq1 * d_eq2_C - eq2 * d_eq1_C) / det;
+            double dC = (d_eq1_x0 * eq2 - d_eq2_x0 * eq1) / det;
 
-		for (int i = 0; i <= n; i++)
-		{
-			double x = (L / n) * i;
-			double y = a * Math.Cosh((x - x0) / a) + C;
-			points[i] = new Vector2((float)x, (float)y); // Scale for Godot
-		}
-		
-		return points;
-	}
+            x0 -= dx0;
+            C -= dC;
+
+            if (Math.Abs(dx0) < tolerance && Math.Abs(dC) < tolerance)
+                return (x0, C);
+        }
+
+        GD.PrintErr("Failed to solve for x0 and C.");
+        return (0, 0);
+    }
+
+    private Vector2[] GenerateAsymmetricCatenaryCurve(double H, double x0, double C, double L, double sw)
+    {
+        Vector2[] points = new Vector2[n + 1];
+        for (int i = 0; i <= n; i++)
+        {
+            double x = (L / n) * i;
+            double y = (H / sw) * Math.Cosh((sw / H) * (x - x0)) + C;
+            points[i] = new Vector2((float)x, (float)y);
+        }
+        return points;
+    }
 
 	private Vector2[] FEM(Vector2[] points){
 		Vector2[] nonething = points;
