@@ -96,8 +96,8 @@ public partial class Coordinator : Node
 
     public override void _Ready()
     {
-        AddPlotter(new RawPlotter("Initial Plot"));
-        AddPlotter(new FEMLine());
+        AddPlotter(new RawPlotter("Initial Plot", new Color(.7f, .5f, 0)));
+        AddPlotter(new FEMLine(new Color(0, 0, 1)));
         IsReady = true;
     }
 

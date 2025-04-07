@@ -5,7 +5,8 @@ using System.Linq;
 
 public partial class FEMLine : Node2D, CablePlotter
 {
-	private static bool show;
+	private bool show;
+	private Color lineColor;
 	private Line2D catenaryLine;
 	private Line2D deformedLine;
 	private Vector2 startAnchor = new Vector2(100, 500);  // Left support
@@ -65,8 +66,16 @@ public partial class FEMLine : Node2D, CablePlotter
 	// Define a vector to store the total external force applied
 	public static double[] maxForce;
 
+	public FEMLine(Color lineColor) {
+		this.lineColor = lineColor;
+	}
+
 	public String GetPlotName() {
 		return "FEM Line";
+	}
+	
+	public Color GetColor() {
+		return lineColor;
 	}
 
 	// Function to divide a vector by a scalar (element-wise division)
@@ -86,7 +95,7 @@ public partial class FEMLine : Node2D, CablePlotter
 		{
 			Name = "Catenary",
 			Width = 4,
-			DefaultColor = new Color(1,0,0,1),
+			DefaultColor = lineColor,
 			Antialiased = true,
 			Visible = false // Never visible. Now handled by a separate CablePlotter.
 		};
@@ -96,7 +105,7 @@ public partial class FEMLine : Node2D, CablePlotter
 		{
 			Name = "CatenaryDeformed",
 			Width = 4,
-			DefaultColor = new Color(0, 0, 1, 1),
+			DefaultColor = lineColor,
 			Antialiased = true,
 			Visible = show
 		};

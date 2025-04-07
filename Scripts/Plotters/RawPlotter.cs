@@ -6,26 +6,20 @@ public partial class RawPlotter : Node2D, CablePlotter
 {
 	private Line2D line;
 	private bool show = false;
-	private String plotName = null;
+	private String plotName;
+	private Color lineColor;
 	private Vector2[] meterPoints;
 
-	public String GetPlotName() {
-		return plotName;
-	}
-
-	public RawPlotter(String plotName) {
+	public RawPlotter(String plotName, Color lineColor) {
 		this.plotName = plotName;
+		this.lineColor = lineColor;
 	}
 
 	public override void _Ready()
 	{
-		if (plotName == null) {
-			plotName = "Raw";
-		}
-		line = new Line2D
-		{
+		line = new Line2D {
 			Width = 4,
-			DefaultColor = new Color(0.2f, 0.8f, 1.0f),
+			DefaultColor = lineColor,
 			Antialiased = true
 		};
 
@@ -46,6 +40,15 @@ public partial class RawPlotter : Node2D, CablePlotter
 			line.Show();
 		}
 	}
+
+	public String GetPlotName() {
+		return plotName;
+	}
+
+	public Color GetColor() {
+		return lineColor;
+	}
+
 
 	public void Generate(Vector2 startPoint, Vector2 endPoint, float mass, float arcLength, int segmentCount)
 	{

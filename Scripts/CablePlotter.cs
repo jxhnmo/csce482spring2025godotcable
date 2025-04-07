@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using Godot;
 
 public interface CablePlotter
@@ -8,8 +9,7 @@ public interface CablePlotter
 	public void HidePlot();
 	public void ShowPlot();
 	public String GetPlotName();
-	// public void SetColor(Color lineColor);
-	// public Color GetColor();
+	public Color GetColor();
 	// public float GetProgress();
 	// public Vector2[] GetFinalPoints();
 }
