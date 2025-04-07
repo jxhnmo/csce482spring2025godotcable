@@ -51,6 +51,11 @@ public partial class Coordinator : Node
 
     public void AddPlotter(CablePlotter plotter)
     {
+        if (plotter is Node node)
+        {
+            WorldRoot.AddChild(node);
+        }
+
         if (!plotters.Contains(plotter))
         {
             plotters.Add(plotter);
@@ -91,18 +96,8 @@ public partial class Coordinator : Node
 
     public override void _Ready()
     {
-        var parabola = new ParabolaPlotter();
-        var abs = new AbsPlotter();
-        var fem = new FEMLine();
-
-        WorldRoot.AddChild(parabola);
-        WorldRoot.AddChild(abs);
-        WorldRoot.AddChild(fem);
-
-        AddPlotter(parabola);
-        AddPlotter(abs);
-        AddPlotter(fem);
-
+        AddPlotter(new RawPlotter("Initial Plot"));
+        AddPlotter(new FEMLine());
         IsReady = true;
     }
 

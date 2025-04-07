@@ -88,7 +88,7 @@ public partial class FEMLine : Node2D, CablePlotter
 			Width = 4,
 			DefaultColor = new Color(1,0,0,1),
 			Antialiased = true,
-			Visible = show
+			Visible = false // Never visible. Now handled by a separate CablePlotter.
 		};
 		AddChild(catenaryLine);
 
@@ -119,21 +119,11 @@ public partial class FEMLine : Node2D, CablePlotter
 		L = endPoint.X - startPoint.X;
 		h_diff = endPoint.Y - startPoint.Y;
 
-		Vector2[] points = InitialCurve.Make(startPoint, endPoint, mass, arcLength, segmentCount);
-
-		float[] xPoints = new float[points.Length];
-		float[] yPoints = new float[points.Length];
-
-		for (int i = 0; i < points.Length; i++)
-		{
-			xPoints[i] = Coordinator.MetersToWorldX(points[i].X + startAnchor.X);
-			yPoints[i] = Coordinator.MetersToWorldY(points[i].Y + startAnchor.Y);
-		}
-
+		// Populate catenary line
 		catenaryLine.ClearPoints();
-		for (int i = 0; i < xPoints.Length; i++)
-		{
-			catenaryLine.AddPoint(new Vector2(xPoints[i], yPoints[i]));
+		Vector2[] points = InitialCurve.Make(startPoint, endPoint, mass, arcLength, segmentCount);
+		for (int i = 0; i < points.Length; i++) {
+			catenaryLine.AddPoint(Coordinator.MetersToWorld(points[i]));
 		}
 
 		// Continue with full FEM logic here...
@@ -373,7 +363,7 @@ public partial class FEMLine : Node2D, CablePlotter
 			// Clear and replot using separate x/y arrays
 			deformedLine.ClearPoints();
 
-			for (int i = 0; i < xPoints.Length; i++)
+			for (int i = 0; i < points.Length; i++)
 			{
 				deformedLine.AddPoint(new Vector2(xDeformed[i], yDeformed[i]));
 			}
@@ -1117,9 +1107,9 @@ public partial class FEMLine : Node2D, CablePlotter
 
 	public void HidePlot() {
 		show = false;
-		if (catenaryLine != null && catenaryLine.IsInsideTree()) {
-			catenaryLine.Hide();
-		}
+		// if (catenaryLine != null && catenaryLine.IsInsideTree()) {
+		// 	catenaryLine.Hide();
+		// }
 		if (deformedLine != null && deformedLine.IsInsideTree()) {
 			deformedLine.Hide();
 		}
@@ -1127,9 +1117,9 @@ public partial class FEMLine : Node2D, CablePlotter
 
 	public void ShowPlot() {
 		show = true;
-		if (catenaryLine != null && catenaryLine.IsInsideTree()) {
-			catenaryLine.Show();
-		}
+		// if (catenaryLine != null && catenaryLine.IsInsideTree()) {
+		// 	catenaryLine.Show();
+		// }
 		if (deformedLine != null && deformedLine.IsInsideTree()) {
 			deformedLine.Show();
 		}
