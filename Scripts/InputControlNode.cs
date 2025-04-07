@@ -49,16 +49,37 @@ public partial class InputControlNode : Control
 		var plotters = coordinator.GetPlotters();
 		for (int i = 0; i < plotters.Length; i++)
 		{
-			int index = i; // local copy for lambda capture
+			int index = i;
 			var plotter = plotters[index];
+
+			var hbox = new HBoxContainer();
+
+			var centerCont = new CenterContainer 
+			{
+				SizeFlagsVertical = Control.SizeFlags.Expand | Control.SizeFlags.Fill
+			};
+
+			var colorRect = new ColorRect
+			{
+				Color = plotter.GetColor(),
+				CustomMinimumSize = new Vector2(16, 16),
+				SizeFlagsVertical = Control.SizeFlags.ShrinkBegin,
+				SizeFlagsHorizontal = Control.SizeFlags.ShrinkBegin
+			};
+
 			var checkbox = new CheckBox
 			{
 				Text = plotter.GetPlotName(),
-				ButtonPressed = true // default to visible
+				ButtonPressed = true
 			};
+
 			checkbox.Toggled += pressed => coordinator.SetVisible(index, pressed);
-			coordinator.SetVisible(index, checkbox.ButtonPressed); // Set initial state
-			checkboxContainer.AddChild(checkbox);
+			coordinator.SetVisible(index, checkbox.ButtonPressed);
+
+			centerCont.AddChild(colorRect);
+			hbox.AddChild(centerCont);
+			hbox.AddChild(checkbox);
+			checkboxContainer.AddChild(hbox);
 		}
 
 		// Generate Plots Button
