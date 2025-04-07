@@ -7,6 +7,10 @@ public partial class ParabolaPlotter : Node2D, CablePlotter
 	private Line2D line;
 	private bool show = false;
 
+	public String GetPlotName() {
+		return "Parabola";
+	}
+
 	public override void _Ready()
 	{
 		line = new Line2D

@@ -20,8 +20,10 @@ public partial class AbsPlotter : Node2D, CablePlotter
 		line.Visible = show;
 	}
 
+	public String GetPlotName() {
+		return "V Plot";
+	}
 	
-
 	public void HidePlot() {
 		show = false;
 		if (line != null && line.IsInsideTree()) {

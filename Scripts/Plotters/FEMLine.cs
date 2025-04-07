@@ -65,8 +65,12 @@ public partial class FEMLine : Node2D, CablePlotter
 	// Define a vector to store the total external force applied
 	public static double[] maxForce;
 
+	public String GetPlotName() {
+		return "FEM Line";
+	}
+
 	// Function to divide a vector by a scalar (element-wise division)
-	public static double[] DivideVector(double[] vector, int divisor)
+	private static double[] DivideVector(double[] vector, int divisor)
 	{
 		double[] result = new double[vector.Length];
 		for (int i = 0; i < vector.Length; i++)

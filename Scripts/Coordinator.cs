@@ -82,6 +82,13 @@ public partial class Coordinator : Node
 
     public void ResetCamera() => WorldCamera.ResetCamera();
 
+    public CablePlotter[] GetPlotters() {
+        if (!IsReady) {
+            throw new Exception("Cannot call GetPlotters before Coordinator is ready.");
+        }
+        return plotters.ToArray();
+    }
+
     public override void _Ready()
     {
         var parabola = new ParabolaPlotter();
