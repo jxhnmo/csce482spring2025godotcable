@@ -92,7 +92,7 @@ text = "Segments"
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = 1.0
-max_value = 1000.0
+max_value = 30.0
 value = 6.0
 
 [node name="HSeparator" type="HSeparator" parent="."]
