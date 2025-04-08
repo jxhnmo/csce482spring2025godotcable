@@ -12,4 +12,5 @@ public interface CablePlotter
 	public Color GetColor();
 	// public float GetProgress();
 	// public Vector2[] GetFinalPoints();
+	// Dictionary<string, string> GetStatistics();
 }
