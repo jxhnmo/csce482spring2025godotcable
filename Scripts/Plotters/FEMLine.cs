@@ -365,8 +365,8 @@ public partial class FEMLine : Node2D, CablePlotter
 			// Adjusting values for visibility on initial screen
 			for (int i = 0; i < deformedPoints.Length; i++)
 			{
-				xDeformed[i] = Coordinator.MetersToWorldX((deformedPoints[i].X) + startAnchor.X);
-				yDeformed[i] = Coordinator.MetersToWorldY((deformedPoints[i].Y) + startAnchor.Y);
+				xDeformed[i] = Coordinator.MetersToWorldX((deformedPoints[i].X));
+				yDeformed[i] = Coordinator.MetersToWorldY((deformedPoints[i].Y));
 			}
 
 			// Clear and replot using separate x/y arrays
