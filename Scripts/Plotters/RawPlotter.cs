@@ -50,14 +50,13 @@ public partial class RawPlotter : Node2D, CablePlotter
 	}
 
 
-	public void Generate(Vector2 startPoint, Vector2 endPoint, float mass, float arcLength, int segmentCount)
+	public void Generate(float nodeMass, Vector2[] meterPoints)
 	{
 		if (line == null) {
-			Ready += () => Generate(startPoint, endPoint, mass, arcLength, segmentCount);
+			Ready += () => Generate(nodeMass, meterPoints);
 			return;
 		}
 		
-		meterPoints = InitialCurve.Make(startPoint, endPoint, mass, arcLength, segmentCount);
 		Vector2[] worldPoints = new Vector2[meterPoints.Length];
 
 		for (int i = 0; i < meterPoints.Length; i++) {

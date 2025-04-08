@@ -9,12 +9,8 @@ public partial class FEMLine : Node2D, CablePlotter
 	private Color lineColor;
 	private Line2D catenaryLine;
 	private Line2D deformedLine;
-	private Vector2 startAnchor = new Vector2(100, 500);  // Left support
 
 	// Catenary Variables (User Input/Adjustable)
-	private double L = 10.0;       // (m) Horizontal span (distance between supports)
-	private double L_cat = 10.8;   // (m) Cable Length
-	private double h_diff = 4.0;   // (m) Vertical difference between supports
 	private int n = 12;            // Number of segments for the plot
 
 	// FEM Variables/Constants
@@ -113,27 +109,25 @@ public partial class FEMLine : Node2D, CablePlotter
 	}
 	// Ready() ENDS HERE
 
-	public void Generate(Vector2 startPoint, Vector2 endPoint, float mass, float arcLength, int segmentCount)
+
+	public void Generate(float nodeMass, Vector2[] meterPoints)
 	{
 		if (catenaryLine == null || deformedLine == null) {
-			Ready += () => Generate(startPoint, endPoint, mass, arcLength, segmentCount);
+			Ready += () => Generate(nodeMass, meterPoints);
 			return;
 		}
 
 		// Parameter Setup
-		n = segmentCount;
-		L_cat = arcLength;
-		gamma = mass / arcLength; // Mass per unit length (kg/m)
-		startAnchor = startPoint;
-		L = endPoint.X - startPoint.X;
-		h_diff = endPoint.Y - startPoint.Y;
+		float arcLength = 0;
+		for (int i = 0; i < meterPoints.Length - 1; i++) {
+			arcLength += Mathf.Sqrt(meterPoints[i].DistanceTo(meterPoints[i + 1]));
+		}
+		gamma = nodeMass * meterPoints.Length / arcLength; // Mass per unit length (kg/m)
+		n = meterPoints.Length - 1;
 
 		// Populate catenary line
 		catenaryLine.ClearPoints();
-		Vector2[] points = InitialCurve.Make(startPoint, endPoint, mass, arcLength, segmentCount);
-		for (int i = 0; i < points.Length; i++) {
-			catenaryLine.AddPoint(Coordinator.MetersToWorld(points[i]));
-		}
+		Vector2[] points = meterPoints;
 
 		// Continue with full FEM logic here...
 		// FEM SECTION

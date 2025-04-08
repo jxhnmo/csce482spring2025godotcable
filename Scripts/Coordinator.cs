@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.InteropServices;
 
 public partial class Coordinator : Node
@@ -43,9 +44,11 @@ public partial class Coordinator : Node
     public void GeneratePlots()
     {
         GD.Print("GeneratePlots()...");
+        Vector2[] initalPoints = InitialCurve.Make(startPoint, endPoint, mass, length, segmentCount);
+        float nodeMass = mass / segmentCount;
         foreach (CablePlotter plotter in plotters)
         {
-            plotter.Generate(startPoint, endPoint, mass, length, segmentCount);
+            plotter.Generate(nodeMass, initalPoints);
         }
     }
 
