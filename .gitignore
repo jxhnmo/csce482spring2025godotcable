@@ -1,5 +1,6 @@
 .DS_Store
 test/.godot
+out
 
 # Godot 4+ specific ignores
 .godot/*

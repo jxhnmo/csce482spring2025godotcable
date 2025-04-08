@@ -104,42 +104,50 @@ layout_mode = 2
 text = "Enable/Disable Plots
 "
 
-[node name="HBoxContainerParabola" type="HBoxContainer" parent="."]
+[node name="VisibilityChecksContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="CheckBoxParabola" type="CheckBox" parent="HBoxContainerParabola"]
+[node name="HBoxContainer1" type="HBoxContainer" parent="VisibilityChecksContainer"]
 layout_mode = 2
 
-[node name="_Label_35" type="Label" parent="HBoxContainerParabola"]
+[node name="CheckBox" type="CheckBox" parent="VisibilityChecksContainer/HBoxContainer1"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VisibilityChecksContainer/HBoxContainer1"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "Parabola
+text = "Sample 1
 "
 
-[node name="HBoxContainerAbs" type="HBoxContainer" parent="."]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VisibilityChecksContainer"]
 layout_mode = 2
 
-[node name="CheckBoxAbs" type="CheckBox" parent="HBoxContainerAbs"]
+[node name="CenterContainer" type="CenterContainer" parent="VisibilityChecksContainer/HBoxContainer2"]
 layout_mode = 2
 
-[node name="_Label_36" type="Label" parent="HBoxContainerAbs"]
+[node name="ColorRect" type="ColorRect" parent="VisibilityChecksContainer/HBoxContainer2/CenterContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="VisibilityChecksContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VisibilityChecksContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "V - Plot
-"
+text = "Sample 2"
 
-[node name="HBoxContainerFEM" type="HBoxContainer" parent="."]
+[node name="HBoxContainer3" type="HBoxContainer" parent="VisibilityChecksContainer"]
 layout_mode = 2
 
-[node name="CheckBoxFEM" type="CheckBox" parent="HBoxContainerFEM"]
+[node name="CheckBox" type="CheckBox" parent="VisibilityChecksContainer/HBoxContainer3"]
 layout_mode = 2
 button_pressed = true
 
-[node name="_Label_37" type="Label" parent="HBoxContainerFEM"]
+[node name="Label" type="Label" parent="VisibilityChecksContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "FEM Cable
-"
+text = "Sample 3"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2

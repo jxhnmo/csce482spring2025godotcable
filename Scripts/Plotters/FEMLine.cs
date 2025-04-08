@@ -5,15 +5,12 @@ using System.Linq;
 
 public partial class FEMLine : Node2D, CablePlotter
 {
-	private static bool show;
+	private bool show;
+	private Color lineColor;
 	private Line2D catenaryLine;
 	private Line2D deformedLine;
-	private Vector2 startAnchor = new Vector2(100, 500);  // Left support
 
 	// Catenary Variables (User Input/Adjustable)
-	private double L = 10.0;       // (m) Horizontal span (distance between supports)
-	private double L_cat = 10.8;   // (m) Cable Length
-	private double h_diff = 4.0;   // (m) Vertical difference between supports
 	private int n = 12;            // Number of segments for the plot
 
 	// FEM Variables/Constants
@@ -65,8 +62,20 @@ public partial class FEMLine : Node2D, CablePlotter
 	// Define a vector to store the total external force applied
 	public static double[] maxForce;
 
+	public FEMLine(Color lineColor) {
+		this.lineColor = lineColor;
+	}
+
+	public String GetPlotName() {
+		return "FEM Line";
+	}
+	
+	public Color GetColor() {
+		return lineColor;
+	}
+
 	// Function to divide a vector by a scalar (element-wise division)
-	public static double[] DivideVector(double[] vector, int divisor)
+	private static double[] DivideVector(double[] vector, int divisor)
 	{
 		double[] result = new double[vector.Length];
 		for (int i = 0; i < vector.Length; i++)
@@ -82,9 +91,9 @@ public partial class FEMLine : Node2D, CablePlotter
 		{
 			Name = "Catenary",
 			Width = 4,
-			DefaultColor = new Color(1,0,0,1),
+			DefaultColor = lineColor,
 			Antialiased = true,
-			Visible = show
+			Visible = false // Never visible. Now handled by a separate CablePlotter.
 		};
 		AddChild(catenaryLine);
 
@@ -92,7 +101,7 @@ public partial class FEMLine : Node2D, CablePlotter
 		{
 			Name = "CatenaryDeformed",
 			Width = 4,
-			DefaultColor = new Color(0, 0, 1, 1),
+			DefaultColor = lineColor,
 			Antialiased = true,
 			Visible = show
 		};
@@ -100,44 +109,25 @@ public partial class FEMLine : Node2D, CablePlotter
 	}
 	// Ready() ENDS HERE
 
-	public void Generate(Vector2 startPoint, Vector2 endPoint, float mass, float arc_length, int segmentCount)
+
+	public void Generate(float nodeMass, Vector2[] meterPoints)
 	{
 		if (catenaryLine == null || deformedLine == null) {
-			Ready += () => Generate(startPoint, endPoint, mass, arc_length, segmentCount);
+			Ready += () => Generate(nodeMass, meterPoints);
 			return;
 		}
 
 		// Parameter Setup
-		n = segmentCount;
-		L_cat = arc_length;
-		gamma = mass / arc_length; // Mass per unit length (kg/m)
-		startAnchor = startPoint;
-		L = endPoint.X - startPoint.X;
-		h_diff = endPoint.Y - startPoint.Y;
-
-		double H = SolveForH(L, L_cat, gamma * 9.81); // sw = gamma * g
-        (double x0, double C) = SolveForX0AndC_Asym(H, L, h_diff, gamma * 9.81);
-        Vector2[] points = GenerateAsymmetricCatenaryCurve(H, x0, C, L, gamma * 9.81);
-
-        double y_min = (H / (gamma * 9.81)) + C;
-        double V = 0.5 * L_cat * gamma * 9.81;
-        double T_max = Math.Sqrt(H * H + V * V);
-        GD.Print($"Sag: {Math.Round(y_min, 3)} m | Max Tension at Supports: {Math.Round(T_max, 1)} N");
-
-		float[] xPoints = new float[points.Length];
-		float[] yPoints = new float[points.Length];
-
-		for (int i = 0; i < points.Length; i++)
-		{
-			xPoints[i] = Coordinator.MetersToWorldX(points[i].X + startAnchor.X);
-			yPoints[i] = Coordinator.MetersToWorldY(points[i].Y + startAnchor.Y);
+		float arcLength = 0;
+		for (int i = 0; i < meterPoints.Length - 1; i++) {
+			arcLength += Mathf.Sqrt(meterPoints[i].DistanceTo(meterPoints[i + 1]));
 		}
+		gamma = nodeMass * meterPoints.Length / arcLength; // Mass per unit length (kg/m)
+		n = meterPoints.Length - 1;
 
+		// Populate catenary line
 		catenaryLine.ClearPoints();
-		for (int i = 0; i < xPoints.Length; i++)
-		{
-			catenaryLine.AddPoint(new Vector2(xPoints[i], yPoints[i]));
-		}
+		Vector2[] points = meterPoints;
 
 		// Continue with full FEM logic here...
 		// FEM SECTION
@@ -369,103 +359,19 @@ public partial class FEMLine : Node2D, CablePlotter
 			// Adjusting values for visibility on initial screen
 			for (int i = 0; i < deformedPoints.Length; i++)
 			{
-				xDeformed[i] = Coordinator.MetersToWorldX((deformedPoints[i].X) + startAnchor.X);
-				yDeformed[i] = Coordinator.MetersToWorldY((deformedPoints[i].Y) + startAnchor.Y);
+				xDeformed[i] = Coordinator.MetersToWorldX((deformedPoints[i].X));
+				yDeformed[i] = Coordinator.MetersToWorldY((deformedPoints[i].Y));
 			}
 
 			// Clear and replot using separate x/y arrays
 			deformedLine.ClearPoints();
 
-			for (int i = 0; i < xPoints.Length; i++)
+			for (int i = 0; i < points.Length; i++)
 			{
 				deformedLine.AddPoint(new Vector2(xDeformed[i], yDeformed[i]));
 			}
 		}
 	}
-
-	// EQUATIONS START HERE
-	private double SolveForH(double L, double L_cat, double sw)
-    {
-        double tolerance = 0.5;
-        for (double H = 10; H <= 20000; H += 1)
-        {
-            double L_approx = ComputeCableLength(H, L, sw);
-            if (Math.Abs(L_approx - L_cat) < tolerance){
-                return H;
-            }
-        }
-
-        GD.PrintErr("No valid H found within search range.");
-        return 0;
-    }
-
-    private double ComputeCableLength(double H, double L, double sw)
-    {
-        int segments = 1000;
-        double[] x = new double[segments];
-        double dx = L / (segments - 1);
-        for (int i = 0; i < segments; i++)
-            x[i] = -L / 2 + i * dx;
-
-        double[] y = new double[segments];
-        for (int i = 0; i < segments; i++)
-            y[i] = (H / sw) * (Math.Cosh(sw / H * x[i]) - 1);
-
-        double length = 0;
-        for (int i = 0; i < segments - 1; i++)
-        {
-            double dy = y[i + 1] - y[i];
-            length += Math.Sqrt(dx * dx + dy * dy);
-        }
-        return length;
-    }
-
-    private (double, double) SolveForX0AndC_Asym(double H, double L, double h_diff, double sw)
-    {
-        double x0 = 0, C = 0;
-        double tolerance = 1e-6;
-        int maxIter = 100;
-
-        for (int i = 0; i < maxIter; i++)
-        {
-            double eq1 = (H / sw) * Math.Cosh(-x0 * sw / H) + C;
-            double eq2 = (H / sw) * Math.Cosh((L - x0) * sw / H) + C - h_diff;
-
-            double d_eq1_x0 = -Math.Sinh(-x0 * sw / H);
-            double d_eq2_x0 = -Math.Sinh((L - x0) * sw / H);
-
-            double d_eq1_C = 1;
-            double d_eq2_C = 1;
-
-            double det = d_eq1_x0 * d_eq2_C - d_eq2_x0 * d_eq1_C;
-            if (Math.Abs(det) < tolerance)
-                break;
-
-            double dx0 = (eq1 * d_eq2_C - eq2 * d_eq1_C) / det;
-            double dC = (d_eq1_x0 * eq2 - d_eq2_x0 * eq1) / det;
-
-            x0 -= dx0;
-            C -= dC;
-
-            if (Math.Abs(dx0) < tolerance && Math.Abs(dC) < tolerance)
-                return (x0, C);
-        }
-
-        GD.PrintErr("Failed to solve for x0 and C.");
-        return (0, 0);
-    }
-
-    private Vector2[] GenerateAsymmetricCatenaryCurve(double H, double x0, double C, double L, double sw)
-    {
-        Vector2[] points = new Vector2[n + 1];
-        for (int i = 0; i <= n; i++)
-        {
-            double x = (L / n) * i;
-            double y = (H / sw) * Math.Cosh((sw / H) * (x - x0)) + C;
-            points[i] = new Vector2((float)x, (float)y);
-        }
-        return points;
-    }
 
 	private Vector2[] FEM(Vector2[] points){
 		Vector2[] nonething = points;
@@ -1204,9 +1110,9 @@ public partial class FEMLine : Node2D, CablePlotter
 
 	public void HidePlot() {
 		show = false;
-		if (catenaryLine != null && catenaryLine.IsInsideTree()) {
-			catenaryLine.Hide();
-		}
+		// if (catenaryLine != null && catenaryLine.IsInsideTree()) {
+		// 	catenaryLine.Hide();
+		// }
 		if (deformedLine != null && deformedLine.IsInsideTree()) {
 			deformedLine.Hide();
 		}
@@ -1214,9 +1120,9 @@ public partial class FEMLine : Node2D, CablePlotter
 
 	public void ShowPlot() {
 		show = true;
-		if (catenaryLine != null && catenaryLine.IsInsideTree()) {
-			catenaryLine.Show();
-		}
+		// if (catenaryLine != null && catenaryLine.IsInsideTree()) {
+		// 	catenaryLine.Show();
+		// }
 		if (deformedLine != null && deformedLine.IsInsideTree()) {
 			deformedLine.Show();
 		}

@@ -1,0 +1,46 @@
+@startuml
+interface CablePlotter {
+  +Generate(nodeMass: float, initialPoints: Vector2[])
+  +HidePlot()
+  +ShowPlot()
+  +GetPlotName(): String
+  +GetColor(): Color
+  +GetProgress(): float
+  +GetFinalPoints(): Vector2[]
+  +GetStatistics(): Dictionary<String, String>
+}
+
+class RawPlotter {
+  +RawPlotter(plotName: String, lineColor: Color)
+}
+RawPlotter ..|> CablePlotter
+
+class FEMLine {
+  +FEMLine(lineColor: Color)
+}
+FEMLine ..|> CablePlotter
+
+class Coordinator {
+  +WorldRootPath: NodePath
+  -plotters: List<CablePlotter>
+  +GetPlotters(): CablePlotter[]
+  +GeneratePlots()
+  +SetVisible(index: int, visible: bool)
+}
+
+Coordinator --> "calls" InitialCurve
+Coordinator --> "uses" CablePlotter
+
+class InitialCurve {
+  +Make(startPoint: Vector2, endPoint: Vector2, mass: float, arcLength: float, segmentCount: int): Vector2[]
+}
+
+
+class InputControlNode {
+  +CoordinatorPath: NodePath
+  -coordinator: Coordinator
+  -PrepareInput(): void
+}
+
+InputControlNode --> Coordinator
+@enduml

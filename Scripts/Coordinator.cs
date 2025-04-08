@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.InteropServices;
 
 public partial class Coordinator : Node
@@ -43,14 +44,21 @@ public partial class Coordinator : Node
     public void GeneratePlots()
     {
         GD.Print("GeneratePlots()...");
+        Vector2[] initalPoints = InitialCurve.Make(startPoint, endPoint, mass, length, segmentCount);
+        float nodeMass = mass / segmentCount;
         foreach (CablePlotter plotter in plotters)
         {
-            plotter.Generate(startPoint, endPoint, mass, length, segmentCount);
+            plotter.Generate(nodeMass, initalPoints);
         }
     }
 
     public void AddPlotter(CablePlotter plotter)
     {
+        if (plotter is Node node)
+        {
+            WorldRoot.AddChild(node);
+        }
+
         if (!plotters.Contains(plotter))
         {
             plotters.Add(plotter);
@@ -82,20 +90,17 @@ public partial class Coordinator : Node
 
     public void ResetCamera() => WorldCamera.ResetCamera();
 
+    public CablePlotter[] GetPlotters() {
+        if (!IsReady) {
+            throw new Exception("Cannot call GetPlotters before Coordinator is ready.");
+        }
+        return plotters.ToArray();
+    }
+
     public override void _Ready()
     {
-        var parabola = new ParabolaPlotter();
-        var abs = new AbsPlotter();
-        var fem = new FEMLine();
-
-        WorldRoot.AddChild(parabola);
-        WorldRoot.AddChild(abs);
-        WorldRoot.AddChild(fem);
-
-        AddPlotter(parabola);
-        AddPlotter(abs);
-        AddPlotter(fem);
-
+        AddPlotter(new RawPlotter("Initial Plot", new Color(.7f, .5f, 0)));
+        AddPlotter(new FEMLine(new Color(0, 0, 1)));
         IsReady = true;
     }
 
