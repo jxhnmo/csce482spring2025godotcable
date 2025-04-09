@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dy3nrmx6qe32c"]
+[gd_scene load_steps=6 format=3 uid="uid://dy3nrmx6qe32c"]
 
 [ext_resource type="Script" path="res://Scripts/Coordinator.cs" id="1_a1noq"]
 [ext_resource type="PackedScene" uid="uid://cl8v8vnftiyeq" path="res://UserControls.tscn" id="2_40380"]
 [ext_resource type="Script" path="res://Scripts/WorldViewport.cs" id="3_n21wb"]
-[ext_resource type="Script" path="res://Scripts/GridLines.cs" id="4_h65es"]
-[ext_resource type="Script" path="res://Scripts/CameraDragZoom.cs" id="4_v46wn"]
+[ext_resource type="Script" path="res://Scripts/GridlineController.cs" id="4_agtll"]
 [ext_resource type="Texture2D" uid="uid://pm780dkmkv82" path="res://icon.svg" id="5_fo2ce"]
 
 [node name="Main" type="Control"]
@@ -15,9 +14,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Coordinator" type="Node" parent="." node_paths=PackedStringArray("WorldCamera", "WorldRoot")]
+[node name="Coordinator" type="Node" parent="." node_paths=PackedStringArray("GridController", "WorldRoot")]
 script = ExtResource("1_a1noq")
-WorldCamera = NodePath("../HBoxContainer/PanelContainer2/SubViewportContainer/WorldViewport/Camera2D")
+GridController = NodePath("../HBoxContainer/PanelContainer2/SubViewportContainer/WorldViewport/GridLines")
 WorldRoot = NodePath("../HBoxContainer/PanelContainer2/SubViewportContainer/WorldViewport/WorldRoot")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -67,14 +66,12 @@ render_target_update_mode = 4
 script = ExtResource("3_n21wb")
 
 [node name="Camera2D" type="Camera2D" parent="HBoxContainer/PanelContainer2/SubViewportContainer/WorldViewport"]
-offset = Vector2(1.685, 0)
-script = ExtResource("4_v46wn")
-MinZoom = 0.025
+
+[node name="GridLines" type="Node2D" parent="HBoxContainer/PanelContainer2/SubViewportContainer/WorldViewport"]
+script = ExtResource("4_agtll")
+WorldRootPath = NodePath("../WorldRoot")
 
 [node name="WorldRoot" type="Node2D" parent="HBoxContainer/PanelContainer2/SubViewportContainer/WorldViewport"]
-
-[node name="GridLines" type="Node2D" parent="HBoxContainer/PanelContainer2/SubViewportContainer/WorldViewport/WorldRoot"]
-script = ExtResource("4_h65es")
 
 [node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/PanelContainer2/SubViewportContainer/WorldViewport/WorldRoot"]
 visible = false
