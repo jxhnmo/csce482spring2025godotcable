@@ -110,19 +110,15 @@ public partial class FEMLine : Node2D, CablePlotter
 	// Ready() ENDS HERE
 
 
-	public void Generate(float nodeMass, Vector2[] meterPoints)
+	public void Generate(float nodeMass, Vector2[] meterPoints, float actualLength)
 	{
 		if (catenaryLine == null || deformedLine == null) {
-			Ready += () => Generate(nodeMass, meterPoints);
+			Ready += () => Generate(nodeMass, meterPoints, actualLength);
 			return;
 		}
 
 		// Parameter Setup
-		float arcLength = 0;
-		for (int i = 0; i < meterPoints.Length - 1; i++) {
-			arcLength += Mathf.Sqrt(meterPoints[i].DistanceTo(meterPoints[i + 1]));
-		}
-		gamma = nodeMass * meterPoints.Length / arcLength; // Mass per unit length (kg/m)
+		gamma = nodeMass * meterPoints.Length / actualLength; // Mass per unit length (kg/m)
 		n = meterPoints.Length - 1;
 
 		// Populate catenary line

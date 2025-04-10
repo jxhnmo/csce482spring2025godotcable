@@ -6,11 +6,11 @@ public partial class RawPlotter : Node2D, CablePlotter
 {
 	private Line2D line;
 	private bool show = false;
-	private String plotName;
+	private string plotName;
 	private Color lineColor;
 	private Vector2[] meterPoints;
 
-	public RawPlotter(String plotName, Color lineColor) {
+	public RawPlotter(string plotName, Color lineColor) {
 		this.plotName = plotName;
 		this.lineColor = lineColor;
 	}
@@ -41,7 +41,7 @@ public partial class RawPlotter : Node2D, CablePlotter
 		}
 	}
 
-	public String GetPlotName() {
+	public string GetPlotName() {
 		return plotName;
 	}
 
@@ -50,10 +50,10 @@ public partial class RawPlotter : Node2D, CablePlotter
 	}
 
 
-	public void Generate(float nodeMass, Vector2[] meterPoints)
+	public void Generate(float nodeMass, Vector2[] meterPoints, float actualLength)
 	{
 		if (line == null) {
-			Ready += () => Generate(nodeMass, meterPoints);
+			Ready += () => Generate(nodeMass, meterPoints, actualLength);
 			return;
 		}
 		

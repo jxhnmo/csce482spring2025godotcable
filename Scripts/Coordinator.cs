@@ -48,7 +48,7 @@ public partial class Coordinator : Node
 		float nodeMass = mass / segmentCount;
 		foreach (CablePlotter plotter in plotters)
 		{
-			plotter.Generate(nodeMass, initalPoints);
+			plotter.Generate(nodeMass, initalPoints, length);
 		}
 	}
 

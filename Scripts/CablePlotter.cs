@@ -5,7 +5,7 @@ using Godot;
 public interface CablePlotter
 {
 	// public void Generate(Vector2 startPoint, Vector2 endPoint, float mass, float length, int segmentCount);
-	public void Generate(float nodeMass, Vector2[] initialPoints);
+	public void Generate(float nodeMass, Vector2[] initialPoints, float actualLength);
 	public void HidePlot();
 	public void ShowPlot();
 	public String GetPlotName();
