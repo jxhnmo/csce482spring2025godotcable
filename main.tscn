@@ -17,8 +17,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Coordinator" type="Node" parent="." node_paths=PackedStringArray("WorldRoot")]
+[node name="Coordinator" type="Node" parent="." node_paths=PackedStringArray("GridController", "WorldRoot")]
 script = ExtResource("1_a1noq")
+GridController = NodePath("../HBoxContainer/PanelContainer2/SubViewportContainer/WorldViewport/GridLines")
 WorldRoot = NodePath("../HBoxContainer/PanelContainer2/SubViewportContainer/WorldViewport/WorldRoot")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
