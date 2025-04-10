@@ -10,10 +10,15 @@ config_version=5
 
 [application]
 
-config/name="CapstoneProject"
+config/name="Cable Models"
+config/description="This is a capstone project developed by undergraduate students at Texas A&M University."
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.3", "C#", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://Assets/icon.svg"
+
+[display]
+
+window/dpi/allow_hidpi=false
 
 [dotnet]
 

@@ -1,0 +1,79 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwv6gacsfydwx"]
+
+[ext_resource type="Script" path="res://InfoBox.cs" id="1_1t6j5"]
+[ext_resource type="Texture2D" uid="uid://cbr38qmj01hrf" path="res://Assets/close3.webp" id="1_2orpn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yl66s"]
+font_size = 20
+
+[node name="InfoBoxNode" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1t6j5")
+
+[node name="GreyBackground" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="GreyBackground"]
+layout_mode = 2
+
+[node name="MainPanel" type="PanelContainer" parent="GreyBackground/CenterContainer"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+
+[node name="MainColor" type="ColorRect" parent="GreyBackground/CenterContainer/MainPanel"]
+custom_minimum_size = Vector2(51.12, 0)
+layout_mode = 2
+color = Color(0.282407, 0.282407, 0.282407, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="GreyBackground/CenterContainer/MainPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GreyBackground/CenterContainer/MainPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GreyBackground/CenterContainer/MainPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GreyBackground/CenterContainer/MainPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Cable Models
+"
+label_settings = SubResource("LabelSettings_yl66s")
+
+[node name="MarginContainer" type="MarginContainer" parent="GreyBackground/CenterContainer/MainPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CloseButton" type="Button" parent="GreyBackground/CenterContainer/MainPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+icon = ExtResource("1_2orpn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GreyBackground/CenterContainer/MainPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "This application allows users to simulate cable behavior using static physics models.
+
+You can define the cable's start point and end point (in meters), mass (kg), total length (m), and the number of segments to discretize the cable. These parameters influence the internal force calculations and deformation profile.
+
+The simulation visualizes multiple paths. Only enabled plots will be displayed.
+
+Use this tool to visualize how physical parameters affect cable sag and final shape in this simplified environment."
+fit_content = true
