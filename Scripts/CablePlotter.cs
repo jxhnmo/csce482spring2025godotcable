@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Godot;
 
@@ -12,5 +13,11 @@ public interface CablePlotter
 	public Color GetColor();
 	// public float GetProgress();
 	// public Vector2[] GetFinalPoints();
-	// Dictionary<string, string> GetStatistics();
+	protected static Action<CablePlotter, Dictionary<string, string>> statisticsCallback;
+
+	public static void SetStatisticsCallback(Action<CablePlotter, Dictionary<string, string>> callback)
+	{
+		statisticsCallback = callback;
+	}
+
 }
