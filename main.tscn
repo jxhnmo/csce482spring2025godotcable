@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://dy3nrmx6qe32c"]
+[gd_scene load_steps=9 format=3 uid="uid://dy3nrmx6qe32c"]
 
 [ext_resource type="Script" path="res://Scripts/Coordinator.cs" id="1_a1noq"]
 [ext_resource type="PackedScene" uid="uid://cl8v8vnftiyeq" path="res://UserControls.tscn" id="2_40380"]
 [ext_resource type="Script" path="res://Scripts/WorldViewport.cs" id="3_n21wb"]
 [ext_resource type="Script" path="res://Scripts/GridlineController.cs" id="4_agtll"]
-[ext_resource type="Texture2D" uid="uid://pm780dkmkv82" path="res://icon.svg" id="5_fo2ce"]
+[ext_resource type="Texture2D" uid="uid://pm780dkmkv82" path="res://Assets/icon.svg" id="5_fo2ce"]
+[ext_resource type="Texture2D" uid="uid://ofdcmqbcms60" path="res://Assets/question.png" id="6_4u8a8"]
+[ext_resource type="Script" path="res://ShowInfoButton.cs" id="6_ctccb"]
+[ext_resource type="PackedScene" uid="uid://cwv6gacsfydwx" path="res://InfoBox.tscn" id="6_hy6r2"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -14,9 +17,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Coordinator" type="Node" parent="." node_paths=PackedStringArray("GridController", "WorldRoot")]
+[node name="Coordinator" type="Node" parent="." node_paths=PackedStringArray("WorldRoot")]
 script = ExtResource("1_a1noq")
-GridController = NodePath("../HBoxContainer/PanelContainer2/SubViewportContainer/WorldViewport/GridLines")
 WorldRoot = NodePath("../HBoxContainer/PanelContainer2/SubViewportContainer/WorldViewport/WorldRoot")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -76,3 +78,22 @@ WorldRootPath = NodePath("../WorldRoot")
 [node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/PanelContainer2/SubViewportContainer/WorldViewport/WorldRoot"]
 visible = false
 texture = ExtResource("5_fo2ce")
+
+[node name="ShowInfoButton" type="Button" parent="."]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+icon = ExtResource("6_4u8a8")
+flat = true
+expand_icon = true
+script = ExtResource("6_ctccb")
+InfoBoxPath = NodePath("../InfoBoxNode")
+
+[node name="InfoBoxNode" parent="." instance=ExtResource("6_hy6r2")]
+visible = false
+layout_mode = 1
