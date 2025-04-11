@@ -90,13 +90,8 @@ public partial class InputControlNode : Control
 			checkboxContainer.AddChild(hbox);
 		}
 
-		// Generate Plots Button
 		GetNode<Button>($"{controlPath}GeneratePlots").Pressed += () => {clearStatistics(); coordinator.GeneratePlots();};
-
-		// Recenter Camera Button
 		GetNode<Button>($"{controlPath}RecenterCamera").Pressed += coordinator.ResetCamera;
-
-		// Generate Plots with initial parameters
 		coordinator.GeneratePlots();
 	}
 

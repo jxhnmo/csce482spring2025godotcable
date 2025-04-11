@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/GridlineController.cs" id="4_agtll"]
 [ext_resource type="Texture2D" uid="uid://pm780dkmkv82" path="res://Assets/icon.svg" id="5_fo2ce"]
 [ext_resource type="Texture2D" uid="uid://ofdcmqbcms60" path="res://Assets/question.png" id="6_4u8a8"]
-[ext_resource type="Script" path="res://ShowInfoButton.cs" id="6_ctccb"]
+[ext_resource type="Script" path="res://Scripts/ShowInfoButton.cs" id="6_ctccb"]
 [ext_resource type="PackedScene" uid="uid://dami4wvieu7l5" path="res://InfoBox.tscn" id="6_hy6r2"]
 
 [node name="Main" type="Control"]
@@ -68,15 +68,6 @@ offset_top = -324.0
 offset_right = 218.0
 offset_bottom = 324.0
 CoordinatorPath = NodePath("../Coordinator")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="ShowInfoButton" type="Button" parent="."]
 custom_minimum_size = Vector2(50, 50)
