@@ -58,16 +58,28 @@ public partial class GridlineController : Node2D
 
 	private void ApplyZoom(float zoomChange)
 	{
-		float currentZoom = (worldRoot.Scale.X + worldRoot.Scale.Y) * 0.5f;
-		float scaledStep = zoomChange * currentZoom;
+		Vector2 viewportSize = GetViewportRect().Size;
+		Vector2 mouseViewportPos = GetViewport().GetMousePosition();
+		Vector2 mouseScreenOffset = mouseViewportPos - viewportSize / 2f;
 
-		float newZoomX = worldRoot.Scale.X + scaledStep;
-		float newZoomY = worldRoot.Scale.Y + scaledStep;
+		Vector2 scaleBefore = worldRoot.Scale;
+		Vector2 centerWorld = -worldRoot.Position;
+		Vector2 mouseWorldBefore = (centerWorld + mouseScreenOffset) / scaleBefore;
 
-		newZoomX = Mathf.Clamp(newZoomX, MinZoom, MaxZoom);
-		newZoomY = Mathf.Clamp(newZoomY, MinZoom, MaxZoom);
+		float zoomAvg = (scaleBefore.X + scaleBefore.Y) * 0.5f;
+		float zoomStep = zoomChange * zoomAvg;
 
-		worldRoot.Scale = new Vector2(newZoomX, newZoomY);
+		float newZoomX = Mathf.Clamp(scaleBefore.X + zoomStep, MinZoom, MaxZoom);
+		float newZoomY = Mathf.Clamp(scaleBefore.Y + zoomStep, MinZoom, MaxZoom);
+		Vector2 scaleAfter = new Vector2(newZoomX, newZoomY);
+
+		Vector2 mouseScreenOffsetBefore = mouseWorldBefore * scaleBefore;
+		Vector2 mouseScreenOffsetAfter  = mouseWorldBefore * scaleAfter;
+
+		Vector2 offsetDelta = mouseScreenOffsetAfter - mouseScreenOffsetBefore;
+
+		worldRoot.Scale = scaleAfter;
+		worldRoot.Position -= offsetDelta;
 	}
 
 	public void ResetCamera()

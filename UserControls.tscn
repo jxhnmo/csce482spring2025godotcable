@@ -8,6 +8,11 @@ anchor_bottom = 1.0
 offset_right = 187.0
 grow_vertical = 2
 script = ExtResource("1_y6inc")
+ControlPath = NodePath("TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer")
+ControlDynamicsPath = NodePath("TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/Dynamics")
+StatsPath = NodePath("TabContainer/Statistics/ScrollContainer/MarginContainer/VBoxContainer")
+GeneratePath = NodePath("TabContainer/Controls/MarginContainer/VBoxContainer/GeneratePlots")
+RecenterPath = NodePath("TabContainer/Controls/MarginContainer/VBoxContainer/RecenterCamera")
 
 [node name="TabContainer" type="TabContainer" parent="."]
 custom_minimum_size = Vector2(218.725, 0)
@@ -34,55 +39,68 @@ theme_override_constants/margin_bottom = 10
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Controls/MarginContainer"]
 layout_mode = 2
 
-[node name="_Label_11" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Start Point"
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
 
-[node name="HBoxContainerStart" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+theme_override_constants/margin_right = 5
+
+[node name="ControlContainer" type="VBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="StartX" type="SpinBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/HBoxContainerStart"]
+[node name="_Label_11" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
+layout_mode = 2
+text = "Start Point (m)"
+
+[node name="HBoxContainerStart" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
+layout_mode = 2
+
+[node name="StartX" type="SpinBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerStart"]
 layout_mode = 2
 min_value = -70.0
 max_value = 70.0
 step = 0.1
 
-[node name="StartY" type="SpinBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/HBoxContainerStart"]
+[node name="StartY" type="SpinBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerStart"]
 layout_mode = 2
 min_value = -70.0
 max_value = 70.0
 step = 0.1
 
-[node name="_Label_19" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer"]
+[node name="_Label_19" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
 layout_mode = 2
-text = "End Point"
+text = "End Point (m)"
 
-[node name="HBoxContainerEnd" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer"]
+[node name="HBoxContainerEnd" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
 layout_mode = 2
 
-[node name="EndX" type="SpinBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/HBoxContainerEnd"]
+[node name="EndX" type="SpinBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerEnd"]
 layout_mode = 2
 min_value = -70.0
 max_value = 70.0
 step = 0.1
 value = 4.9
 
-[node name="EndY" type="SpinBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/HBoxContainerEnd"]
+[node name="EndY" type="SpinBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerEnd"]
 layout_mode = 2
 min_value = -70.0
 max_value = 70.0
 step = 0.1
 value = 1.5
 
-[node name="HBoxContainerMass" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer"]
+[node name="HBoxContainerMass" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
 layout_mode = 2
 
-[node name="_Label_29" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer/HBoxContainerMass"]
+[node name="_Label_29" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerMass"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "Mass"
+text = "Mass (kg)"
 
-[node name="Mass" type="SpinBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/HBoxContainerMass"]
+[node name="Mass" type="SpinBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerMass"]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -1000.0
@@ -90,93 +108,95 @@ max_value = 1000.0
 step = 0.1
 value = 100.0
 
-[node name="HBoxContainerLength" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer"]
+[node name="HBoxContainerLength" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
 layout_mode = 2
 
-[node name="_Label_34" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer/HBoxContainerLength"]
+[node name="_Label_34" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerLength"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "Length"
+text = "Length (m)"
 
-[node name="SpinBoxLength" type="SpinBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/HBoxContainerLength"]
+[node name="SpinBoxLength" type="SpinBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerLength"]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
 step = 0.1
 value = 7.0
 
-[node name="HBoxContainerSegments" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer"]
+[node name="HBoxContainerSegments" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
 layout_mode = 2
 
-[node name="_Label_39" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer/HBoxContainerSegments"]
+[node name="_Label_39" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerSegments"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Segments"
 
-[node name="SpinBoxSegments" type="SpinBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/HBoxContainerSegments"]
+[node name="SpinBoxSegments" type="SpinBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerSegments"]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = 1.0
 max_value = 25.0
 value = 6.0
 
-[node name="HSeparator" type="HSeparator" parent="TabContainer/Controls/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
 layout_mode = 2
 
-[node name="_Label_35" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer"]
+[node name="_Label_35" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Enable/Disable Plots
 "
 
-[node name="VisibilityChecksContainer" type="VBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer"]
+[node name="VisibilityChecksContainer" type="VBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer1" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/VisibilityChecksContainer"]
+[node name="HBoxContainer1" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/VisibilityChecksContainer"]
 layout_mode = 2
 
-[node name="CheckBox" type="CheckBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/VisibilityChecksContainer/HBoxContainer1"]
+[node name="CheckBox" type="CheckBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/VisibilityChecksContainer/HBoxContainer1"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer/VisibilityChecksContainer/HBoxContainer1"]
+[node name="Label" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/VisibilityChecksContainer/HBoxContainer1"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Sample 1
 "
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/VisibilityChecksContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/VisibilityChecksContainer"]
 layout_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/VisibilityChecksContainer/HBoxContainer2"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/VisibilityChecksContainer/HBoxContainer2"]
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="TabContainer/Controls/MarginContainer/VBoxContainer/VisibilityChecksContainer/HBoxContainer2/CenterContainer"]
+[node name="ColorRect" type="ColorRect" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/VisibilityChecksContainer/HBoxContainer2/CenterContainer"]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 
-[node name="CheckBox" type="CheckBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/VisibilityChecksContainer/HBoxContainer2"]
+[node name="CheckBox" type="CheckBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/VisibilityChecksContainer/HBoxContainer2"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer/VisibilityChecksContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/VisibilityChecksContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Sample 2"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/VisibilityChecksContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/VisibilityChecksContainer"]
 layout_mode = 2
 
-[node name="CheckBox" type="CheckBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/VisibilityChecksContainer/HBoxContainer3"]
+[node name="CheckBox" type="CheckBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/VisibilityChecksContainer/HBoxContainer3"]
 layout_mode = 2
 button_pressed = true
 
-[node name="Label" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer/VisibilityChecksContainer/HBoxContainer3"]
+[node name="Label" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/VisibilityChecksContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Sample 3"
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
 layout_mode = 2
-size_flags_vertical = 3
+
+[node name="Dynamics" type="VBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
+layout_mode = 2
 
 [node name="GeneratePlots" type="Button" parent="TabContainer/Controls/MarginContainer/VBoxContainer"]
 layout_mode = 2

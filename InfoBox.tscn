@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dami4wvieu7l5"]
 
-[ext_resource type="Script" path="res://InfoBox.cs" id="1_1t6j5"]
+[ext_resource type="Script" path="res://Scripts/InfoBox.cs" id="1_1t6j5"]
 [ext_resource type="Texture2D" uid="uid://cbr38qmj01hrf" path="res://Assets/close3.webp" id="1_2orpn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_yl66s"]
