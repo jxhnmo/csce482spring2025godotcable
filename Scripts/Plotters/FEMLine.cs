@@ -368,30 +368,15 @@ public partial class FEMLine : Node2D, CablePlotter
 			}
 		}
 
-		var statsDict = new Dictionary<string, string>();
-		statsDict.Add("Key1", "value1");
-		statsDict.Add("Key2", "value1");
-		statsDict.Add("Key3", "value1");
-		statsDict.Add("Key4", "value1");
-		statsDict.Add("Key5", "value1");
-		statsDict.Add("Key6", "value1");
-		statsDict.Add("Key7", "value1");
-		statsDict.Add("Key8", "value1");
-		statsDict.Add("Key9", "value1");
-		statsDict.Add("Key10", "value1");
-		statsDict.Add("Key11", "value1");
-		statsDict.Add("Key12", "value1");
-		statsDict.Add("Key13", "value1");
-		statsDict.Add("Key14", "value1");
-		statsDict.Add("Key15", "value1");
-		statsDict.Add("Key16", "value1");
-		statsDict.Add("Key17", "value1");
-		statsDict.Add("Key18", "value1");
-		statsDict.Add("Key19", "value1");
-		statsDict.Add("Key20", "value1");
-		statsDict.Add("Key21", "value1");
-		statsDict.Add("Key22", "value1");
-		statsDict.Add("Key23", "value1");
+		var statsDict = new Dictionary<string, string>
+		{
+			{ "Segments", n.ToString() },
+			{ "Force Increments", nForceIncrements.ToString() },
+			{ "Converged Increments", (UG_FINAL.GetLength(1) - 1).ToString() },
+			{ "Max Displacement", UG_FINAL.Cast<double>().Select(Math.Abs).Max().ToString("F3") + " m" },
+			{ "Total Internal Force", FI_FINAL.Cast<double>().Sum().ToString("F2") + " N" },
+			{ "Convergence Threshold", convThreshold.ToString() + " N" }
+		};
 		CablePlotter.statisticsCallback?.Invoke(this, statsDict);
 	}
 

@@ -109,37 +109,35 @@ public partial class InputControlNode : Control
 			child.QueueFree();
 	}
 
-private void statisticsCallback(CablePlotter caller, Dictionary<string, string> stats)
-{
-	var container = GetNode<VBoxContainer>(statsPath);
-
-	var richText = new RichTextLabel
+	private void statisticsCallback(CablePlotter caller, Dictionary<string, string> stats)
 	{
-		FocusMode = FocusModeEnum.None,
-		BbcodeEnabled = true,
-		ScrollActive = false,
-		AutowrapMode = TextServer.AutowrapMode.Word,
-		FitContent = true,
-		SizeFlagsHorizontal = SizeFlags.Expand | SizeFlags.Fill
-	};
-	richText.SetSelectionEnabled(true);
-	var style = new StyleBoxEmpty();
-	richText.AddThemeStyleboxOverride("focus", style);
+		var container = GetNode<VBoxContainer>(statsPath);
 
-	// Add all stats as a single block
-	richText.AppendText($"[b]{caller.GetPlotName()}[/b]\n");
-	foreach (var pair in stats)
-		richText.AppendText($"{pair.Key}: {pair.Value}\n");
+		var richText = new RichTextLabel
+		{
+			FocusMode = FocusModeEnum.None,
+			BbcodeEnabled = true,
+			ScrollActive = false,
+			AutowrapMode = TextServer.AutowrapMode.Word,
+			FitContent = true,
+			SizeFlagsHorizontal = SizeFlags.Expand | SizeFlags.Fill
+		};
+		richText.SetSelectionEnabled(true);
+		var style = new StyleBoxEmpty();
+		richText.AddThemeStyleboxOverride("focus", style);
 
-	container.AddChild(richText);
+		richText.AppendText($"[b]{caller.GetPlotName()}[/b]\n");
+		foreach (var pair in stats)
+			richText.AppendText($"{pair.Key}: {pair.Value}\n");
 
-	// Add a horizontal separator
-	var separator = new HSeparator
-	{
-		SizeFlagsHorizontal = SizeFlags.Expand | SizeFlags.Fill
-	};
-	container.AddChild(separator);
-}
+		container.AddChild(richText);
+
+		var separator = new HSeparator
+		{
+			SizeFlagsHorizontal = SizeFlags.Expand | SizeFlags.Fill
+		};
+		container.AddChild(separator);
+	}
 
 
 }
