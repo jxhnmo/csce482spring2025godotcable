@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3 uid="uid://bspmxdfwvoajt"]
+
+[ext_resource type="Texture2D" uid="uid://pm780dkmkv82" path="res://icon.svg" id="1_0xey7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_05eqi"]
+
+[node name="MassSpring" type="Node2D"]
+
+[node name="NodeA" type="Node2D" parent="."]
+position = Vector2(209, 97)
+
+[node name="Sprite2D" type="Sprite2D" parent="NodeA"]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_0xey7")
+
+[node name="NodeB" type="Node2D" parent="."]
+position = Vector2(884, 463)
+
+[node name="Sprite2D" type="Sprite2D" parent="NodeB"]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_0xey7")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+visible = false
+position = Vector2(163, 295)
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+visible = false
+shape = SubResource("CircleShape2D_05eqi")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+visible = false
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_0xey7")
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="."]
+visible = false
+position = Vector2(695, 465)
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D2"]
+visible = false
+shape = SubResource("CircleShape2D_05eqi")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D2"]
+visible = false
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_0xey7")
+
+[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="."]
+visible = false
+node_a = NodePath("../RigidBody2D")
+node_b = NodePath("../RigidBody2D2")
+
+[node name="Sprite2D" type="Sprite2D" parent="DampedSpringJoint2D"]
+visible = false
+texture = ExtResource("1_0xey7")
