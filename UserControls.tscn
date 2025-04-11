@@ -83,7 +83,7 @@ layout_mode = 2
 min_value = -70.0
 max_value = 70.0
 step = 0.1
-value = 4.9
+value = 5.0
 
 [node name="EndY" type="SpinBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerEnd"]
 layout_mode = 2
