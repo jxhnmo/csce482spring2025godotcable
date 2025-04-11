@@ -5,6 +5,7 @@ using System.Reflection.Metadata.Ecma335;
 
 public partial class InputControlNode : Control
 {
+	public static InputControlNode Instance { get; private set; } = null;
 	[Export] public NodePath CoordinatorPath;
 	private Coordinator coordinator;
 	private CablePlotter[] plotters;
@@ -13,6 +14,7 @@ public partial class InputControlNode : Control
 
 	public override void _Ready()
 	{
+		Instance = this;
 		coordinator = GetNode<Coordinator>(CoordinatorPath);
 		if (coordinator.IsReady) {
 			PrepareInput();
@@ -94,13 +96,9 @@ public partial class InputControlNode : Control
 		// Recenter Camera Button
 		GetNode<Button>($"{controlPath}RecenterCamera").Pressed += coordinator.ResetCamera;
 
-		// Add statistics from
-		CablePlotter.SetStatisticsCallback((CablePlotter caller, Dictionary<string, string> stats) => statisticsCallback(caller, stats));
-
 		// Generate Plots with initial parameters
 		coordinator.GeneratePlots();
 	}
-
 
 	private void clearStatistics()
 	{
@@ -109,7 +107,7 @@ public partial class InputControlNode : Control
 			child.QueueFree();
 	}
 
-	private void statisticsCallback(CablePlotter caller, Dictionary<string, string> stats)
+	public void StatisticsCallback(CablePlotter caller, Dictionary<string, string> stats)
 	{
 		var container = GetNode<VBoxContainer>(statsPath);
 

@@ -377,7 +377,7 @@ public partial class FEMLine : Node2D, CablePlotter
 			{ "Total Internal Force", FI_FINAL.Cast<double>().Sum().ToString("F2") + " N" },
 			{ "Convergence Threshold", convThreshold.ToString() + " N" }
 		};
-		CablePlotter.statisticsCallback?.Invoke(this, statsDict);
+		InputControlNode.Instance.StatisticsCallback(this, statsDict);
 	}
 
 	private Vector2[] FEM(Vector2[] points){

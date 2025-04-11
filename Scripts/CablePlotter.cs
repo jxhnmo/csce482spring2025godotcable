@@ -13,11 +13,4 @@ public interface CablePlotter
 	public Color GetColor();
 	// public float GetProgress();
 	// public Vector2[] GetFinalPoints();
-	protected static Action<CablePlotter, Dictionary<string, string>> statisticsCallback;
-
-	public static void SetStatisticsCallback(Action<CablePlotter, Dictionary<string, string>> callback)
-	{
-		statisticsCallback = callback;
-	}
-
 }
