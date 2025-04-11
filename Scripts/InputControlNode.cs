@@ -1,10 +1,15 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 
 public partial class InputControlNode : Control
 {
 	[Export] public NodePath CoordinatorPath;
 	private Coordinator coordinator;
+	private CablePlotter[] plotters;
+	private string controlPath = "TabContainer/Controls/MarginContainer/VBoxContainer/";
+	private string statsPath = "TabContainer/Statistics/ScrollContainer/MarginContainer/VBoxContainer/";
 
 	public override void _Ready()
 	{
@@ -17,36 +22,37 @@ public partial class InputControlNode : Control
 	}
 
 	private void PrepareInput() {
+		
 		// Start point
-		GetNode<SpinBox>("HBoxContainerStart/StartX").ValueChanged += val => coordinator.SetStartPointX((float)val);
-		GetNode<SpinBox>("HBoxContainerStart/StartY").ValueChanged += val => coordinator.SetStartPointY((float)val);
-		coordinator.SetStartPointX((float)GetNode<SpinBox>("HBoxContainerStart/StartX").Value);
-		coordinator.SetStartPointY((float)GetNode<SpinBox>("HBoxContainerStart/StartY").Value);
+		GetNode<SpinBox>($"{controlPath}HBoxContainerStart/StartX").ValueChanged += val => coordinator.SetStartPointX((float)val);
+		GetNode<SpinBox>($"{controlPath}HBoxContainerStart/StartY").ValueChanged += val => coordinator.SetStartPointY((float)val);
+		coordinator.SetStartPointX((float)GetNode<SpinBox>($"{controlPath}HBoxContainerStart/StartX").Value);
+		coordinator.SetStartPointY((float)GetNode<SpinBox>($"{controlPath}HBoxContainerStart/StartY").Value);
 
 		// End point
-		GetNode<SpinBox>("HBoxContainerEnd/EndX").ValueChanged += val => coordinator.SetEndPointX((float)val);
-		GetNode<SpinBox>("HBoxContainerEnd/EndY").ValueChanged += val => coordinator.SetEndPointY((float)val);
-		coordinator.SetEndPointX((float)GetNode<SpinBox>("HBoxContainerEnd/EndX").Value);
-		coordinator.SetEndPointY((float)GetNode<SpinBox>("HBoxContainerEnd/EndY").Value);
+		GetNode<SpinBox>($"{controlPath}HBoxContainerEnd/EndX").ValueChanged += val => coordinator.SetEndPointX((float)val);
+		GetNode<SpinBox>($"{controlPath}HBoxContainerEnd/EndY").ValueChanged += val => coordinator.SetEndPointY((float)val);
+		coordinator.SetEndPointX((float)GetNode<SpinBox>($"{controlPath}HBoxContainerEnd/EndX").Value);
+		coordinator.SetEndPointY((float)GetNode<SpinBox>($"{controlPath}HBoxContainerEnd/EndY").Value);
 
 		// Mass
-		GetNode<SpinBox>("HBoxContainerMass/Mass").ValueChanged += val => coordinator.SetMass((float)val);
-		coordinator.SetMass((float)GetNode<SpinBox>("HBoxContainerMass/Mass").Value);
+		GetNode<SpinBox>($"{controlPath}HBoxContainerMass/Mass").ValueChanged += val => coordinator.SetMass((float)val);
+		coordinator.SetMass((float)GetNode<SpinBox>($"{controlPath}HBoxContainerMass/Mass").Value);
 
 		// Length
-		GetNode<SpinBox>("HBoxContainerLength/SpinBoxLength").ValueChanged += val => coordinator.SetLength((float)val);
-		coordinator.SetLength((float)GetNode<SpinBox>("HBoxContainerLength/SpinBoxLength").Value);
+		GetNode<SpinBox>($"{controlPath}HBoxContainerLength/SpinBoxLength").ValueChanged += val => coordinator.SetLength((float)val);
+		coordinator.SetLength((float)GetNode<SpinBox>($"{controlPath}HBoxContainerLength/SpinBoxLength").Value);
 
 		// Segments
-		GetNode<SpinBox>("HBoxContainerSegments/SpinBoxSegments").ValueChanged += val => coordinator.SetSegmentCount((int)val);
-		coordinator.SetSegmentCount((int)GetNode<SpinBox>("HBoxContainerSegments/SpinBoxSegments").Value);
+		GetNode<SpinBox>($"{controlPath}HBoxContainerSegments/SpinBoxSegments").ValueChanged += val => coordinator.SetSegmentCount((int)val);
+		coordinator.SetSegmentCount((int)GetNode<SpinBox>($"{controlPath}HBoxContainerSegments/SpinBoxSegments").Value);
 
 		// Dynamic copies of visibility checkboxes:
-		var checkboxContainer = GetNode<Container>("VisibilityChecksContainer");
+		var checkboxContainer = GetNode<Container>($"{controlPath}VisibilityChecksContainer");
 		foreach (Node child in checkboxContainer.GetChildren()) {
 			child.QueueFree(); // Remove sample containers from tree.
 		}
-		var plotters = coordinator.GetPlotters();
+		plotters = coordinator.GetPlotters();
 		for (int i = 0; i < plotters.Length; i++)
 		{
 			int index = i;
@@ -83,12 +89,55 @@ public partial class InputControlNode : Control
 		}
 
 		// Generate Plots Button
-		GetNode<Button>("GeneratePlots").Pressed += () => coordinator.GeneratePlots();
+		GetNode<Button>($"{controlPath}GeneratePlots").Pressed += () => {clearStatistics(); coordinator.GeneratePlots();};
 
 		// Recenter Camera Button
-		GetNode<Button>("RecenterCamera").Pressed += () => coordinator.ResetCamera();
+		GetNode<Button>($"{controlPath}RecenterCamera").Pressed += coordinator.ResetCamera;
+
+		// Add statistics from
+		CablePlotter.SetStatisticsCallback((CablePlotter caller, Dictionary<string, string> stats) => statisticsCallback(caller, stats));
 
 		// Generate Plots with initial parameters
 		coordinator.GeneratePlots();
 	}
+
+
+	private void clearStatistics()
+	{
+		var container = GetNode<VBoxContainer>(statsPath);
+		foreach (Node child in container.GetChildren())
+			child.QueueFree();
+	}
+
+	private void statisticsCallback(CablePlotter caller, Dictionary<string, string> stats)
+	{
+		var container = GetNode<VBoxContainer>(statsPath);
+
+		var richText = new RichTextLabel
+		{
+			FocusMode = FocusModeEnum.None,
+			BbcodeEnabled = true,
+			ScrollActive = false,
+			AutowrapMode = TextServer.AutowrapMode.Word,
+			FitContent = true,
+			SizeFlagsHorizontal = SizeFlags.Expand | SizeFlags.Fill
+		};
+		richText.SetSelectionEnabled(true);
+		var style = new StyleBoxEmpty();
+		richText.AddThemeStyleboxOverride("focus", style);
+
+		richText.AppendText($"[b]{caller.GetPlotName()}[/b]\n");
+		foreach (var pair in stats)
+			richText.AppendText($"{pair.Key}: {pair.Value}\n");
+
+		container.AddChild(richText);
+
+		var separator = new HSeparator
+		{
+			SizeFlagsHorizontal = SizeFlags.Expand | SizeFlags.Fill
+		};
+		container.AddChild(separator);
+	}
+
+
 }

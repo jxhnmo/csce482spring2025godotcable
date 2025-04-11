@@ -142,7 +142,7 @@ public partial class GridlineController : Node2D
 		Vector2 metersPos = Coordinator.WorldToMeters(worldPos);
 
 		// Format nicely
-        string cursorText = $"Cursor: {metersPos.X:F2} m, {metersPos.Y:F2} m";
+		string cursorText = $"Cursor: {metersPos.X:F2} m, {metersPos.Y:F2} m";
 
 		// Pick a font
 		var font = ThemeDB.FallbackFont;

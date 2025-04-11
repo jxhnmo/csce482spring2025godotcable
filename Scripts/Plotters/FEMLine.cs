@@ -367,6 +367,17 @@ public partial class FEMLine : Node2D, CablePlotter
 				deformedLine.AddPoint(new Vector2(xDeformed[i], yDeformed[i]));
 			}
 		}
+
+		var statsDict = new Dictionary<string, string>
+		{
+			{ "Segments", n.ToString() },
+			{ "Force Increments", nForceIncrements.ToString() },
+			{ "Converged Increments", (UG_FINAL.GetLength(1) - 1).ToString() },
+			{ "Max Displacement", UG_FINAL.Cast<double>().Select(Math.Abs).Max().ToString("F3") + " m" },
+			{ "Total Internal Force", FI_FINAL.Cast<double>().Sum().ToString("F2") + " N" },
+			{ "Convergence Threshold", convThreshold.ToString() + " N" }
+		};
+		CablePlotter.statisticsCallback?.Invoke(this, statsDict);
 	}
 
 	private Vector2[] FEM(Vector2[] points){
