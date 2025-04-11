@@ -6,51 +6,61 @@ using System.Reflection.Metadata.Ecma335;
 public partial class InputControlNode : Control
 {
 	public static InputControlNode Instance { get; private set; } = null;
-	[Export] public NodePath CoordinatorPath;
+	private bool isReady;
 	private Coordinator coordinator;
 	private CablePlotter[] plotters;
-	private string controlPath = "TabContainer/Controls/MarginContainer/VBoxContainer/";
-	private string statsPath = "TabContainer/Statistics/ScrollContainer/MarginContainer/VBoxContainer/";
+	[Export] public NodePath CoordinatorPath;
+	[Export] public NodePath ControlPath;
+	[Export] public NodePath ControlDynamicsPath;
+	[Export] public NodePath StatsPath;
+	[Export] public NodePath GeneratePath;
+	[Export] public NodePath RecenterPath;
+
+
+	public InputControlNode() {
+		Instance = this;
+		isReady = false;
+	}
 
 	public override void _Ready()
 	{
-		Instance = this;
+		isReady = true;
 		coordinator = GetNode<Coordinator>(CoordinatorPath);
 		if (coordinator.IsReady) {
-			PrepareInput();
+			prepareInput();
 		} else {
-			coordinator.Ready += PrepareInput;
+			coordinator.Ready += prepareInput;
 		}
 	}
 
-	private void PrepareInput() {
+	private void prepareInput() {
 		
 		// Start point
-		GetNode<SpinBox>($"{controlPath}HBoxContainerStart/StartX").ValueChanged += val => coordinator.SetStartPointX((float)val);
-		GetNode<SpinBox>($"{controlPath}HBoxContainerStart/StartY").ValueChanged += val => coordinator.SetStartPointY((float)val);
-		coordinator.SetStartPointX((float)GetNode<SpinBox>($"{controlPath}HBoxContainerStart/StartX").Value);
-		coordinator.SetStartPointY((float)GetNode<SpinBox>($"{controlPath}HBoxContainerStart/StartY").Value);
+		GetNode<SpinBox>($"{ControlPath}/HBoxContainerStart/StartX").ValueChanged += val => coordinator.SetStartPointX((float)val);
+		GetNode<SpinBox>($"{ControlPath}/HBoxContainerStart/StartY").ValueChanged += val => coordinator.SetStartPointY((float)val);
+		coordinator.SetStartPointX((float)GetNode<SpinBox>($"{ControlPath}/HBoxContainerStart/StartX").Value);
+		coordinator.SetStartPointY((float)GetNode<SpinBox>($"{ControlPath}/HBoxContainerStart/StartY").Value);
 
 		// End point
-		GetNode<SpinBox>($"{controlPath}HBoxContainerEnd/EndX").ValueChanged += val => coordinator.SetEndPointX((float)val);
-		GetNode<SpinBox>($"{controlPath}HBoxContainerEnd/EndY").ValueChanged += val => coordinator.SetEndPointY((float)val);
-		coordinator.SetEndPointX((float)GetNode<SpinBox>($"{controlPath}HBoxContainerEnd/EndX").Value);
-		coordinator.SetEndPointY((float)GetNode<SpinBox>($"{controlPath}HBoxContainerEnd/EndY").Value);
+		GetNode<SpinBox>($"{ControlPath}/HBoxContainerEnd/EndX").ValueChanged += val => coordinator.SetEndPointX((float)val);
+		GetNode<SpinBox>($"{ControlPath}/HBoxContainerEnd/EndY").ValueChanged += val => coordinator.SetEndPointY((float)val);
+		coordinator.SetEndPointX((float)GetNode<SpinBox>($"{ControlPath}/HBoxContainerEnd/EndX").Value);
+		coordinator.SetEndPointY((float)GetNode<SpinBox>($"{ControlPath}/HBoxContainerEnd/EndY").Value);
 
 		// Mass
-		GetNode<SpinBox>($"{controlPath}HBoxContainerMass/Mass").ValueChanged += val => coordinator.SetMass((float)val);
-		coordinator.SetMass((float)GetNode<SpinBox>($"{controlPath}HBoxContainerMass/Mass").Value);
+		GetNode<SpinBox>($"{ControlPath}/HBoxContainerMass/Mass").ValueChanged += val => coordinator.SetMass((float)val);
+		coordinator.SetMass((float)GetNode<SpinBox>($"{ControlPath}/HBoxContainerMass/Mass").Value);
 
 		// Length
-		GetNode<SpinBox>($"{controlPath}HBoxContainerLength/SpinBoxLength").ValueChanged += val => coordinator.SetLength((float)val);
-		coordinator.SetLength((float)GetNode<SpinBox>($"{controlPath}HBoxContainerLength/SpinBoxLength").Value);
+		GetNode<SpinBox>($"{ControlPath}/HBoxContainerLength/SpinBoxLength").ValueChanged += val => coordinator.SetLength((float)val);
+		coordinator.SetLength((float)GetNode<SpinBox>($"{ControlPath}/HBoxContainerLength/SpinBoxLength").Value);
 
 		// Segments
-		GetNode<SpinBox>($"{controlPath}HBoxContainerSegments/SpinBoxSegments").ValueChanged += val => coordinator.SetSegmentCount((int)val);
-		coordinator.SetSegmentCount((int)GetNode<SpinBox>($"{controlPath}HBoxContainerSegments/SpinBoxSegments").Value);
+		GetNode<SpinBox>($"{ControlPath}/HBoxContainerSegments/SpinBoxSegments").ValueChanged += val => coordinator.SetSegmentCount((int)val);
+		coordinator.SetSegmentCount((int)GetNode<SpinBox>($"{ControlPath}/HBoxContainerSegments/SpinBoxSegments").Value);
 
 		// Dynamic copies of visibility checkboxes:
-		var checkboxContainer = GetNode<Container>($"{controlPath}VisibilityChecksContainer");
+		var checkboxContainer = GetNode<Container>($"{ControlPath}/VisibilityChecksContainer");
 		foreach (Node child in checkboxContainer.GetChildren()) {
 			child.QueueFree(); // Remove sample containers from tree.
 		}
@@ -90,21 +100,26 @@ public partial class InputControlNode : Control
 			checkboxContainer.AddChild(hbox);
 		}
 
-		GetNode<Button>($"{controlPath}GeneratePlots").Pressed += () => {clearStatistics(); coordinator.GeneratePlots();};
-		GetNode<Button>($"{controlPath}RecenterCamera").Pressed += coordinator.ResetCamera;
+		GetNode<Button>(GeneratePath).Pressed += () => {clearStatistics(); coordinator.GeneratePlots();};
+		GetNode<Button>(RecenterPath).Pressed += coordinator.ResetCamera;
 		coordinator.GeneratePlots();
 	}
 
 	private void clearStatistics()
 	{
-		var container = GetNode<VBoxContainer>(statsPath);
+		var container = GetNode<VBoxContainer>(StatsPath);
 		foreach (Node child in container.GetChildren())
 			child.QueueFree();
 	}
 
 	public void StatisticsCallback(CablePlotter caller, Dictionary<string, string> stats)
 	{
-		var container = GetNode<VBoxContainer>(statsPath);
+		if (!isReady) {
+			Ready += () => StatisticsCallback(caller, stats);
+			return;
+		}
+
+		var container = GetNode<VBoxContainer>(StatsPath);
 
 		var richText = new RichTextLabel
 		{
@@ -132,5 +147,31 @@ public partial class InputControlNode : Control
 		container.AddChild(separator);
 	}
 
+
+	public void AddDoubleField(string labelText, double initialValue, Action<double> onChanged)
+	{
+		var container = GetNode<VBoxContainer>(ControlDynamicsPath);
+		var box = new VBoxContainer();
+		var label = new Label
+		{
+			Text = labelText,
+			CustomMinimumSize = new Vector2(100, 0)
+		};
+		var input = new SpinBox
+		{
+			MinValue = -1e12,
+			MaxValue = 1e12,
+			Step = 0.1,
+			Value = initialValue,
+			SizeFlagsHorizontal = SizeFlags.ExpandFill
+		};
+
+		input.ValueChanged += val => onChanged((double)val);
+		onChanged(initialValue);
+
+		box.AddChild(label);
+		box.AddChild(input);
+		container.AddChild(box);
+	}
 
 }

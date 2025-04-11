@@ -11,7 +11,7 @@ public partial class FEMLine : Node2D, CablePlotter
 	private Line2D deformedLine;
 
 	// Catenary Variables (User Input/Adjustable)
-	private int n = 12;            // Number of segments for the plot
+	private int n = 12; // Number of segments for the plot
 
 	// FEM Variables/Constants
 	private double E = 7e10; // Young's Modulus (Pa)
@@ -21,7 +21,7 @@ public partial class FEMLine : Node2D, CablePlotter
 	private int P = 0; // (N) Point load magnitude (and direction via sign)
 	private char pointLoadAxis = 'y'; //The GLOBAL axis along which point loads are applied
 	private int nForceIncrements = 1000; // 
-	private int convThreshold = 10; // (N) Threshold on average percentage increase in incremental deflection
+	private double convThreshold = 10.0; // (N) Threshold on average percentage increase in incremental deflection
 	
 
 	private int[][] members;
@@ -106,6 +106,11 @@ public partial class FEMLine : Node2D, CablePlotter
 			Visible = show
 		};
 		AddChild(deformedLine);
+
+		InputControlNode.Instance.AddDoubleField("Young's Modulus (Pa)", E, (double val) =>  E = val);
+		InputControlNode.Instance.AddDoubleField("Cross-sectional Area (m^2)", A, (double val) => A = val);
+		InputControlNode.Instance.AddDoubleField("Convergence Threshold %", convThreshold, (double val) => convThreshold = val);
+		
 	}
 	// Ready() ENDS HERE
 

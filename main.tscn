@@ -61,13 +61,10 @@ texture = ExtResource("5_fo2ce")
 
 [node name="UserControls" parent="." instance=ExtResource("2_40380")]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -324.0
+anchors_preset = -1
 offset_right = 218.0
-offset_bottom = 324.0
 CoordinatorPath = NodePath("../Coordinator")
+metadata/_edit_use_anchors_ = true
 
 [node name="ShowInfoButton" type="Button" parent="."]
 custom_minimum_size = Vector2(50, 50)
