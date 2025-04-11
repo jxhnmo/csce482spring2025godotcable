@@ -9,7 +9,7 @@ public partial class Cable : Node2D
 	[Export]
 	private float startYPosition = 400.0f;
 	[Export]
-	private float endXPosition = 400.0f;
+	private float endXPosition = 600.0f;
 	[Export]
 	private float endYPosition = 200.0f;
 	[Export]
@@ -21,7 +21,7 @@ public partial class Cable : Node2D
 	[Export]
 	private float length = 500.0f;
 	[Export]
-	private int numSegments = 20;
+	private int numSegments = 10;
 	private bool StaticCableEnd = true;
 	
 	private PackedScene CableSegmentPackedScene;
@@ -43,7 +43,7 @@ public partial class Cable : Node2D
 		CableStart = GetNode<CableSegment>("CableStart");
 		CableStart.GlobalPosition = new Vector2(startXPosition, startYPosition);
 		CableEnd = GetNode<CableSegment>("CableEnd");
-		CableEnd.GlobalPosition = CableStart.GlobalPosition + new Vector2(0, length);
+		CableEnd.GlobalPosition = CableStart.GlobalPosition + new Vector2(length, 0);
 		CableStart.Cable = this;
 		CableEnd.Cable = this;
 		CableStartPinJoint = GetNode<PinJoint2D>("CableStart/PinJoint2D");
@@ -51,9 +51,8 @@ public partial class Cable : Node2D
 
 		SpawnCable();
 
-		//CableEnd.SetPhysicsProcess(false);
-		CableEnd.GlobalPosition = new Vector2(endXPosition, endYPosition);
-		//CableEnd.SetPhysicsProcess(true);
+		var tween = CreateTween();
+		tween.TweenProperty(CableEnd, "position", new Vector2(endXPosition, endYPosition), 1);
 	}
 
 	public void SpawnCable()
@@ -91,6 +90,7 @@ public partial class Cable : Node2D
 
 		if (StaticCableEnd)
 		{
+			CableStart.Freeze = true;
 			CableEnd.Freeze = true;
 		}
 		CableEnd.IndexInArray = numSegments;
@@ -112,7 +112,7 @@ public partial class Cable : Node2D
 		segment.Rotation = rotationAngle;
 		segment.Cable = this;
 		segment.IndexInArray = id;
-		segment.GravityScale = segmentMass / 10.0f;
+		segment.Mass = segmentMass;
 
 		AddChild(segment);
 		pinJoint.NodeA = previousSegment.GetPath();
