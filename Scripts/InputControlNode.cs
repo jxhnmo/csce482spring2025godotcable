@@ -126,17 +126,27 @@ public partial class InputControlNode : Control
 			FocusMode = FocusModeEnum.None,
 			BbcodeEnabled = true,
 			ScrollActive = false,
-			AutowrapMode = TextServer.AutowrapMode.Word,
+			AutowrapMode = TextServer.AutowrapMode.Off,
 			FitContent = true,
-			SizeFlagsHorizontal = SizeFlags.Expand | SizeFlags.Fill
+			SizeFlagsHorizontal = SizeFlags.Expand,
 		};
 		richText.SetSelectionEnabled(true);
 		var style = new StyleBoxEmpty();
 		richText.AddThemeStyleboxOverride("focus", style);
 
+		// Title
 		richText.AppendText($"[b]{caller.GetPlotName()}[/b]\n");
+
+		// Begin table with 2 columns
+		richText.AppendText("[table=2]");
+
 		foreach (var pair in stats)
-			richText.AppendText($"{pair.Key}: {pair.Value}\n");
+		{
+			richText.AppendText($"[cell][left]{pair.Key}[/left][/cell]");
+			richText.AppendText($"[cell][right]{pair.Value}[/right][/cell]");
+		}
+
+		richText.AppendText("[/table]");
 
 		container.AddChild(richText);
 

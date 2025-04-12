@@ -83,7 +83,7 @@ layout_mode = 2
 min_value = -70.0
 max_value = 70.0
 step = 0.1
-value = 4.9
+value = 5.0
 
 [node name="EndY" type="SpinBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerEnd"]
 layout_mode = 2
@@ -210,7 +210,6 @@ text = "Recenter Camera"
 
 [node name="Statistics" type="PanelContainer" parent="TabContainer"]
 visible = false
-custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -220,6 +219,7 @@ color = Color(0.243834, 0.258919, 0.263992, 1)
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Statistics"]
 layout_mode = 2
+horizontal_scroll_mode = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/Statistics/ScrollContainer"]
 layout_mode = 2

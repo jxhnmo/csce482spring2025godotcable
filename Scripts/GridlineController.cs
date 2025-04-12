@@ -153,14 +153,17 @@ public partial class GridlineController : Node2D
 		Vector2 worldPos = (centerWorld + mouseScreenPos) / scale;
 		Vector2 metersPos = Coordinator.WorldToMeters(worldPos);
 
-		// Format nicely
 		string cursorText = $"Cursor: {metersPos.X:F2} m, {metersPos.Y:F2} m";
 
-		// Pick a font
 		var font = ThemeDB.FallbackFont;
+		int fontSize = 16;
+		Vector2 textSize = font.GetStringSize(cursorText, HorizontalAlignment.Left, -1, fontSize);
+
 		Vector2 margin = new Vector2(10, -10);
-		Vector2 drawPos = new Vector2(margin.X + topLeftScreen.X, margin.Y + bottomRightScreen.Y);
-		DrawString(font, drawPos, cursorText, HorizontalAlignment.Left, -1, 16, TextColor);
+		Vector2 bottomRight = new Vector2(bottomRightScreen.X, bottomRightScreen.Y);
+		Vector2 drawPos = bottomRight - new Vector2(textSize.X + margin.X, -margin.Y);
+
+		DrawString(font, drawPos, cursorText, HorizontalAlignment.Left, -1, fontSize, TextColor);
 	}
 
 }

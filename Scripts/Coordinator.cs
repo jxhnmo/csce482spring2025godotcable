@@ -79,11 +79,9 @@ public partial class Coordinator : Node
 		}
 
 		if (visible) {
-			GD.Print($"Showing {index}");
 			plotters[index].ShowPlot();
 		}
 		else {
-			GD.Print($"Hiding {index}");
 			plotters[index].HidePlot();
 		}
 	}
