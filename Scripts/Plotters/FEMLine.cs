@@ -108,15 +108,16 @@ public partial class FEMLine : Node2D, CablePlotter
 		AddChild(deformedLine);
 
 		InputControlNode.Instance.AddDoubleField("Young's Modulus (Pa)", E, (double val) =>  E = val);
-		InputControlNode.Instance.AddDoubleField("Cross-sectional Area (m^2)", A, (double val) => A = val);
+		// InputControlNode.Instance.AddDoubleField("Cross-sectional Area (m^2)", A, (double val) => A = val);
 		InputControlNode.Instance.AddDoubleField("Convergence Threshold %", convThreshold, (double val) => convThreshold = val);
 		
 	}
 	// Ready() ENDS HERE
 
 
-	public void Generate(float nodeMass, Vector2[] meterPoints, float actualLength)
+	public void Generate(float nodeMass, Vector2[] meterPoints, float actualLength, List<(int nodeIndex, Vector2 force)> extraForces = null)
 	{
+
 		if (catenaryLine == null || deformedLine == null) {
 			Ready += () => Generate(nodeMass, meterPoints, actualLength);
 			return;
@@ -219,6 +220,20 @@ public partial class FEMLine : Node2D, CablePlotter
 				{
 					SW_at_supports.Add(new double[] { jy, F_node });
 				}
+			}
+		}
+
+		if (extraForces != null)
+		{
+			for (int i = 0; i < extraForces.Count; i++)
+			{
+				int node = extraForces[i].nodeIndex;
+				Vector2 f = extraForces[i].force;
+
+				if (node < 0 || node > n) continue; // safety check
+
+				forceVector[2 * node, 0]     += f.X;
+				forceVector[2 * node + 1, 0] += f.Y;
 			}
 		}
 

@@ -16,7 +16,7 @@ public partial class GridlineController : Node2D
 	[Export] public float MinZoom = 0.2f;
 	[Export] public float MaxZoom = 5f;
 	[Export] public float GridSpacing = 1.0f; // in meters
-	[Export] public Color GridColor = new Color(0.8f, 0.8f, 0.8f, 0.5f);
+	[Export] public Color GridColor = new Color(92f / 255f, 96f / 255f, 97f / 255f);
 	[Export] public Color TextColor = new Color(1f, 1f, 1f);
 
 	public override void _Ready()
@@ -111,6 +111,9 @@ public partial class GridlineController : Node2D
 		int startY = Mathf.FloorToInt(bottomRightMeters.Y);
 		int endY = Mathf.CeilToInt(topLeftMeters.Y);
 
+		// Delay drawing each axis branchlessly.
+		Action drawAxis = () => {};
+
 		// Draw vertical lines every 1m
 		for (int x = startX; x <= endX; x++)
 		{
@@ -123,7 +126,7 @@ public partial class GridlineController : Node2D
 			if (x != 0)
 				DrawLine(screenStart, screenEnd, GridColor, 1.0f);
 			else
-				DrawLine(screenStart, screenEnd, Colors.Green, 1.0f); // Y axis
+				drawAxis += () => DrawLine(screenStart, screenEnd, Colors.Green, 1.0f); // Y axis
 		}
 
 		// Draw horizontal lines every 1m
@@ -138,8 +141,10 @@ public partial class GridlineController : Node2D
 			if (y != 0)
 				DrawLine(screenStart, screenEnd, GridColor, 1.0f);
 			else
-				DrawLine(screenStart, screenEnd, Colors.Red, 1.0f); // X axis
+				drawAxis += () => DrawLine(screenStart, screenEnd, Colors.Red, 1.0f); // X axis
 		}
+
+		drawAxis();
 
 		// --- Cursor Position in Meters ---
 		Vector2 mouseViewportPos = GetViewport().GetMousePosition();
