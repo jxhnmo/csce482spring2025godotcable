@@ -11,6 +11,8 @@ public partial class InputControlNode : Control
 	private CablePlotter[] plotters;
 	[Export] public NodePath CoordinatorPath;
 	[Export] public NodePath ControlPath;
+	[Export] public NodePath ExternalForcesPath;
+	[Export] public NodePath AddForcePath;
 	[Export] public NodePath ControlDynamicsPath;
 	[Export] public NodePath StatsPath;
 	[Export] public NodePath GeneratePath;
@@ -34,6 +36,15 @@ public partial class InputControlNode : Control
 	}
 
 	private void prepareInput() {
+
+		var forceTarget = GetNode<Control>(ExternalForcesPath);
+		PackedScene packed = GD.Load<PackedScene>("res://ExternalForce.tscn");
+		GetNode<Button>(AddForcePath).Pressed += () => 
+		{
+			ExternalForce newForce = packed.Instantiate<ExternalForce>();
+			forceTarget.AddChild(newForce);
+			Coordinator.Instance.RegisterExternalForce(newForce);
+		};
 		
 		// Start point
 		GetNode<SpinBox>($"{ControlPath}/HBoxContainerStart/StartX").ValueChanged += val => coordinator.SetStartPointX((float)val);

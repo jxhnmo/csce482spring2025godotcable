@@ -50,7 +50,7 @@ public partial class RawPlotter : Node2D, CablePlotter
 	}
 
 
-	public void Generate(float nodeMass, Vector2[] meterPoints, float actualLength)
+	public void Generate(float nodeMass, Vector2[] meterPoints, float actualLength, List<(int nodeIndex, Vector2 force)> extraForces = null)
 	{
 		if (line == null) {
 			Ready += () => Generate(nodeMass, meterPoints, actualLength);

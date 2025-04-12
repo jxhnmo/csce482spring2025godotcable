@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://byyo51v3gmx7v"]
+
+[ext_resource type="Script" path="res://Scripts/ExternalForce.cs" id="1_hbw5a"]
+[ext_resource type="Texture2D" uid="uid://cbr38qmj01hrf" path="res://Assets/close3.webp" id="2_l16f1"]
+
+[node name="ExternalForceContainer" type="HBoxContainer"]
+offset_right = 6.0
+offset_bottom = 23.0
+script = ExtResource("1_hbw5a")
+NodeBoxPath = NodePath("NodeBox")
+XBoxPath = NodePath("NodeBox")
+YBoxPath = NodePath("YBox")
+RemovePath = NodePath("RemoveButton")
+
+[node name="NodeBox" type="SpinBox" parent="."]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+min_value = 1.0
+value = 1.0
+prefix = "Node"
+
+[node name="XBox" type="SpinBox" parent="."]
+layout_mode = 2
+min_value = -1000.0
+max_value = 1000.0
+suffix = "N"
+
+[node name="YBox" type="SpinBox" parent="."]
+layout_mode = 2
+min_value = -1000.0
+max_value = 1000.0
+suffix = "N"
+
+[node name="RemoveButton" type="Button" parent="."]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+icon = ExtResource("2_l16f1")
+flat = true
+expand_icon = true

@@ -9,6 +9,8 @@ offset_right = 187.0
 grow_vertical = 2
 script = ExtResource("1_y6inc")
 ControlPath = NodePath("TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer")
+ExternalForcesPath = NodePath("TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/ExternalForces")
+AddForcePath = NodePath("TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/AddForceButton")
 ControlDynamicsPath = NodePath("TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/Dynamics")
 StatsPath = NodePath("TabContainer/Statistics/ScrollContainer/MarginContainer/VBoxContainer")
 GeneratePath = NodePath("TabContainer/Controls/MarginContainer/VBoxContainer/GeneratePlots")
@@ -52,31 +54,33 @@ theme_override_constants/margin_right = 5
 [node name="ControlContainer" type="VBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="_Label_11" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
-layout_mode = 2
-text = "Start Point (m)"
-
 [node name="HBoxContainerStart" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
 layout_mode = 2
+
+[node name="_Label_11" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerStart"]
+layout_mode = 2
+text = "Start Point: "
 
 [node name="StartX" type="SpinBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerStart"]
 layout_mode = 2
 min_value = -70.0
 max_value = 70.0
 step = 0.1
+suffix = "m"
 
 [node name="StartY" type="SpinBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerStart"]
 layout_mode = 2
 min_value = -70.0
 max_value = 70.0
 step = 0.1
-
-[node name="_Label_19" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
-layout_mode = 2
-text = "End Point (m)"
+suffix = "m"
 
 [node name="HBoxContainerEnd" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
 layout_mode = 2
+
+[node name="_Label_19" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerEnd"]
+layout_mode = 2
+text = "End Point:   "
 
 [node name="EndX" type="SpinBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerEnd"]
 layout_mode = 2
@@ -84,6 +88,7 @@ min_value = -70.0
 max_value = 70.0
 step = 0.1
 value = 5.0
+suffix = "m"
 
 [node name="EndY" type="SpinBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerEnd"]
 layout_mode = 2
@@ -91,6 +96,7 @@ min_value = -70.0
 max_value = 70.0
 step = 0.1
 value = 1.5
+suffix = "m"
 
 [node name="HBoxContainerMass" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
 layout_mode = 2
@@ -98,7 +104,7 @@ layout_mode = 2
 [node name="_Label_29" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerMass"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "Mass (kg)"
+text = "Mass"
 
 [node name="Mass" type="SpinBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerMass"]
 layout_mode = 2
@@ -107,6 +113,7 @@ min_value = -1000.0
 max_value = 1000.0
 step = 0.1
 value = 100.0
+suffix = "kg"
 
 [node name="HBoxContainerLength" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
 layout_mode = 2
@@ -114,7 +121,7 @@ layout_mode = 2
 [node name="_Label_34" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerLength"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "Length (m)"
+text = "Length"
 
 [node name="SpinBoxLength" type="SpinBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerLength"]
 layout_mode = 2
@@ -122,6 +129,7 @@ size_flags_horizontal = 3
 max_value = 1000.0
 step = 0.1
 value = 7.0
+suffix = "m"
 
 [node name="HBoxContainerSegments" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
 layout_mode = 2
@@ -134,9 +142,21 @@ text = "Segments"
 [node name="SpinBoxSegments" type="SpinBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerSegments"]
 layout_mode = 2
 size_flags_horizontal = 3
-min_value = 1.0
+min_value = 2.0
 max_value = 25.0
 value = 6.0
+
+[node name="ExternalForcesLabel" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
+layout_mode = 2
+text = "External Forces:"
+
+[node name="ExternalForces" type="VBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
+layout_mode = 2
+
+[node name="AddForceButton" type="Button" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
+layout_mode = 2
+tooltip_text = "External Forces may be applied to any node on the cable. Node indexes are 0-order, and you may not specify the end nodes. EX: 6 Segments -> indexes [1,5] may be applied a force. 0 and 6 are the end nodes."
+text = "Add External Force"
 
 [node name="HSeparator" type="HSeparator" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
 layout_mode = 2
