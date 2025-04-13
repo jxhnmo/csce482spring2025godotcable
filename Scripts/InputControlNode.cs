@@ -195,4 +195,17 @@ public partial class InputControlNode : Control
 		container.AddChild(box);
 	}
 
+
+	public void ShowAlert(string title, string message)
+	{
+		var alert = new AcceptDialog
+		{
+			DialogText = message,
+			Title = title,
+		};
+
+		AddChild(alert);
+		alert.PopupCentered(); // Center it on the screen
+	}
+
 }
