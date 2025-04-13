@@ -11,7 +11,7 @@ public partial class FEMLine : Node2D, CablePlotter
 	private Line2D deformedLine;
 
 	// Catenary Variables (User Input/Adjustable)
-	private int n = 12;            // Number of segments for the plot
+	private int n = 12; // Number of segments for the plot
 
 	// FEM Variables/Constants
 	private double E = 7e10; // Young's Modulus (Pa)
@@ -21,7 +21,7 @@ public partial class FEMLine : Node2D, CablePlotter
 	private int P = 0; // (N) Point load magnitude (and direction via sign)
 	private char pointLoadAxis = 'y'; //The GLOBAL axis along which point loads are applied
 	private int nForceIncrements = 1000; // 
-	private int convThreshold = 10; // (N) Threshold on average percentage increase in incremental deflection
+	private double convThreshold = 10.0; // (N) Threshold on average percentage increase in incremental deflection
 	
 
 	private int[][] members;
@@ -106,12 +106,18 @@ public partial class FEMLine : Node2D, CablePlotter
 			Visible = show
 		};
 		AddChild(deformedLine);
+
+		InputControlNode.Instance.AddDoubleField("Young's Modulus (Pa)", E, (double val) =>  E = val);
+		// InputControlNode.Instance.AddDoubleField("Cross-sectional Area (m^2)", A, (double val) => A = val);
+		InputControlNode.Instance.AddDoubleField("Convergence Threshold %", convThreshold, (double val) => convThreshold = val);
+		
 	}
 	// Ready() ENDS HERE
 
 
-	public void Generate(float nodeMass, Vector2[] meterPoints, float actualLength)
+	public void Generate(float nodeMass, Vector2[] meterPoints, float actualLength, List<(int nodeIndex, Vector2 force)> extraForces = null)
 	{
+
 		if (catenaryLine == null || deformedLine == null) {
 			Ready += () => Generate(nodeMass, meterPoints, actualLength);
 			return;
@@ -214,6 +220,20 @@ public partial class FEMLine : Node2D, CablePlotter
 				{
 					SW_at_supports.Add(new double[] { jy, F_node });
 				}
+			}
+		}
+
+		if (extraForces != null)
+		{
+			for (int i = 0; i < extraForces.Count; i++)
+			{
+				int node = extraForces[i].nodeIndex;
+				Vector2 f = extraForces[i].force;
+
+				if (node < 0 || node > n) continue; // safety check
+
+				forceVector[2 * node, 0]     += f.X;
+				forceVector[2 * node + 1, 0] += f.Y;
 			}
 		}
 
@@ -367,6 +387,17 @@ public partial class FEMLine : Node2D, CablePlotter
 				deformedLine.AddPoint(new Vector2(xDeformed[i], yDeformed[i]));
 			}
 		}
+
+		var statsDict = new Dictionary<string, string>
+		{
+			{ "Segments", n.ToString() },
+			{ "Force Increments", nForceIncrements.ToString() },
+			{ "Converged Increments", (UG_FINAL.GetLength(1) - 1).ToString() },
+			{ "Max Displacement", UG_FINAL.Cast<double>().Select(Math.Abs).Max().ToString("F3") + " m" },
+			{ "Total Internal Force", FI_FINAL.Cast<double>().Sum().ToString("F2") + " N" },
+			{ "Convergence Threshold", convThreshold.ToString() + " N" }
+		};
+		InputControlNode.Instance.StatisticsCallback(this, statsDict);
 	}
 
 	private Vector2[] FEM(Vector2[] points){

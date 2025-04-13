@@ -16,7 +16,7 @@ public partial class GridlineController : Node2D
 	[Export] public float MinZoom = 0.2f;
 	[Export] public float MaxZoom = 5f;
 	[Export] public float GridSpacing = 1.0f; // in meters
-	[Export] public Color GridColor = new Color(0.8f, 0.8f, 0.8f, 0.5f);
+	[Export] public Color GridColor = new Color(92f / 255f, 96f / 255f, 97f / 255f);
 	[Export] public Color TextColor = new Color(1f, 1f, 1f);
 
 	public override void _Ready()
@@ -58,16 +58,28 @@ public partial class GridlineController : Node2D
 
 	private void ApplyZoom(float zoomChange)
 	{
-		float currentZoom = (worldRoot.Scale.X + worldRoot.Scale.Y) * 0.5f;
-		float scaledStep = zoomChange * currentZoom;
+		Vector2 viewportSize = GetViewportRect().Size;
+		Vector2 mouseViewportPos = GetViewport().GetMousePosition();
+		Vector2 mouseScreenOffset = mouseViewportPos - viewportSize / 2f;
 
-		float newZoomX = worldRoot.Scale.X + scaledStep;
-		float newZoomY = worldRoot.Scale.Y + scaledStep;
+		Vector2 scaleBefore = worldRoot.Scale;
+		Vector2 centerWorld = -worldRoot.Position;
+		Vector2 mouseWorldBefore = (centerWorld + mouseScreenOffset) / scaleBefore;
 
-		newZoomX = Mathf.Clamp(newZoomX, MinZoom, MaxZoom);
-		newZoomY = Mathf.Clamp(newZoomY, MinZoom, MaxZoom);
+		float zoomAvg = (scaleBefore.X + scaleBefore.Y) * 0.5f;
+		float zoomStep = zoomChange * zoomAvg;
 
-		worldRoot.Scale = new Vector2(newZoomX, newZoomY);
+		float newZoomX = Mathf.Clamp(scaleBefore.X + zoomStep, MinZoom, MaxZoom);
+		float newZoomY = Mathf.Clamp(scaleBefore.Y + zoomStep, MinZoom, MaxZoom);
+		Vector2 scaleAfter = new Vector2(newZoomX, newZoomY);
+
+		Vector2 mouseScreenOffsetBefore = mouseWorldBefore * scaleBefore;
+		Vector2 mouseScreenOffsetAfter  = mouseWorldBefore * scaleAfter;
+
+		Vector2 offsetDelta = mouseScreenOffsetAfter - mouseScreenOffsetBefore;
+
+		worldRoot.Scale = scaleAfter;
+		worldRoot.Position -= offsetDelta;
 	}
 
 	public void ResetCamera()
@@ -99,6 +111,9 @@ public partial class GridlineController : Node2D
 		int startY = Mathf.FloorToInt(bottomRightMeters.Y);
 		int endY = Mathf.CeilToInt(topLeftMeters.Y);
 
+		// Delay drawing each axis branchlessly.
+		Action drawAxis = () => {};
+
 		// Draw vertical lines every 1m
 		for (int x = startX; x <= endX; x++)
 		{
@@ -111,7 +126,7 @@ public partial class GridlineController : Node2D
 			if (x != 0)
 				DrawLine(screenStart, screenEnd, GridColor, 1.0f);
 			else
-				DrawLine(screenStart, screenEnd, Colors.Green, 1.0f); // Y axis
+				drawAxis += () => DrawLine(screenStart, screenEnd, Colors.Green, 1.0f); // Y axis
 		}
 
 		// Draw horizontal lines every 1m
@@ -126,8 +141,10 @@ public partial class GridlineController : Node2D
 			if (y != 0)
 				DrawLine(screenStart, screenEnd, GridColor, 1.0f);
 			else
-				DrawLine(screenStart, screenEnd, Colors.Red, 1.0f); // X axis
+				drawAxis += () => DrawLine(screenStart, screenEnd, Colors.Red, 1.0f); // X axis
 		}
+
+		drawAxis();
 
 		// --- Cursor Position in Meters ---
 		Vector2 mouseViewportPos = GetViewport().GetMousePosition();
@@ -141,14 +158,17 @@ public partial class GridlineController : Node2D
 		Vector2 worldPos = (centerWorld + mouseScreenPos) / scale;
 		Vector2 metersPos = Coordinator.WorldToMeters(worldPos);
 
-		// Format nicely
-        string cursorText = $"Cursor: {metersPos.X:F2} m, {metersPos.Y:F2} m";
+		string cursorText = $"Cursor: {metersPos.X:F2} m, {metersPos.Y:F2} m";
 
-		// Pick a font
 		var font = ThemeDB.FallbackFont;
+		int fontSize = 16;
+		Vector2 textSize = font.GetStringSize(cursorText, HorizontalAlignment.Left, -1, fontSize);
+
 		Vector2 margin = new Vector2(10, -10);
-		Vector2 drawPos = new Vector2(margin.X + topLeftScreen.X, margin.Y + bottomRightScreen.Y);
-		DrawString(font, drawPos, cursorText, HorizontalAlignment.Left, -1, 16, TextColor);
+		Vector2 bottomRight = new Vector2(bottomRightScreen.X, bottomRightScreen.Y);
+		Vector2 drawPos = bottomRight - new Vector2(textSize.X + margin.X, -margin.Y);
+
+		DrawString(font, drawPos, cursorText, HorizontalAlignment.Left, -1, fontSize, TextColor);
 	}
 
 }

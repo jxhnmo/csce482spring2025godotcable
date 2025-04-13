@@ -1,19 +1,24 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Runtime.InteropServices;
+using System.Linq;
 
 public partial class Coordinator : Node
 {
+	public static Coordinator Instance { get; private set;}
+	public bool IsReady { get; private set; } = false;
 	[Export] public GridlineController GridController;
 	[Export] public Node2D WorldRoot;
-	public bool IsReady { get; private set; } = false;
 	private Vector2 startPoint;
 	private Vector2 endPoint;
 	private float mass;
 	private float length;
 	private int segmentCount;
+
+	public Coordinator() {
+		Instance = this;
+		externalForces = new List<ExternalForce>();
+	}
 
 	private List<CablePlotter> plotters = new List<CablePlotter>();
 
@@ -27,7 +32,12 @@ public partial class Coordinator : Node
 
 	public void SetMass(float value) => mass = value;
 	public void SetLength(float value) => length = value;
-	public void SetSegmentCount(int value) => segmentCount = value;
+	public void SetSegmentCount(int value) {
+		segmentCount = value;
+		foreach (var force in externalForces) {
+			force.SetMaxIndex(segmentCount - 1);
+		}
+	}
 
 	public float GetStartPointX() => startPoint.X;
 	public float GetStartPointY() => startPoint.Y;
@@ -41,14 +51,34 @@ public partial class Coordinator : Node
 	public float GetLength() => length;
 	public int GetSegmentCount() => segmentCount;
 
+	private List<ExternalForce> externalForces;
+
+	public void RegisterExternalForce(ExternalForce force) {
+		externalForces.Add(force);
+		force.SetRemoveAction(() => RemoveExternalForce(force));
+		force.SetMaxIndex(segmentCount - 1);
+	}
+
+	public void RemoveExternalForce(ExternalForce force) {
+		externalForces.Remove(force);
+		force.QueueFree();
+	}
+
+	private List<(int nodeIndex, Vector2 force)> createExtraForcesList() {
+		return  externalForces
+			.Select(f => (f.GetNodeIndex(), f.GetForce()))
+			.ToList();
+	}
+
 	public void GeneratePlots()
 	{
 		GD.Print("GeneratePlots()...");
 		Vector2[] initalPoints = InitialCurve.Make(startPoint, endPoint, mass, length, segmentCount);
 		float nodeMass = mass / segmentCount;
+		var addedForces = createExtraForcesList();
 		foreach (CablePlotter plotter in plotters)
 		{
-			plotter.Generate(nodeMass, initalPoints, length);
+			plotter.Generate(nodeMass, initalPoints, length, addedForces);
 		}
 	}
 
@@ -79,11 +109,9 @@ public partial class Coordinator : Node
 		}
 
 		if (visible) {
-			GD.Print($"Showing {index}");
 			plotters[index].ShowPlot();
 		}
 		else {
-			GD.Print($"Hiding {index}");
 			plotters[index].HidePlot();
 		}
 	}
