@@ -11,6 +11,6 @@ public interface CablePlotter
 	public void ShowPlot();
 	public string GetPlotName();
 	public Color GetColor();
-	// public float GetProgress();
+	public float GetProgress();
 	// public Vector2[] GetFinalPoints();
 }

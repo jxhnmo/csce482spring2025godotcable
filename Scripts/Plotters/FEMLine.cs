@@ -69,6 +69,10 @@ public partial class FEMLine : Node2D, CablePlotter
 	public String GetPlotName() {
 		return "FEM Line";
 	}
+
+	public float GetProgress() {
+		return 1f;
+	}
 	
 	public Color GetColor() {
 		return lineColor;
