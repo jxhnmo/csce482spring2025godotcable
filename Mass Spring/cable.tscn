@@ -6,25 +6,29 @@
 
 [node name="Cable" type="Node2D"]
 script = ExtResource("1_43h1j")
+startXPosition = 100.0
+startYPosition = 100.0
+endXPosition = 200.0
+endYPosition = 100.0
 
 [node name="Line2D" type="Line2D" parent="."]
 modulate = Color(1, 0, 0, 1)
+width = 5.0
 
 [node name="CableStart" parent="." instance=ExtResource("1_es15g")]
-position = Vector2(208, 269)
 freeze = true
 
 [node name="Sprite2D" type="Sprite2D" parent="CableStart"]
+visible = false
 modulate = Color(0, 0, 0, 1)
 rotation = 0.785398
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("3_11g35")
 
 [node name="CableEnd" parent="." instance=ExtResource("1_es15g")]
-position = Vector2(609, 193)
-freeze = true
 
 [node name="Sprite2D" type="Sprite2D" parent="CableEnd"]
+visible = false
 modulate = Color(0, 0, 0, 1)
 rotation = 0.785398
 scale = Vector2(0.1, 0.1)

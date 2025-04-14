@@ -14,6 +14,7 @@ public partial class Coordinator : Node
 	private float mass;
 	private float length;
 	private int segmentCount;
+	private PackedScene cablePackedScene;
 
 	public Coordinator() {
 		Instance = this;
@@ -80,6 +81,15 @@ public partial class Coordinator : Node
 		{
 			plotter.Generate(nodeMass, initalPoints, length, addedForces);
 		}
+		/*
+		cablePackedScene = GD.Load<PackedScene>("res://Mass Spring/cable.tscn");
+		var cableInstance = cablePackedScene.Instantiate() as Cable;
+		cableInstance.Initialize(
+			startX: MetersToWorldX(startPoint.X), startY: MetersToWorldY(startPoint.Y), endX: MetersToWorldX(endPoint.X), endY: MetersToWorldY(endPoint.Y),
+			mass: mass, length: MetersToWorldX(length), segments: segmentCount
+		);
+		WorldRoot.AddChild(cableInstance);
+		*/
 	}
 
 	public void AddPlotter(CablePlotter plotter)
@@ -129,7 +139,11 @@ public partial class Coordinator : Node
 	{
 		AddPlotter(new RawPlotter("Initial Plot", new Color(.9f, .9f, 0)));
 		AddPlotter(new FEMLine(new Color(0, 0, 1)));
+		
+		
+		
 		IsReady = true;
+
 	}
 
 	public const float PixelsPerMeter = 75.0f;

@@ -13,15 +13,56 @@ public partial class Cable : Node2D
 	[Export]
 	private float endYPosition = 200.0f;
 	[Export]
-	private float bias = 0.0f;
+	private float bias = 0.1f;
 	[Export]
-	private float softness = 0.0f;
+	private float softness = 0.01f;
 	[Export]
 	private float mass = 100.0f;
 	[Export]
 	private float length = 500.0f;
 	[Export]
 	private int numSegments = 10;
+		
+	public void Initialize(
+		float startX, float startY, float endX, float endY,
+		float mass, float length, int segments)
+	{
+		this.startXPosition = startX;
+		this.startYPosition = startY;
+		this.endXPosition = endX;
+		this.endYPosition = endY;
+		this.mass = mass;
+		this.length = length;
+		this.numSegments = segments;
+	}
+	
+	public float GetStartXPosition() => startXPosition;
+	public void SetStartXPosition(float value) => startXPosition = value;
+
+	public float GetStartYPosition() => startYPosition;
+	public void SetStartYPosition(float value) => startYPosition = value;
+
+	public float GetEndXPosition() => endXPosition;
+	public void SetEndXPosition(float value) => endXPosition = value;
+
+	public float GetEndYPosition() => endYPosition;
+	public void SetEndYPosition(float value) => endYPosition = value;
+
+	public float GetBias() => bias;
+	public void SetBias(float value) => bias = value;
+
+	public float GetSoftness() => softness;
+	public void SetSoftness(float value) => softness = value;
+
+	public float GetMass() => mass;
+	public void SetMass(float value) => mass = value;
+
+	public float GetLength() => length;
+	public void SetLength(float value) => length = value;
+
+	public int GetNumSegments() => numSegments;
+	public void SetNumSegments(int value) => numSegments = value;
+	
 	private bool StaticCableEnd = true;
 	
 	private PackedScene CableSegmentPackedScene;
@@ -50,15 +91,17 @@ public partial class Cable : Node2D
 		CableEndPinJoint = GetNode<PinJoint2D>("CableEnd/PinJoint2D");
 
 		SpawnCable();
-
+		
+		//CableEnd.GlobalPosition = new Vector2(endXPosition, endYPosition);
 		var tween = CreateTween();
-		tween.TweenProperty(CableEnd, "position", new Vector2(endXPosition, endYPosition), 1);
+		tween.TweenProperty(CableEnd, "global_position", new Vector2(endXPosition, endYPosition), 1);
 	}
 
 	public void SpawnCable()
 	{
-		Vector2 cableStartPos = CableStartPinJoint.GlobalPosition;
-		Vector2 cableEndPos = CableEndPinJoint.GlobalPosition;
+		Vector2 cableStartPos = CableStart.GlobalPosition;
+		Vector2 cableEndPos = CableEnd.GlobalPosition;
+		//GD.Print(cableStartPos, cableEndPos);
 		
 		Vector2 direction = (cableEndPos - cableStartPos).Normalized();
 		var interval = length / numSegments;
@@ -74,6 +117,8 @@ public partial class Cable : Node2D
 		for (int i = 0; i < numSegments; i++)
 		{
 			currentPos += direction * interval;
+			//GD.Print(currentPos);
+			Console.WriteLine(currentPos);
 			latestSegment = AddCableSegment(latestSegment, i + 1, rotationAngle, currentPos, segmentMass);
 			CableSegments.Add(latestSegment);
 
@@ -125,14 +170,18 @@ public partial class Cable : Node2D
 	private void UpdateLine2DCable()
 	{
 		CablePointsLine2D.Clear();
-		CablePointsLine2D.Add(CableStartPinJoint.GlobalPosition);
+		CablePointsLine2D.Add(CableStart.Position);
+		//GD.Print(CableStart.Position);
 
 		foreach (var segment in CableSegments)
 		{
-			CablePointsLine2D.Add(segment.GlobalPosition);
+			CablePointsLine2D.Add(segment.Position);
+			//GD.Print(segment.Position);
 		}
-		CablePointsLine2D.Add(CableEndPinJoint.GlobalPosition);
+		CablePointsLine2D.Add(CableEnd.Position);
 		Line2DNode.Points = CablePointsLine2D.ToArray();
+		
+		//GD.Print(CableEnd.Position);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
