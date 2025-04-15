@@ -14,7 +14,6 @@ public partial class Coordinator : Node
 	private float mass;
 	private float length;
 	private int segmentCount;
-	private PackedScene cablePackedScene;
 
 	public Coordinator() {
 		Instance = this;
@@ -88,8 +87,8 @@ public partial class Coordinator : Node
 			startX: MetersToWorldX(startPoint.X), startY: MetersToWorldY(startPoint.Y), endX: MetersToWorldX(endPoint.X), endY: MetersToWorldY(endPoint.Y),
 			mass: mass, length: MetersToWorldX(length), segments: segmentCount
 		);
-		WorldRoot.AddChild(cableInstance);
-		*/
+		WorldRoot.AddChild(cableInstance);*/
+		
 	}
 
 	public void AddPlotter(CablePlotter plotter)

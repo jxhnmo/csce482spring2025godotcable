@@ -1,60 +1,158 @@
-[gd_scene load_steps=3 format=3 uid="uid://bspmxdfwvoajt"]
+[gd_scene load_steps=5 format=3 uid="uid://c4rwh44wtowfs"]
 
-[ext_resource type="Texture2D" uid="uid://pm780dkmkv82" path="res://icon.svg" id="1_0xey7"]
+[ext_resource type="Script" path="res://Mass Spring/Scripts/MassSpringCoordinator.cs" id="1_6y5i7"]
+[ext_resource type="Script" path="res://Scripts/WorldViewport.cs" id="2_xpjhe"]
+[ext_resource type="Script" path="res://Scripts/GridlineController.cs" id="3_wkbbl"]
+[ext_resource type="Texture2D" uid="uid://pm780dkmkv82" path="res://Assets/icon.svg" id="4_lrtra"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_05eqi"]
+[node name="Mass Spring" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="MassSpring" type="Node2D"]
+[node name="Coordinator" type="Node" parent="."]
+script = ExtResource("1_6y5i7")
 
-[node name="NodeA" type="Node2D" parent="."]
-position = Vector2(209, 97)
+[node name="PanelContainer2" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
 
-[node name="Sprite2D" type="Sprite2D" parent="NodeA"]
-modulate = Color(0, 0, 0, 1)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_0xey7")
+[node name="ColorRect" type="ColorRect" parent="PanelContainer2"]
+layout_mode = 2
+color = Color(0.329434, 0.348118, 0.354403, 1)
 
-[node name="NodeB" type="Node2D" parent="."]
-position = Vector2(884, 463)
+[node name="SubViewportContainer" type="SubViewportContainer" parent="PanelContainer2"]
+layout_mode = 2
+stretch = true
 
-[node name="Sprite2D" type="Sprite2D" parent="NodeB"]
-modulate = Color(0, 0, 0, 1)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_0xey7")
+[node name="WorldViewport" type="SubViewport" parent="PanelContainer2/SubViewportContainer"]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+script = ExtResource("2_xpjhe")
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="PanelContainer2/SubViewportContainer/WorldViewport"]
+
+[node name="GridLines" type="Node2D" parent="PanelContainer2/SubViewportContainer/WorldViewport"]
+script = ExtResource("3_wkbbl")
+WorldRootPath = NodePath("../WorldRoot")
+
+[node name="WorldRoot" type="Node2D" parent="PanelContainer2/SubViewportContainer/WorldViewport"]
+
+[node name="Sprite2D" type="Sprite2D" parent="PanelContainer2/SubViewportContainer/WorldViewport/WorldRoot"]
 visible = false
-position = Vector2(163, 295)
-gravity_scale = 0.0
+texture = ExtResource("4_lrtra")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-visible = false
-shape = SubResource("CircleShape2D_05eqi")
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 175.0
+grow_vertical = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
-visible = false
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_0xey7")
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "CableControls"
 
-[node name="RigidBody2D2" type="RigidBody2D" parent="."]
-visible = false
-position = Vector2(695, 465)
-gravity_scale = 0.0
+[node name="StartXHBox" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D2"]
-visible = false
-shape = SubResource("CircleShape2D_05eqi")
+[node name="Label" type="Label" parent="VBoxContainer/StartXHBox"]
+layout_mode = 2
+text = "Start X (m):"
 
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D2"]
-visible = false
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_0xey7")
+[node name="StartX" type="SpinBox" parent="VBoxContainer/StartXHBox"]
+layout_mode = 2
+min_value = -100.0
+step = 0.01
 
-[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="."]
-visible = false
-node_a = NodePath("../RigidBody2D")
-node_b = NodePath("../RigidBody2D2")
+[node name="StartYHBox" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="DampedSpringJoint2D"]
-visible = false
-texture = ExtResource("1_0xey7")
+[node name="Label" type="Label" parent="VBoxContainer/StartYHBox"]
+layout_mode = 2
+text = "Start Y (m):"
+
+[node name="StartY" type="SpinBox" parent="VBoxContainer/StartYHBox"]
+layout_mode = 2
+min_value = -100.0
+step = 0.01
+
+[node name="EndXHBox" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/EndXHBox"]
+layout_mode = 2
+text = "End X (m):"
+
+[node name="EndX" type="SpinBox" parent="VBoxContainer/EndXHBox"]
+layout_mode = 2
+min_value = -100.0
+step = 0.01
+value = 5.0
+
+[node name="EndYHBox" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/EndYHBox"]
+layout_mode = 2
+text = "End Y (m):"
+
+[node name="EndY" type="SpinBox" parent="VBoxContainer/EndYHBox"]
+layout_mode = 2
+min_value = -100.0
+step = 0.01
+value = 1.5
+
+[node name="MassHBox" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/MassHBox"]
+layout_mode = 2
+text = "Mass (kg):"
+
+[node name="Mass" type="SpinBox" parent="VBoxContainer/MassHBox"]
+layout_mode = 2
+max_value = 500.0
+step = 0.01
+value = 100.0
+
+[node name="LengthHBox" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/LengthHBox"]
+layout_mode = 2
+text = "Length (m):"
+
+[node name="Length" type="SpinBox" parent="VBoxContainer/LengthHBox"]
+layout_mode = 2
+max_value = 500.0
+step = 0.01
+value = 7.0
+
+[node name="NumSegmentsHBox" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/NumSegmentsHBox"]
+layout_mode = 2
+text = "Number of 
+Segments:"
+
+[node name="NumSegments" type="SpinBox" parent="VBoxContainer/NumSegmentsHBox"]
+layout_mode = 2
+value = 6.0
+
+[node name="ApplyChanges" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Apply Changes
+"
