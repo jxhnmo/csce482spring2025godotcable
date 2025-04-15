@@ -165,194 +165,194 @@ public partial class FEMLine : Node2D, CablePlotter
 		computeThread.Start();
 	}
 
-public virtual void RunFEMComputation(float nodeMass, Vector2[] meterPoints, float actualLength, List<(int nodeIndex, Vector2 force)> extraForces = null)
-{
-	SetProgress(0.01f); // Start
-
-	// Parameter Setup (very fast)
-	gamma = nodeMass * meterPoints.Length / actualLength;
-	n = meterPoints.Length - 1;
-	Vector2[] points = meterPoints;
-
-	SetProgress(0.02f); // Parsed basic inputs
-
-	nDoF = 2 * (n + 1);
-	UG_FINAL = new double[nDoF, 0];
-	FI_FINAL = new double[nDoF, 0];
-	EXTFORCES = new double[nDoF, 0];
-	MBRFORCES = new double[n, 0];
-
-	members = new int[n][];
-	for (int i = 0; i < n; i++) members[i] = new int[] { i + 1, i + 2 };
-
-	restrainedIndex = new int[] { 0, 1, 2 * n, 2 * n + 1 };
-	restrainedDoF = new int[] { 1, 2, 2 * n + 1, 2 * n + 2 };
-	freeDoF = new int[2 * n - 2];
-	for (int i = 0; i < 2 * n - 2; i++) freeDoF[i] = 2 + i;
-
-	nodes = points;
-	Areas = Enumerable.Repeat(A, n).ToArray();
-	P0 = Enumerable.Repeat(1.0, n).ToArray();
-	forceVector = new double[2 * (n + 1), 1];
-
-	lengths = new double[n];
-	for (int z = 0; z < n; z++)
+	public virtual void RunFEMComputation(float nodeMass, Vector2[] meterPoints, float actualLength, List<(int nodeIndex, Vector2 force)> extraForces = null)
 	{
-		int node_i = members[z][0], node_j = members[z][1];
-		double ix = nodes[node_i - 1][0], iy = nodes[node_i - 1][1];
-		double jx = nodes[node_j - 1][0], jy = nodes[node_j - 1][1];
-		double dx = jx - ix, dy = jy - iy;
-		lengths[z] = Math.Sqrt(dx * dx + dy * dy);
-	}
+		SetProgress(0.01f); // Start
 
-	SetProgress(0.05f); // Finished preprocessing
+		// Parameter Setup (very fast)
+		gamma = nodeMass * meterPoints.Length / actualLength;
+		n = meterPoints.Length - 1;
+		Vector2[] points = meterPoints;
 
-	if (swt)
-	{
-		List<double[]> SW_at_supports = new List<double[]>();
-		for (int n = 0; n < members.Length; n++)
+		SetProgress(0.02f); // Parsed basic inputs
+
+		nDoF = 2 * (n + 1);
+		UG_FINAL = new double[nDoF, 0];
+		FI_FINAL = new double[nDoF, 0];
+		EXTFORCES = new double[nDoF, 0];
+		MBRFORCES = new double[n, 0];
+
+		members = new int[n][];
+		for (int i = 0; i < n; i++) members[i] = new int[] { i + 1, i + 2 };
+
+		restrainedIndex = new int[] { 0, 1, 2 * n, 2 * n + 1 };
+		restrainedDoF = new int[] { 1, 2, 2 * n + 1, 2 * n + 2 };
+		freeDoF = new int[2 * n - 2];
+		for (int i = 0; i < 2 * n - 2; i++) freeDoF[i] = 2 + i;
+
+		nodes = points;
+		Areas = Enumerable.Repeat(A, n).ToArray();
+		P0 = Enumerable.Repeat(1.0, n).ToArray();
+		forceVector = new double[2 * (n + 1), 1];
+
+		lengths = new double[n];
+		for (int z = 0; z < n; z++)
 		{
-			int node_i = members[n][0], node_j = members[n][1];
-			double length = lengths[n];
-			double sw = length * gamma * 9.81;
-			double F_node = sw / 2;
-			int iy = 2 * node_i - 1, jy = 2 * node_j - 1;
-
-			forceVector[iy, 0] -= F_node;
-			forceVector[jy, 0] -= F_node;
-
-			if (restrainedDoF.Contains(iy + 1)) SW_at_supports.Add(new double[] { iy, F_node });
-			if (restrainedDoF.Contains(jy + 1)) SW_at_supports.Add(new double[] { jy, F_node });
+			int node_i = members[z][0], node_j = members[z][1];
+			double ix = nodes[node_i - 1][0], iy = nodes[node_i - 1][1];
+			double jx = nodes[node_j - 1][0], jy = nodes[node_j - 1][1];
+			double dx = jx - ix, dy = jy - iy;
+			lengths[z] = Math.Sqrt(dx * dx + dy * dy);
 		}
-	}
-	if (extraForces != null)
-	{
-		foreach (var (node, f) in extraForces)
+
+		SetProgress(0.05f); // Finished preprocessing
+
+		if (swt)
 		{
-			if (node < 0 || node > n) continue;
-			forceVector[2 * node, 0] += f.X;
-			forceVector[2 * node + 1, 0] += f.Y;
-		}
-	}
-
-	SetProgress(0.08f); // External force application
-
-	UG = new double[nDoF, 1];
-	TMs = CalculateTransMatrices(UG, nodes, members);
-	F_pre = InitPretension(forceVector, members, TMs, P0);
-	UG_inc = new double[nDoF, 1];
-	F_inc = new double[nDoF, 1];
-
-	for (int i = 0; i < nDoF; i++)
-	{
-		UG_inc[i, 0] = UG[i, 0];
-		F_inc[i, 0] = F_pre[i, 0];
-	}
-
-	forceIncrement = new double[nDoF];
-	for (int i = 0; i < nDoF; i++) forceIncrement[i] = forceVector[i, 0] / nForceIncrements;
-
-	maxForce = new double[nDoF];
-	for (int i = 0; i < nDoF; i++)
-	{
-		maxForce[i] = forceVector[i, 0];
-		forceVector[i, 0] = forceIncrement[i];
-	}
-
-	SetProgress(0.10f); // Ready to start solving
-
-	// MAIN EXECUTION (likely to take a while)
-	int counter = 0, inc = 0;
-	bool notConverged = true;
-	float baseProgress = 0.10f;
-	float endProgress = 0.90f;
-
-	while (notConverged && counter < 10000)
-	{
-		double[,] Fi_total = SumColumns(F_inc);
-		double[,] UG_total = SumColumns(UG_inc);
-		double[,] F_inequilibrium = SubtractMatrices(forceVector, Fi_total);
-		double[,] Ks = BuildStructureStiffnessMatrix(UG_total);
-		double[,] UG_new = SolveDisplacements(Ks, F_inequilibrium);
-		TMs = CalculateTransMatrices(UG_total, nodes, members);
-		double[,] F_new = UpdateInternalForceSystem(UG_new);
-
-		UG_inc = AppendColumn(UG_inc, UG_new);
-		F_inc = AppendColumn(F_inc, F_new);
-
-		notConverged = TestForConvergence(counter, convThreshold, F_inequilibrium);
-		counter++;
-
-		if (!notConverged)
-		{
-			inc++;
-			UG_FINAL = AppendColumn(UG_FINAL, UG_total);
-			FI_FINAL = AppendColumn(FI_FINAL, Fi_total);
-
-			UG_inc = new double[nDoF, 1];
-			F_inc = new double[nDoF, 1];
-			for (int d = 0; d < nDoF; d++)
+			List<double[]> SW_at_supports = new List<double[]>();
+			for (int n = 0; n < members.Length; n++)
 			{
-				UG_inc[d, 0] = UG_total[d, 0];
-				F_inc[d, 0] = Fi_total[d, 0];
+				int node_i = members[n][0], node_j = members[n][1];
+				double length = lengths[n];
+				double sw = length * gamma * 9.81;
+				double F_node = sw / 2;
+				int iy = 2 * node_i - 1, jy = 2 * node_j - 1;
+
+				forceVector[iy, 0] -= F_node;
+				forceVector[jy, 0] -= F_node;
+
+				if (restrainedDoF.Contains(iy + 1)) SW_at_supports.Add(new double[] { iy, F_node });
+				if (restrainedDoF.Contains(jy + 1)) SW_at_supports.Add(new double[] { jy, F_node });
 			}
-
-			double[] lastDispCol = GetLastColumn(UG_FINAL);
-			double[] mbrForces = CalculateMemberForces(lastDispCol, members, nodes, lengths, P0, E, Areas);
-			MBRFORCES = AppendColumn(MBRFORCES, ToColumnMatrix(mbrForces));
-			EXTFORCES = AppendColumn(EXTFORCES, forceVector);
-
-			double totalApplied = forceVector.Cast<double>().Sum();
-			double totalMax = maxForce.Sum();
-
-			if (Math.Abs(totalApplied) < Math.Abs(totalMax))
+		}
+		if (extraForces != null)
+		{
+			foreach (var (node, f) in extraForces)
 			{
-				counter = 0;
+				if (node < 0 || node > n) continue;
+				forceVector[2 * node, 0] += f.X;
+				forceVector[2 * node + 1, 0] += f.Y;
+			}
+		}
+
+		SetProgress(0.08f); // External force application
+
+		UG = new double[nDoF, 1];
+		TMs = CalculateTransMatrices(UG, nodes, members);
+		F_pre = InitPretension(forceVector, members, TMs, P0);
+		UG_inc = new double[nDoF, 1];
+		F_inc = new double[nDoF, 1];
+
+		for (int i = 0; i < nDoF; i++)
+		{
+			UG_inc[i, 0] = UG[i, 0];
+			F_inc[i, 0] = F_pre[i, 0];
+		}
+
+		forceIncrement = new double[nDoF];
+		for (int i = 0; i < nDoF; i++) forceIncrement[i] = forceVector[i, 0] / nForceIncrements;
+
+		maxForce = new double[nDoF];
+		for (int i = 0; i < nDoF; i++)
+		{
+			maxForce[i] = forceVector[i, 0];
+			forceVector[i, 0] = forceIncrement[i];
+		}
+
+		SetProgress(0.10f); // Ready to start solving
+
+		// MAIN EXECUTION (likely to take a while)
+		int counter = 0, inc = 0;
+		bool notConverged = true;
+		float baseProgress = 0.10f;
+		float endProgress = 0.90f;
+
+		while (notConverged && counter < 10000)
+		{
+			double[,] Fi_total = SumColumns(F_inc);
+			double[,] UG_total = SumColumns(UG_inc);
+			double[,] F_inequilibrium = SubtractMatrices(forceVector, Fi_total);
+			double[,] Ks = BuildStructureStiffnessMatrix(UG_total);
+			double[,] UG_new = SolveDisplacements(Ks, F_inequilibrium);
+			TMs = CalculateTransMatrices(UG_total, nodes, members);
+			double[,] F_new = UpdateInternalForceSystem(UG_new);
+
+			UG_inc = AppendColumn(UG_inc, UG_new);
+			F_inc = AppendColumn(F_inc, F_new);
+
+			notConverged = TestForConvergence(counter, convThreshold, F_inequilibrium);
+			counter++;
+
+			if (!notConverged)
+			{
+				inc++;
+				UG_FINAL = AppendColumn(UG_FINAL, UG_total);
+				FI_FINAL = AppendColumn(FI_FINAL, Fi_total);
+
+				UG_inc = new double[nDoF, 1];
+				F_inc = new double[nDoF, 1];
 				for (int d = 0; d < nDoF; d++)
-					forceVector[d, 0] += forceIncrement[d];
-				notConverged = true;
+				{
+					UG_inc[d, 0] = UG_total[d, 0];
+					F_inc[d, 0] = Fi_total[d, 0];
+				}
+
+				double[] lastDispCol = GetLastColumn(UG_FINAL);
+				double[] mbrForces = CalculateMemberForces(lastDispCol, members, nodes, lengths, P0, E, Areas);
+				MBRFORCES = AppendColumn(MBRFORCES, ToColumnMatrix(mbrForces));
+				EXTFORCES = AppendColumn(EXTFORCES, forceVector);
+
+				double totalApplied = forceVector.Cast<double>().Sum();
+				double totalMax = maxForce.Sum();
+
+				if (Math.Abs(totalApplied) < Math.Abs(totalMax))
+				{
+					counter = 0;
+					for (int d = 0; d < nDoF; d++)
+						forceVector[d, 0] += forceIncrement[d];
+					notConverged = true;
+				}
 			}
+
+			SetProgress(baseProgress + (endProgress - baseProgress) * Math.Min(1.0f, (float)inc / nForceIncrements));
 		}
 
-		SetProgress(baseProgress + (endProgress - baseProgress) * Math.Min(1.0f, (float)inc / nForceIncrements));
-	}
-
-	// Post-process deformation
-	if (UG_FINAL != null)
-	{
-		int lastCol = UG_FINAL.GetLength(1) - 1;
-		Vector2[] deformedPoints = new Vector2[n + 1];
-
-		for (int i = 0; i <= n; i++)
+		// Post-process deformation
+		if (UG_FINAL != null)
 		{
-			double ux = UG_FINAL[2 * i, lastCol];
-			double uy = UG_FINAL[2 * i + 1, lastCol];
-			deformedPoints[i] = new Vector2((float)(nodes[i].X + ux), (float)(nodes[i].Y + uy));
+			int lastCol = UG_FINAL.GetLength(1) - 1;
+			Vector2[] deformedPoints = new Vector2[n + 1];
+
+			for (int i = 0; i <= n; i++)
+			{
+				double ux = UG_FINAL[2 * i, lastCol];
+				double uy = UG_FINAL[2 * i + 1, lastCol];
+				deformedPoints[i] = new Vector2((float)(nodes[i].X + ux), (float)(nodes[i].Y + uy));
+			}
+
+			var linePoints = new Vector2[deformedPoints.Length];
+			for (int i = 0; i < deformedPoints.Length; i++)
+				linePoints[i] = Coordinator.MetersToWorld(deformedPoints[i]);
+
+			CallDeferred("setDeformationPoints", linePoints);
 		}
 
-		var linePoints = new Vector2[deformedPoints.Length];
-		for (int i = 0; i < deformedPoints.Length; i++)
-			linePoints[i] = Coordinator.MetersToWorld(deformedPoints[i]);
+		SetProgress(0.95f); // Plotting finished
 
-		CallDeferred("setDeformationPoints", linePoints);
+		var statsDict = new Godot.Collections.Dictionary<string, string>
+		{
+			{ "Segments", n.ToString() },
+			{ "Force Increments", nForceIncrements.ToString() },
+			{ "Converged Increments", (UG_FINAL.GetLength(1) - 1).ToString() },
+			{ "Max Displacement", UG_FINAL.Cast<double>().Select(Math.Abs).Max().ToString("F3") + " m" },
+			{ "Total Internal Force", FI_FINAL.Cast<double>().Sum().ToString("F2") + " N" },
+			{ "Convergence Threshold", convThreshold.ToString() + " N" }
+		};
+		CallDeferred(nameof(postStatistics), statsDict);
+
+		SetProgress(1f); // Done
+		GD.Print("FEMLine generated");
 	}
-
-	SetProgress(0.95f); // Plotting finished
-
-	var statsDict = new Godot.Collections.Dictionary<string, string>
-	{
-		{ "Segments", n.ToString() },
-		{ "Force Increments", nForceIncrements.ToString() },
-		{ "Converged Increments", (UG_FINAL.GetLength(1) - 1).ToString() },
-		{ "Max Displacement", UG_FINAL.Cast<double>().Select(Math.Abs).Max().ToString("F3") + " m" },
-		{ "Total Internal Force", FI_FINAL.Cast<double>().Sum().ToString("F2") + " N" },
-		{ "Convergence Threshold", convThreshold.ToString() + " N" }
-	};
-	CallDeferred(nameof(postStatistics), statsDict);
-
-	SetProgress(1f); // Done
-	GD.Print("FEMLine generated");
-}
 
 
 	protected void setDeformationPoints(Vector2[] points) {
