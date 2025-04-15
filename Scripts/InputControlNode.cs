@@ -9,6 +9,7 @@ public partial class InputControlNode : Control
 	private bool isReady;
 	private Coordinator coordinator;
 	private CablePlotter[] plotters;
+	public string SavePath = $"C:/Users/{System.Environment.UserName}/Desktop/output.csv";
 	[Export] public NodePath CoordinatorPath;
 	[Export] public NodePath ControlPath;
 	[Export] public NodePath ExternalForcesPath;
@@ -17,6 +18,7 @@ public partial class InputControlNode : Control
 	[Export] public NodePath StatsPath;
 	[Export] public NodePath GeneratePath;
 	[Export] public NodePath RecenterPath;
+	[Export] public NodePath SavePathInput;
 
 
 	public InputControlNode() {
@@ -36,7 +38,6 @@ public partial class InputControlNode : Control
 	}
 
 	private void prepareInput() {
-
 		var forceTarget = GetNode<Control>(ExternalForcesPath);
 		PackedScene packed = GD.Load<PackedScene>("res://ExternalForce.tscn");
 		GetNode<Button>(AddForcePath).Pressed += () => 
@@ -69,6 +70,17 @@ public partial class InputControlNode : Control
 		// Segments
 		GetNode<SpinBox>($"{ControlPath}/HBoxContainerSegments/SpinBoxSegments").ValueChanged += val => coordinator.SetSegmentCount((int)val);
 		coordinator.SetSegmentCount((int)GetNode<SpinBox>($"{ControlPath}/HBoxContainerSegments/SpinBoxSegments").Value);
+
+		//output directory
+		try {
+			var pathInput = GetNode<LineEdit>(SavePathInput);
+			pathInput.Text = SavePath; // Set the initial path
+			pathInput.TextChanged += OnSavePathChanged; // Hook up the handler
+		} catch (Exception e) {
+			GD.PrintErr("SavePathInput failed: " + e.Message);
+		}
+		
+
 
 		// Dynamic copies of visibility checkboxes:
 		var checkboxContainer = GetNode<Container>($"{ControlPath}/VisibilityChecksContainer");
@@ -166,6 +178,11 @@ public partial class InputControlNode : Control
 			SizeFlagsHorizontal = SizeFlags.Expand | SizeFlags.Fill
 		};
 		container.AddChild(separator);
+	}
+	
+	private void OnSavePathChanged(string text)
+	{
+		SavePath = text;
 	}
 
 

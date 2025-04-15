@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://dy3nrmx6qe32c"]
 
-[ext_resource type="Script" path="res://Scripts/Coordinator.cs" id="1_a1noq"]
+[ext_resource type="Script" uid="uid://bqhvujlngj54c" path="res://Scripts/Coordinator.cs" id="1_a1noq"]
 [ext_resource type="PackedScene" uid="uid://cl8v8vnftiyeq" path="res://UserControls.tscn" id="2_40380"]
-[ext_resource type="Script" path="res://Scripts/WorldViewport.cs" id="3_n21wb"]
-[ext_resource type="Script" path="res://Scripts/GridlineController.cs" id="4_agtll"]
+[ext_resource type="Script" uid="uid://5cvn5rxtdeiu" path="res://Scripts/WorldViewport.cs" id="3_n21wb"]
+[ext_resource type="Script" uid="uid://bdheuroqg8ak8" path="res://Scripts/GridlineController.cs" id="4_agtll"]
 [ext_resource type="Texture2D" uid="uid://pm780dkmkv82" path="res://Assets/icon.svg" id="5_fo2ce"]
 [ext_resource type="Texture2D" uid="uid://ofdcmqbcms60" path="res://Assets/question.png" id="6_4u8a8"]
-[ext_resource type="Script" path="res://Scripts/ShowInfoButton.cs" id="6_ctccb"]
+[ext_resource type="Script" uid="uid://ctbv1xqck5gs2" path="res://Scripts/ShowInfoButton.cs" id="6_ctccb"]
 [ext_resource type="PackedScene" uid="uid://dami4wvieu7l5" path="res://InfoBox.tscn" id="6_hy6r2"]
 
 [node name="Main" type="Control"]

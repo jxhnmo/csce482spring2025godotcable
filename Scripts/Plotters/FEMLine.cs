@@ -2,6 +2,8 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
+using System.Globalization;
 
 public partial class FEMLine : Node2D, CablePlotter
 {
@@ -117,7 +119,7 @@ public partial class FEMLine : Node2D, CablePlotter
 
 	public void Generate(float nodeMass, Vector2[] meterPoints, float actualLength, List<(int nodeIndex, Vector2 force)> extraForces = null)
 	{
-
+		var stopwatch = System.Diagnostics.Stopwatch.StartNew();
 		if (catenaryLine == null || deformedLine == null) {
 			Ready += () => Generate(nodeMass, meterPoints, actualLength);
 			return;
@@ -387,7 +389,8 @@ public partial class FEMLine : Node2D, CablePlotter
 				deformedLine.AddPoint(new Vector2(xDeformed[i], yDeformed[i]));
 			}
 		}
-
+		stopwatch.Stop();
+		double elapsedMs = stopwatch.Elapsed.TotalMilliseconds;
 		var statsDict = new Dictionary<string, string>
 		{
 			{ "Segments", n.ToString() },
@@ -395,9 +398,11 @@ public partial class FEMLine : Node2D, CablePlotter
 			{ "Converged Increments", (UG_FINAL.GetLength(1) - 1).ToString() },
 			{ "Max Displacement", UG_FINAL.Cast<double>().Select(Math.Abs).Max().ToString("F3") + " m" },
 			{ "Total Internal Force", FI_FINAL.Cast<double>().Sum().ToString("F2") + " N" },
-			{ "Convergence Threshold", convThreshold.ToString() + " N" }
+			{ "Convergence Threshold", convThreshold.ToString() + " N" },
+			{ "Compute Time", $"{elapsedMs:F2} ms" }
 		};
 		InputControlNode.Instance.StatisticsCallback(this, statsDict);
+		SaveStatsToCSV(statsDict);
 	}
 
 	private Vector2[] FEM(Vector2[] points){
@@ -1152,6 +1157,49 @@ public partial class FEMLine : Node2D, CablePlotter
 		// }
 		if (deformedLine != null && deformedLine.IsInsideTree()) {
 			deformedLine.Show();
+		}
+	}
+	
+	private void SaveStatsToCSV(Dictionary<string, string> statsDict)
+	{
+		string filePath = InputControlNode.Instance.SavePath;
+
+		// If the path is a directory (or looks like one), append /output.csv
+		if (Directory.Exists(filePath) || string.IsNullOrWhiteSpace(Path.GetExtension(filePath)))
+		{
+			if (!filePath.EndsWith("/") && !filePath.EndsWith("\\"))
+				filePath += "/";
+
+			filePath += "output.csv";
+		}
+
+		string directory = Path.GetDirectoryName(filePath);
+
+		// Ensure the directory exists
+		if (!Directory.Exists(directory))
+		{
+			Directory.CreateDirectory(directory);
+		}
+
+		bool fileExists = File.Exists(filePath);
+
+		try
+		{
+			using (var writer = new StreamWriter(filePath, append: true))
+			{
+				if (!fileExists)
+				{
+					writer.WriteLine("Timestamp," + string.Join(",", statsDict.Keys));
+				}
+
+				string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+				string csvLine = timestamp + "," + string.Join(",", statsDict.Values);
+				writer.WriteLine(csvLine);
+			}
+		}
+		catch (Exception ex)
+		{
+			GD.PrintErr("Failed to save CSV: " + ex.Message);
 		}
 	}
 }

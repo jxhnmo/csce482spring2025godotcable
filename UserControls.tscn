@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cl8v8vnftiyeq"]
 
-[ext_resource type="Script" path="res://Scripts/InputControlNode.cs" id="1_y6inc"]
+[ext_resource type="Script" uid="uid://dw50sn37ixrgr" path="res://Scripts/InputControlNode.cs" id="1_y6inc"]
 
 [node name="UserControls" type="VBoxContainer"]
 anchors_preset = 9
@@ -15,6 +15,7 @@ ControlDynamicsPath = NodePath("TabContainer/Controls/MarginContainer/VBoxContai
 StatsPath = NodePath("TabContainer/Statistics/ScrollContainer/MarginContainer/VBoxContainer")
 GeneratePath = NodePath("TabContainer/Controls/MarginContainer/VBoxContainer/GeneratePlots")
 RecenterPath = NodePath("TabContainer/Controls/MarginContainer/VBoxContainer/RecenterCamera")
+SavePathInput = NodePath("TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerSave/Save Path Input")
 
 [node name="TabContainer" type="TabContainer" parent="."]
 custom_minimum_size = Vector2(218.725, 0)
@@ -217,6 +218,18 @@ layout_mode = 2
 
 [node name="Dynamics" type="VBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
 layout_mode = 2
+
+[node name="HBoxContainerSave" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
+layout_mode = 2
+
+[node name="Save Location" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerSave"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Save Location"
+
+[node name="Save Path Input" type="LineEdit" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerSave"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="GeneratePlots" type="Button" parent="TabContainer/Controls/MarginContainer/VBoxContainer"]
 layout_mode = 2

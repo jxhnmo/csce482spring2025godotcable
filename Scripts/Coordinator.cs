@@ -130,6 +130,7 @@ public partial class Coordinator : Node
 		AddPlotter(new RawPlotter("Initial Plot", new Color(.9f, .9f, 0)));
 		AddPlotter(new FEMLine(new Color(0, 0, 1)));
 		IsReady = true;
+		EmitSignal(nameof(Ready)); 
 	}
 
 	public const float PixelsPerMeter = 75.0f;
