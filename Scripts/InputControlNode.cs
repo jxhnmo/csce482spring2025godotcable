@@ -110,8 +110,8 @@ public partial class InputControlNode : Control
 		}
 
 		GetNode<Button>(GeneratePath).Pressed += () => {clearStatistics(); coordinator.GeneratePlots();};
+		GetNode<Button>(GeneratePath).EmitSignal("pressed");
 		GetNode<Button>(RecenterPath).Pressed += coordinator.ResetCamera;
-		coordinator.GeneratePlots();
 	}
 
 	private void clearStatistics()
