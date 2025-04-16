@@ -155,7 +155,9 @@ public partial class MassSpringCable : Node2D, CablePlotter
 	{
 		for (int i = 0; i < segmentCount; i++)
 		{
-			DrawLine(Coordinator.MetersToWorld(positions[i]), Coordinator.MetersToWorld(positions[i + 1]), lineColor, 2f);
+			DrawLine(Coordinator.MetersToWorld(positions[i]), Coordinator.MetersToWorld(positions[i + 1]), lineColor, 4f);
+			DrawCircle(Coordinator.MetersToWorld(positions[i]),     2f, lineColor);
+			DrawCircle(Coordinator.MetersToWorld(positions[i + 1]), 2f, lineColor);
 		}
 	}
 
