@@ -22,6 +22,7 @@ public partial class MassSpringCable : Node2D, CablePlotter
 
 	private int segmentCount;
 	private float[] restLengths;
+	private List<(int nodeIndex, Vector2 force)> externalForces;
 
 	private Stopwatch realTimeStopwatch = new();
 	private double totalProcessingTime;
@@ -68,6 +69,13 @@ public partial class MassSpringCable : Node2D, CablePlotter
 		// Gravity
 		for (int i = 0; i < positions.Length; i++)
 			forces[i] += massPerNode * gravity;
+		
+		foreach (var (nodeIndex, force) in externalForces)
+		{
+			if (nodeIndex >= 0 && nodeIndex < forces.Length)
+				forces[nodeIndex] += force;
+		}
+
 
 		// Spring forces (with cap)
 		const float maxForce = 1000f;
@@ -181,6 +189,8 @@ public partial class MassSpringCable : Node2D, CablePlotter
 			positions = (Vector2[])meterPoints.Clone();
 			velocities = new Vector2[positions.Length];
 			forces = new Vector2[positions.Length];
+
+			externalForces = extraForces ?? new List<(int, Vector2)>();
 
 			restLengths = new float[segmentCount];
 			for (int i = 0; i < segmentCount; i++)
