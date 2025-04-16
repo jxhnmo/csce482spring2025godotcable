@@ -7,7 +7,10 @@ public partial class InputControlNode : Control
 	private bool isReady;
 	private Coordinator coordinator;
 	private CablePlotter[] plotters;
-	public string SavePath = $"C:/Users/{System.Environment.UserName}/Desktop/output.csv";
+	public string SavePath = 
+		OperatingSystem.IsWindows()
+			? $"C:/Users/{System.Environment.UserName}/Desktop/output.csv"
+			: $"/Users/{System.Environment.UserName}/Desktop/output.csv";
 	[Export] public NodePath CoordinatorPath;
 	[Export] public NodePath ControlPath;
 	[Export] public NodePath ExternalForcesPath;
