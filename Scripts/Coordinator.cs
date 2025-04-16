@@ -129,6 +129,7 @@ public partial class Coordinator : Node
 	{
 		AddPlotter(new RawPlotter("Initial Plot", new Color(0.9f, 0.9f, 0)));
 		AddPlotter(new FEMLine(new Color(0, 0, 1)));
+		AddPlotter(new MassSpringCable("Mass Spring", new Color(0.7f, 0, 0.7f)));
 		// AddPlotter(new FEMLineNewer(new Color(0.7f, 0, 0.7f)));
 		IsReady = true;
 	}
