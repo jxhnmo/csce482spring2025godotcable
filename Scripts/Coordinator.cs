@@ -12,7 +12,7 @@ public partial class Coordinator : Node
 	[Export] public Node2D WorldRoot;
 	private Vector2 startPoint;
 	private Vector2 endPoint;
-	private float mass;
+	private float massPerMeter;
 	private float length;
 	private int segmentCount;
 
@@ -31,7 +31,7 @@ public partial class Coordinator : Node
 	public void SetStartPoint(Vector2 value) => startPoint = value;
 	public void SetEndPoint(Vector2 value) => endPoint = value;
 
-	public void SetMass(float value) => mass = value;
+	public void SetMass(float value) => massPerMeter = value;
 	public void SetLength(float value) => length = value;
 	public void SetSegmentCount(int value) {
 		segmentCount = value;
@@ -39,18 +39,6 @@ public partial class Coordinator : Node
 			force.SetMaxIndex(segmentCount - 1);
 		}
 	}
-
-	public float GetStartPointX() => startPoint.X;
-	public float GetStartPointY() => startPoint.Y;
-	public float GetEndPointX() => endPoint.X;
-	public float GetEndPointY() => endPoint.Y;
-
-	public Vector2 GetStartPoint() => startPoint;
-	public Vector2 GetEndPoint() => endPoint;
-
-	public float GetMass() => mass;
-	public float GetLength() => length;
-	public int GetSegmentCount() => segmentCount;
 
 	private List<ExternalForce> externalForces;
 
@@ -75,6 +63,7 @@ public partial class Coordinator : Node
 public void GeneratePlots()
 {
 	GD.Print("GeneratePlots()...");
+	var mass = massPerMeter * length;
 	Vector2[] initalPoints = InitialCurve.Make(startPoint, endPoint, mass, length, segmentCount);
 	float nodeMass = mass / segmentCount;
 	var addedForces = createExtraForcesList();
