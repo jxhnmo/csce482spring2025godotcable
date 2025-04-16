@@ -45,6 +45,10 @@ public partial class RawPlotter : Node2D, CablePlotter
 		return plotName;
 	}
 
+	public float GetProgress() {
+		return 1f;
+	}
+
 	public Color GetColor() {
 		return lineColor;
 	}

@@ -127,10 +127,11 @@ public partial class Coordinator : Node
 
 	public override void _Ready()
 	{
-		AddPlotter(new RawPlotter("Initial Plot", new Color(.9f, .9f, 0)));
+		AddPlotter(new RawPlotter("Initial Plot", new Color(0.9f, 0.9f, 0)));
 		AddPlotter(new FEMLine(new Color(0, 0, 1)));
+		// AddPlotter(new FEMLineNewer(new Color(0.7f, 0, 0.7f)));
 		IsReady = true;
-		EmitSignal(nameof(Ready)); 
+
 	}
 
 	public const float PixelsPerMeter = 75.0f;

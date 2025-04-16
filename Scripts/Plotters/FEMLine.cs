@@ -9,67 +9,82 @@ public partial class FEMLine : Node2D, CablePlotter
 {
 	private bool show;
 	private Color lineColor;
-	private Line2D catenaryLine;
 	private Line2D deformedLine;
+	private float progress = 0f;
+	private object progressLock = new object();
+	private System.Threading.Thread computeThread;
 
 	// Catenary Variables (User Input/Adjustable)
-	private int n = 12; // Number of segments for the plot
+	protected int n = 12; // Number of segments for the plot
 
 	// FEM Variables/Constants
-	private double E = 7e10; // Young's Modulus (Pa)
-	private double A = 0.000002; // Cross-sectional Area (m^2)
-	private double gamma = 100; // Mass per unit length (kg/m)
-	private bool swt = true; // Apply Self-Weight of Cable
-	private int P = 0; // (N) Point load magnitude (and direction via sign)
-	private char pointLoadAxis = 'y'; //The GLOBAL axis along which point loads are applied
-	private int nForceIncrements = 1000; // 
-	private double convThreshold = 10.0; // (N) Threshold on average percentage increase in incremental deflection
+	protected double E = 7e10; // Young's Modulus (Pa)
+	protected double A = 0.000002; // Cross-sectional Area (m^2)
+	protected double gamma = 100; // Mass per unit length (kg/m)
+	protected bool swt = true; // Apply Self-Weight of Cable
+	protected int P = 0; // (N) Point load magnitude (and direction via sign)
+	protected char pointLoadAxis = 'y'; //The GLOBAL axis along which point loads are applied
+	protected int nForceIncrements = 1000; // 
+	protected double convThreshold = 10.0; // (N) Threshold on average percentage increase in incremental deflection
 	
 
-	private int[][] members;
-	private int[] restrainedIndex;
-	private int[] restrainedDoF;
-	private int[] freeDoF;
-	private int nDoF;
-	private Vector2[] nodes;
-	private double[] Areas;
-	private double[] P0;
+	protected int[][] members;
+	protected int[] restrainedIndex;
+	protected int[] restrainedDoF;
+	protected int[] freeDoF;
+	protected int nDoF;
+	protected Vector2[] nodes;
+	protected double[] Areas;
+	protected double[] P0;
 
-	private double [,] forceVector;
-	private double[] lengths;
+	protected double [,] forceVector;
+	protected double[] lengths;
 
 
 	// Define global variables
-	public static double[,] UG_FINAL;  // Global displacements
-	public static double[,] FI_FINAL;  // Internal forces
-	public static double[,] EXTFORCES; // External axial forces
-	public static double[,] MBRFORCES; // Axial forces per member
+	public double[,] UG_FINAL;  // Global displacements
+	public double[,] FI_FINAL;  // Internal forces
+	public double[,] EXTFORCES; // External axial forces
+	public double[,] MBRFORCES; // Axial forces per member
 
 	// Global displacement vector (initially zero - undeformed state)
-	public static double[,] UG;
+	public double[,] UG;
 
 	// Transformation matrices for all members based on undeformed position
-	public static double[,,] TMs;
+	public double[,,] TMs;
 
 	// Internal force system based on pre-tension in members
-	public static double[,] F_pre;
+	public double[,] F_pre;
 
 	// Containers for incremental displacements and internal forces per iteration
-	public static double[,] UG_inc;
-	public static double[,] F_inc;
+	public double[,] UG_inc;
+	public double[,] F_inc;
 
 	// Force increment for each convergence test
-	public static double[] forceIncrement;
+	public double[] forceIncrement;
 
 	// Define a vector to store the total external force applied
-	public static double[] maxForce;
+	public double[] maxForce;
 
 	public FEMLine(Color lineColor) {
 		this.lineColor = lineColor;
+		progress = 1f;
 	}
 
-	public String GetPlotName() {
+	public virtual string GetPlotName() {
 		return "FEM Line";
+	}
+
+	public float GetProgress()
+	{
+		lock (progressLock)
+			return progress;
+	}
+
+	protected void SetProgress(float value)
+	{
+		lock (progressLock)
+			progress = value;
 	}
 	
 	public Color GetColor() {
@@ -77,7 +92,7 @@ public partial class FEMLine : Node2D, CablePlotter
 	}
 
 	// Function to divide a vector by a scalar (element-wise division)
-	private static double[] DivideVector(double[] vector, int divisor)
+	protected static double[] DivideVector(double[] vector, int divisor)
 	{
 		double[] result = new double[vector.Length];
 		for (int i = 0; i < vector.Length; i++)
@@ -89,15 +104,6 @@ public partial class FEMLine : Node2D, CablePlotter
 
 	public override void _Ready()
 	{
-		catenaryLine = new Line2D
-		{
-			Name = "Catenary",
-			Width = 4,
-			DefaultColor = lineColor,
-			Antialiased = true,
-			Visible = false // Never visible. Now handled by a separate CablePlotter.
-		};
-		AddChild(catenaryLine);
 
 		deformedLine = new Line2D
 		{
@@ -111,161 +117,145 @@ public partial class FEMLine : Node2D, CablePlotter
 
 		InputControlNode.Instance.AddDoubleField("Young's Modulus (Pa)", E, (double val) =>  E = val);
 		// InputControlNode.Instance.AddDoubleField("Cross-sectional Area (m^2)", A, (double val) => A = val);
-		InputControlNode.Instance.AddDoubleField("Convergence Threshold %", convThreshold, (double val) => convThreshold = val);
+		InputControlNode.Instance.AddDoubleField("Convergence Threshold N", convThreshold, (double val) => convThreshold = val);
 		
 	}
 	// Ready() ENDS HERE
 
-
 	public void Generate(float nodeMass, Vector2[] meterPoints, float actualLength, List<(int nodeIndex, Vector2 force)> extraForces = null)
 	{
-		var stopwatch = System.Diagnostics.Stopwatch.StartNew();
-		if (catenaryLine == null || deformedLine == null) {
-			Ready += () => Generate(nodeMass, meterPoints, actualLength);
+		if (computeThread != null && computeThread.IsAlive)
+			return;
+		
+
+		SetProgress(0f);
+
+		try {
+			if (meterPoints == null || meterPoints.Length < 2) {
+				throw new ArgumentException("At least two meter points are required to define a cable.");
+			}
+			if (actualLength <= 0) {
+				throw new ArgumentException("Cable length must be positive.");
+			}
+		}
+		catch (Exception ex)
+		{
+			GD.PushError($"{GetPlotName()} Thread Error: " + ex.Message);
+			InputControlNode.Instance.CallDeferred("ShowAlert", "Error", $"{GetPlotName()} generation failed: {ex.Message}");
+			SetProgress(1f);
+		}
+
+		if (deformedLine == null)
+		{
+			Ready += () => Generate(nodeMass, meterPoints, actualLength, extraForces);
 			return;
 		}
 
-		// Parameter Setup
-		gamma = nodeMass * meterPoints.Length / actualLength; // Mass per unit length (kg/m)
-		n = meterPoints.Length - 1;
+		computeThread = new System.Threading.Thread(() =>
+		{
+			try
+			{
+				RunFEMComputation(nodeMass, meterPoints, actualLength, extraForces);
+				SetProgress(1f);
+			}
+			catch (Exception ex)
+			{
+				GD.PushError($"{GetPlotName()} Thread Error: " + ex.Message);
+				InputControlNode.Instance.CallDeferred("ShowAlert", "Error", $"{GetPlotName()} generation failed: {ex.Message}");
+				SetProgress(1f);
+			}
+		});
+		computeThread.Start();
+	}
 
-		// Populate catenary line
-		catenaryLine.ClearPoints();
+	public virtual void RunFEMComputation(float nodeMass, Vector2[] meterPoints, float actualLength, List<(int nodeIndex, Vector2 force)> extraForces = null)
+	{
+		var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+		SetProgress(0.01f); // Start
+
+		// Parameter Setup (very fast)
+		gamma = nodeMass * meterPoints.Length / actualLength;
+		n = meterPoints.Length - 1;
 		Vector2[] points = meterPoints;
 
-		// Continue with full FEM logic here...
-		// FEM SECTION
+		SetProgress(0.02f); // Parsed basic inputs
 
-		nDoF = 2*(n+1);
-
+		nDoF = 2 * (n + 1);
 		UG_FINAL = new double[nDoF, 0];
 		FI_FINAL = new double[nDoF, 0];
 		EXTFORCES = new double[nDoF, 0];
 		MBRFORCES = new double[n, 0];
 
 		members = new int[n][];
-		for (int i = 0; i < n; i++)
-		{
-			members[i] = new int[] { i+1, i+2 }; // Initialize each pair with default values
-		}
-	
+		for (int i = 0; i < n; i++) members[i] = new int[] { i + 1, i + 2 };
 
-		restrainedIndex = new int []{ 0, 1, 2*n, 2*n+1 };
-
-		restrainedDoF = new int []{ 1, 2, 2*n+1, 2*n+2 };
-
-		freeDoF = new int[2*n-2];
-
-		for (int i = 0; i < 2*n - 2; i ++){
-			freeDoF[i] = 2 + i; 
-		}
-
-		nodes = new Vector2[n+1];
+		restrainedIndex = new int[] { 0, 1, 2 * n, 2 * n + 1 };
+		restrainedDoF = new int[] { 1, 2, 2 * n + 1, 2 * n + 2 };
+		freeDoF = new int[2 * n - 2];
+		for (int i = 0; i < 2 * n - 2; i++) freeDoF[i] = 2 + i;
 
 		nodes = points;
-		
-
-		// More/Other Variables 
 		Areas = Enumerable.Repeat(A, n).ToArray();
 		P0 = Enumerable.Repeat(1.0, n).ToArray();
 		forceVector = new double[2 * (n + 1), 1];
 
 		lengths = new double[n];
-		
 		for (int z = 0; z < n; z++)
 		{
-			int node_i = members[z][0]; // Node number for node i of this member
-			int node_j = members[z][1]; // Node number for node j of this member
-			
-			double ix = nodes[node_i - 1][0]; // x-coord for node i
-			double iy = nodes[node_i - 1][1]; // y-coord for node i
-			double jx = nodes[node_j - 1][0]; // x-coord for node j
-			double jy = nodes[node_j - 1][1]; // y-coord for node j
-
-			double dx = jx - ix; // x-component of vector along member
-			double dy = jy - iy; // y-component of vector along member
-
-			
-
-			double length = Math.Sqrt(dx * dx + dy * dy); // Magnitude of vector (length of member)
-
-			
-
-			lengths[z] = length;
+			int node_i = members[z][0], node_j = members[z][1];
+			double ix = nodes[node_i - 1][0], iy = nodes[node_i - 1][1];
+			double jx = nodes[node_j - 1][0], jy = nodes[node_j - 1][1];
+			double dx = jx - ix, dy = jy - iy;
+			lengths[z] = Math.Sqrt(dx * dx + dy * dy);
 		}
+
+		SetProgress(0.05f); // Finished preprocessing
 
 		if (swt)
 		{
-			List<double[]> SW_at_supports = new List<double[]>(); // Equivalent to np.empty((0,2))
-
+			List<double[]> SW_at_supports = new List<double[]>();
 			for (int n = 0; n < members.Length; n++)
 			{
-				int node_i = members[n][0]; // Node number for node i of this member
-				int node_j = members[n][1]; // Node number for node j of this member
+				int node_i = members[n][0], node_j = members[n][1];
 				double length = lengths[n];
+				double sw = length * gamma * 9.81;
+				double F_node = sw / 2;
+				int iy = 2 * node_i - 1, jy = 2 * node_j - 1;
 
-				double sw = length * gamma * 9.81; // (N) Self-weight of the member
-				double F_node = sw / 2; // (N) Self-weight distributed into each node  
-
-				int iy = 2 * node_i - 1; // Index of y-DoF for node i
-				int jy = 2 * node_j - 1; // Index of y-DoF for node j         
-
-				forceVector[iy, 0] -= F_node; 
+				forceVector[iy, 0] -= F_node;
 				forceVector[jy, 0] -= F_node;
 
-				// Check if SW needs to be directly added to supports (if elements connect to supports)
-				if (restrainedDoF.Contains(iy + 1))
-				{
-					SW_at_supports.Add(new double[] { iy, F_node });
-				}
-				if (restrainedDoF.Contains(jy + 1))
-				{
-					SW_at_supports.Add(new double[] { jy, F_node });
-				}
+				if (restrainedDoF.Contains(iy + 1)) SW_at_supports.Add(new double[] { iy, F_node });
+				if (restrainedDoF.Contains(jy + 1)) SW_at_supports.Add(new double[] { jy, F_node });
 			}
 		}
-
 		if (extraForces != null)
 		{
-			for (int i = 0; i < extraForces.Count; i++)
+			foreach (var (node, f) in extraForces)
 			{
-				int node = extraForces[i].nodeIndex;
-				Vector2 f = extraForces[i].force;
-
-				if (node < 0 || node > n) continue; // safety check
-
-				forceVector[2 * node, 0]     += f.X;
+				if (node < 0 || node > n) continue;
+				forceVector[2 * node, 0] += f.X;
 				forceVector[2 * node + 1, 0] += f.Y;
 			}
 		}
 
-		// Global displacement vector (initial state: zero)
-		UG = new double[nDoF, 1];
+		SetProgress(0.08f); // External force application
 
-		// Calculate initial transformation matrices based on undeformed position
-		TMs = CalculateTransMatrices(UG, nodes, members); 
-		
-		// Calculate internal force system due to pre-tension
-		F_pre = InitPretension(forceVector, members,TMs,P0); 
-		
-		// Initialize UG_inc and F_inc with first values
+		UG = new double[nDoF, 1];
+		TMs = CalculateTransMatrices(UG, nodes, members);
+		F_pre = InitPretension(forceVector, members, TMs, P0);
 		UG_inc = new double[nDoF, 1];
 		F_inc = new double[nDoF, 1];
 
 		for (int i = 0; i < nDoF; i++)
 		{
 			UG_inc[i, 0] = UG[i, 0];
-			F_inc[i, 0] = F_pre[i, 0]; 
+			F_inc[i, 0] = F_pre[i, 0];
 		}
 
-		// Force increment for convergence test
 		forceIncrement = new double[nDoF];
-		for (int i = 0; i < nDoF; i++)
-		{
-			forceIncrement[i] = forceVector[i, 0] / nForceIncrements;
-		}
+		for (int i = 0; i < nDoF; i++) forceIncrement[i] = forceVector[i, 0] / nForceIncrements;
 
-		// Set maxForce and initialize forceVector with first increment
 		maxForce = new double[nDoF];
 		for (int i = 0; i < nDoF; i++)
 		{
@@ -273,54 +263,36 @@ public partial class FEMLine : Node2D, CablePlotter
 			forceVector[i, 0] = forceIncrement[i];
 		}
 
-		// MAIN EXECUTION
+		SetProgress(0.10f); // Ready to start solving
 
-		int counter = 0; // Iteration counter
-		int inc = 0; // Load increment counter
+		// MAIN EXECUTION (likely to take a while)
+		int counter = 0, inc = 0;
 		bool notConverged = true;
+		float baseProgress = 0.10f;
+		float endProgress = 0.90f;
 
 		while (notConverged && counter < 10000)
 		{
-			// 1. Sum internal forces: Fi_total = Fa + Fb + ...
 			double[,] Fi_total = SumColumns(F_inc);
-
-			// 2. Sum displacements: UG_total = Xa + Xb + ...
 			double[,] UG_total = SumColumns(UG_inc);
-
-			// 3. Calculate imbalance force vector: F_EXT - Fi_total
 			double[,] F_inequilibrium = SubtractMatrices(forceVector, Fi_total);
+			double[,] Ks = BuildStructureStiffnessMatrix(UG_total);
+			double[,] UG_new = SolveDisplacements(Ks, F_inequilibrium);
+			TMs = CalculateTransMatrices(UG_total, nodes, members);
+			double[,] F_new = UpdateInternalForceSystem(UG_new);
 
-			// 4. Build stiffness matrix based on current position
-			double[,] Ks = BuildStructureStiffnessMatrix(UG_total); 
-
-			// 5. Solve for new displacement increment [Xn]
-			double[,] UG_new = SolveDisplacements(Ks, F_inequilibrium); 
-
-			// 6. Update transformation matrices
-			TMs = CalculateTransMatrices(UG_total, nodes, members); 
-
-			// 7. Calculate internal forces for new increment
-			double[,] F_new = UpdateInternalForceSystem(UG_new); 
-
-			// 8. Append displacements and forces
 			UG_inc = AppendColumn(UG_inc, UG_new);
 			F_inc = AppendColumn(F_inc, F_new);
 
-			// 9. Check convergence
-			notConverged = TestForConvergence(counter, convThreshold, F_inequilibrium); 
-
+			notConverged = TestForConvergence(counter, convThreshold, F_inequilibrium);
 			counter++;
 
 			if (!notConverged)
 			{
 				inc++;
-				//GD.Print($"System has converged for load increment {inc} after {counter - 1} iterations");
-
-				// Store converged displacements and forces
 				UG_FINAL = AppendColumn(UG_FINAL, UG_total);
 				FI_FINAL = AppendColumn(FI_FINAL, Fi_total);
 
-				// Zero out for next increment
 				UG_inc = new double[nDoF, 1];
 				F_inc = new double[nDoF, 1];
 				for (int d = 0; d < nDoF; d++)
@@ -329,15 +301,11 @@ public partial class FEMLine : Node2D, CablePlotter
 					F_inc[d, 0] = Fi_total[d, 0];
 				}
 
-				// Member forces based on latest displacement
 				double[] lastDispCol = GetLastColumn(UG_FINAL);
 				double[] mbrForces = CalculateMemberForces(lastDispCol, members, nodes, lengths, P0, E, Areas);
 				MBRFORCES = AppendColumn(MBRFORCES, ToColumnMatrix(mbrForces));
-
-				// Store external forces
 				EXTFORCES = AppendColumn(EXTFORCES, forceVector);
 
-				// Check if more loading remains
 				double totalApplied = forceVector.Cast<double>().Sum();
 				double totalMax = maxForce.Sum();
 
@@ -349,10 +317,11 @@ public partial class FEMLine : Node2D, CablePlotter
 					notConverged = true;
 				}
 			}
+
+			SetProgress(baseProgress + (endProgress - baseProgress) * Math.Min(1.0f, (float)inc / nForceIncrements));
 		}
 
-
-		// DEFORMED SHAPE PLOT (AFTER FEM Application)
+		// Post-process deformation
 		if (UG_FINAL != null)
 		{
 			int lastCol = UG_FINAL.GetLength(1) - 1;
@@ -360,38 +329,23 @@ public partial class FEMLine : Node2D, CablePlotter
 
 			for (int i = 0; i <= n; i++)
 			{
-				double ux = UG_FINAL[2 * i, lastCol];     // horizontal displacement
-				double uy = UG_FINAL[2 * i + 1, lastCol]; // vertical displacement
-
-				float newX = (float)(nodes[i].X + ux);  // scaled displacement
-				float newY = (float)(nodes[i].Y + uy);  // scaled displacement
-
-				deformedPoints[i] = new Vector2(newX, newY);
+				double ux = UG_FINAL[2 * i, lastCol];
+				double uy = UG_FINAL[2 * i + 1, lastCol];
+				deformedPoints[i] = new Vector2((float)(nodes[i].X + ux), (float)(nodes[i].Y + uy));
 			}
 
-			// Update the Line2D node with new points
-			float[] xDeformed = new float[deformedPoints.Length];
-			float[] yDeformed = new float[deformedPoints.Length];
-
-			// Extract and scale x and y
-			// Adjusting values for visibility on initial screen
+			var linePoints = new Vector2[deformedPoints.Length];
 			for (int i = 0; i < deformedPoints.Length; i++)
-			{
-				xDeformed[i] = Coordinator.MetersToWorldX((deformedPoints[i].X));
-				yDeformed[i] = Coordinator.MetersToWorldY((deformedPoints[i].Y));
-			}
+				linePoints[i] = Coordinator.MetersToWorld(deformedPoints[i]);
 
-			// Clear and replot using separate x/y arrays
-			deformedLine.ClearPoints();
-
-			for (int i = 0; i < points.Length; i++)
-			{
-				deformedLine.AddPoint(new Vector2(xDeformed[i], yDeformed[i]));
-			}
+			CallDeferred("setDeformationPoints", linePoints);
 		}
 		stopwatch.Stop();
 		double elapsedMs = stopwatch.Elapsed.TotalMilliseconds;
-		var statsDict = new Dictionary<string, string>
+
+		SetProgress(0.95f); // Plotting finished
+
+		var statsDict = new Godot.Collections.Dictionary<string, string>
 		{
 			{ "Segments", n.ToString() },
 			{ "Force Increments", nForceIncrements.ToString() },
@@ -401,8 +355,22 @@ public partial class FEMLine : Node2D, CablePlotter
 			{ "Convergence Threshold", convThreshold.ToString() + " N" },
 			{ "Compute Time", $"{elapsedMs:F2} ms" }
 		};
+		
+		CallDeferred(nameof(postStatistics), statsDict);
+		SetProgress(1f); // Done
+		GD.Print("FEMLine generated");
+		
+		
+	}
+
+
+	protected void setDeformationPoints(Vector2[] points) {
+		deformedLine.Points = points;
+	}
+
+	protected void postStatistics(Godot.Collections.Dictionary<string, string> statsDict) {
 		InputControlNode.Instance.StatisticsCallback(this, statsDict);
-		SaveStatsToCSV(statsDict);
+		SaveStatsToCSV(statsDict.ToDictionary(kvp => kvp.Key, kvp => kvp.Value));
 	}
 
 	private Vector2[] FEM(Vector2[] points){
@@ -440,7 +408,7 @@ public partial class FEMLine : Node2D, CablePlotter
 		return T;
 	}
 
-	private double[,,] CalculateTransMatrices(double[,] UG, Vector2[] nodes, int[][] members)
+	public double[,,] CalculateTransMatrices(double[,] UG, Vector2[] nodes, int[][] members)
 	{
 		/*
 		Calculate transformation matrices for each member based on the current deformed shape of the structure.
@@ -483,7 +451,7 @@ public partial class FEMLine : Node2D, CablePlotter
 		return TransformationMatrices;
 	}
 
-	private double[,] InitPretension(double[,] forceVector, int[][] members, double[,,] TMs, double[] P0)
+	public double[,] InitPretension(double[,] forceVector, int[][] members, double[,,] TMs, double[] P0)
 	{
 		/*
 		P = axial pre-tension specified for each bar
@@ -621,7 +589,7 @@ public partial class FEMLine : Node2D, CablePlotter
 		return (K11, K12, K21, K22);
 	}
 
-	private double[,] BuildStructureStiffnessMatrix(double[,] UG)
+	public double[,] BuildStructureStiffnessMatrix(double[,] UG)
 	{
 		/*
 		Standard construction of Primary and Structure stiffness matrix
@@ -657,7 +625,7 @@ public partial class FEMLine : Node2D, CablePlotter
 		return Ks;
 	}
 
-	private double[,] SolveDisplacements(double[,] Ks, double[,] F_inequilibrium)
+	public double[,] SolveDisplacements(double[,] Ks, double[,] F_inequilibrium)
 	{
 		/*
 		Standard solving for structural displacements
@@ -698,7 +666,7 @@ public partial class FEMLine : Node2D, CablePlotter
 		return ConvertToColumnMatrix(UG);
 	}
 
-	private double[,] UpdateInternalForceSystem(double[,] UG)
+	public double[,] UpdateInternalForceSystem(double[,] UG)
 	{
 		/*
 		Calculate the vector of internal forces associated with the incremental displacements UG
@@ -758,7 +726,7 @@ public partial class FEMLine : Node2D, CablePlotter
 		return F_int;
 	}
 
-	private bool TestForConvergence(int iteration, double threshold, double[,] F_inequilibrium)
+	public bool TestForConvergence(int iteration, double threshold, double[,] F_inequilibrium)
 	{
 		/*
 		Test if the structure has converged by comparing the maximum force in the equilibrium 
@@ -833,7 +801,7 @@ public partial class FEMLine : Node2D, CablePlotter
 
 	// HELPER FUNCTIONS
 	// Transpose a 2D matrix
-	private double[,] TransposeMatrix(double[,] matrix)
+	public double[,] TransposeMatrix(double[,] matrix)
 	{
 		int rows = matrix.GetLength(0);
 		int cols = matrix.GetLength(1);
@@ -850,7 +818,7 @@ public partial class FEMLine : Node2D, CablePlotter
 	}
 
 	// Matrix multiplication
-	private double[,] MultiplyMatrix(double[,] A, double[,] B)
+	public double[,] MultiplyMatrix(double[,] A, double[,] B)
 	{
 		int rowsA = A.GetLength(0);
 		int colsA = A.GetLength(1);
@@ -877,7 +845,7 @@ public partial class FEMLine : Node2D, CablePlotter
 		return result;
 	}
 	// Multiply matrix by a scalar
-	private double[,] MultiplyScalar(double[,] matrix, double scalar)
+	public double[,] MultiplyScalar(double[,] matrix, double scalar)
 	{
 		int rows = matrix.GetLength(0);
 		int cols = matrix.GetLength(1);
@@ -894,7 +862,7 @@ public partial class FEMLine : Node2D, CablePlotter
 	}
 
 	// Add two matrices
-	private double[,] AddMatrices(double[,] A, double[,] B)
+	public double[,] AddMatrices(double[,] A, double[,] B)
 	{
 		int rows = A.GetLength(0);
 		int cols = A.GetLength(1);
@@ -911,7 +879,7 @@ public partial class FEMLine : Node2D, CablePlotter
 	}
 
 	// Extract a submatrix
-	private double[,] SubMatrix(double[,] matrix, int rowStart, int rowEnd, int colStart, int colEnd)
+	public double[,] SubMatrix(double[,] matrix, int rowStart, int rowEnd, int colStart, int colEnd)
 	{
 		int numRows = rowEnd - rowStart;
 		int numCols = colEnd - colStart;
@@ -928,7 +896,7 @@ public partial class FEMLine : Node2D, CablePlotter
 	}
 
 	// Adds a submatrix to the main matrix at a specified location
-	private void AddSubMatrix(double[,] mainMatrix, double[,] subMatrix, int rowStart, int colStart)
+	public void AddSubMatrix(double[,] mainMatrix, double[,] subMatrix, int rowStart, int colStart)
 	{
 		int rows = subMatrix.GetLength(0);
 		int cols = subMatrix.GetLength(1);
@@ -943,7 +911,7 @@ public partial class FEMLine : Node2D, CablePlotter
 	}
 
 	// Deletes specific rows and columns from a matrix
-	private double[,] DeleteRowsAndColumns(double[,] matrix, List<int> indicesToRemove)
+	public double[,] DeleteRowsAndColumns(double[,] matrix, List<int> indicesToRemove)
 	{
 		int newSize = matrix.GetLength(0) - indicesToRemove.Count;
 		double[,] reducedMatrix = new double[newSize, newSize];
@@ -968,13 +936,13 @@ public partial class FEMLine : Node2D, CablePlotter
 	}
 
 		// Removes specified rows from a vector
-	private double[] RemoveRows(double[] vector, List<int> indicesToRemove)
+	public double[] RemoveRows(double[] vector, List<int> indicesToRemove)
 	{
 		return vector.Where((val, idx) => !indicesToRemove.Contains(idx)).ToArray();
 	}
 
 	// Converts a 1D array to a column matrix (2D array with 1 column)
-	private double[,] ConvertToColumnMatrix(double[] vector)
+	public double[,] ConvertToColumnMatrix(double[] vector)
 	{
 		double[,] matrix = new double[vector.Length, 1];
 		for (int i = 0; i < vector.Length; i++)
@@ -985,7 +953,7 @@ public partial class FEMLine : Node2D, CablePlotter
 	}
 
 	// Inverts a square matrix
-	private double[,] InvertMatrix(double[,] matrix)
+	public double[,] InvertMatrix(double[,] matrix)
 	{
 		int n = matrix.GetLength(0);
 		var identity = CreateIdentityMatrix(n);
@@ -1012,7 +980,7 @@ public partial class FEMLine : Node2D, CablePlotter
 	}
 
 	// Helper to create an identity matrix
-	private double[,] CreateIdentityMatrix(int size)
+	public double[,] CreateIdentityMatrix(int size)
 	{
 		double[,] identity = new double[size, size];
 		for (int i = 0; i < size; i++)
@@ -1021,7 +989,7 @@ public partial class FEMLine : Node2D, CablePlotter
 	}
 
 	// Helper to augment a matrix with another matrix
-	private double[,] AugmentMatrix(double[,] left, double[,] right)
+	public double[,] AugmentMatrix(double[,] left, double[,] right)
 	{
 		int n = left.GetLength(0);
 		int m = left.GetLength(1);
@@ -1038,7 +1006,7 @@ public partial class FEMLine : Node2D, CablePlotter
 	}
 
 	// Extracts the right half of an augmented matrix (after inversion)
-	private double[,] ExtractRightHalf(double[,] matrix)
+	public double[,] ExtractRightHalf(double[,] matrix)
 	{
 		int n = matrix.GetLength(0);
 		int m = matrix.GetLength(1) / 2;
@@ -1052,7 +1020,7 @@ public partial class FEMLine : Node2D, CablePlotter
 	}
 
 	// Extracts a 2D slice from a 3D matrix (TMs[n,:,:] equivalent)
-	private double[,] ExtractMatrix(double[,,] source, int index)
+	public double[,] ExtractMatrix(double[,,] source, int index)
 	{
 		int rows = source.GetLength(1);
 		int cols = source.GetLength(2);
@@ -1065,7 +1033,7 @@ public partial class FEMLine : Node2D, CablePlotter
 		return result;
 	}
 
-	private static double[,] SumColumns(double[,] matrix)
+	public static double[,] SumColumns(double[,] matrix)
 	{
 		int rows = matrix.GetLength(0);
 		int cols = matrix.GetLength(1);
@@ -1084,7 +1052,7 @@ public partial class FEMLine : Node2D, CablePlotter
 		return result;
 	}
 
-	private static double[,] SubtractMatrices(double[,] A, double[,] B)
+	public static double[,] SubtractMatrices(double[,] A, double[,] B)
 	{
 		int rows = A.GetLength(0);
 		int cols = A.GetLength(1);
@@ -1097,7 +1065,7 @@ public partial class FEMLine : Node2D, CablePlotter
 		return result;
 	}
 
-	private static double[,] AppendColumn(double[,] matrix, double[,] newCol)
+	public static double[,] AppendColumn(double[,] matrix, double[,] newCol)
 	{
 		int rows = matrix.GetLength(0);
 		int cols = matrix.GetLength(1);
@@ -1118,7 +1086,7 @@ public partial class FEMLine : Node2D, CablePlotter
 		return result;
 	}
 
-	private static double[] GetLastColumn(double[,] matrix)
+	public static double[] GetLastColumn(double[,] matrix)
 	{
 		int rows = matrix.GetLength(0);
 		int lastColIndex = matrix.GetLength(1) - 1;
@@ -1130,7 +1098,7 @@ public partial class FEMLine : Node2D, CablePlotter
 		return result;
 	}
 
-	private static double[,] ToColumnMatrix(double[] vector)
+	public static double[,] ToColumnMatrix(double[] vector)
 	{
 		int length = vector.Length;
 		double[,] result = new double[length, 1];
@@ -1142,8 +1110,8 @@ public partial class FEMLine : Node2D, CablePlotter
 
 	public void HidePlot() {
 		show = false;
-		// if (catenaryLine != null && catenaryLine.IsInsideTree()) {
-		// 	catenaryLine.Hide();
+		// if ( != null && .IsInsideTree()) {
+		// 	.Hide();
 		// }
 		if (deformedLine != null && deformedLine.IsInsideTree()) {
 			deformedLine.Hide();
@@ -1152,8 +1120,8 @@ public partial class FEMLine : Node2D, CablePlotter
 
 	public void ShowPlot() {
 		show = true;
-		// if (catenaryLine != null && catenaryLine.IsInsideTree()) {
-		// 	catenaryLine.Show();
+		// if ( != null && .IsInsideTree()) {
+		// 	.Show();
 		// }
 		if (deformedLine != null && deformedLine.IsInsideTree()) {
 			deformedLine.Show();
@@ -1162,6 +1130,7 @@ public partial class FEMLine : Node2D, CablePlotter
 	
 	private void SaveStatsToCSV(Dictionary<string, string> statsDict)
 	{
+
 		string filePath = InputControlNode.Instance.SavePath;
 
 		// If the path is a directory (or looks like one), append /output.csv

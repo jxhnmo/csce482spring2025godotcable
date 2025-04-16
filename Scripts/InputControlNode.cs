@@ -1,7 +1,5 @@
 using Godot;
 using System;
-using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
 
 public partial class InputControlNode : Control
 {
@@ -135,7 +133,7 @@ public partial class InputControlNode : Control
 			child.QueueFree();
 	}
 
-	public void StatisticsCallback(CablePlotter caller, Dictionary<string, string> stats)
+	public void StatisticsCallback(CablePlotter caller, Godot.Collections.Dictionary<string, string> stats)
 	{
 		if (!isReady) {
 			Ready += () => StatisticsCallback(caller, stats);
@@ -185,7 +183,6 @@ public partial class InputControlNode : Control
 		SavePath = text;
 	}
 
-
 	public void AddDoubleField(string labelText, double initialValue, Action<double> onChanged)
 	{
 		var container = GetNode<VBoxContainer>(ControlDynamicsPath);
@@ -210,6 +207,19 @@ public partial class InputControlNode : Control
 		box.AddChild(label);
 		box.AddChild(input);
 		container.AddChild(box);
+	}
+
+
+	public void ShowAlert(string title, string message)
+	{
+		var alert = new AcceptDialog
+		{
+			DialogText = message,
+			Title = title,
+		};
+
+		AddChild(alert);
+		alert.PopupCentered(); // Center it on the screen
 	}
 
 }
