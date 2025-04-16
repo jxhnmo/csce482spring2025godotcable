@@ -16,8 +16,8 @@ public partial class InputControlNode : Control
 	private CablePlotter[] plotters;
 	public string SavePath = 
 		OperatingSystem.IsWindows()
-			? $"C:/Users/{System.Environment.UserName}/Desktop/"
-			: $"/Users/{System.Environment.UserName}/Desktop/";
+			? $"C:/Users/{System.Environment.UserName}/Downloads/"
+			: $"/Users/{System.Environment.UserName}/Downloads/";
 	[Export] public NodePath CoordinatorPath;
 	[Export] public NodePath ControlPath;
 	[Export] public NodePath ExternalForcesPath;
