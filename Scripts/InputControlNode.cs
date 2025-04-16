@@ -1,5 +1,12 @@
 using Godot;
 using System;
+using System.IO;
+using System.Globalization;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Reflection;
+using System.Data.SqlTypes;
 
 public partial class InputControlNode : Control
 {
@@ -7,6 +14,10 @@ public partial class InputControlNode : Control
 	private bool isReady;
 	private Coordinator coordinator;
 	private CablePlotter[] plotters;
+	public string SavePath = 
+		OperatingSystem.IsWindows()
+			? $"C:/Users/{System.Environment.UserName}/Desktop/"
+			: $"/Users/{System.Environment.UserName}/Desktop/";
 	[Export] public NodePath CoordinatorPath;
 	[Export] public NodePath ControlPath;
 	[Export] public NodePath ExternalForcesPath;
@@ -15,6 +26,8 @@ public partial class InputControlNode : Control
 	[Export] public NodePath StatsPath;
 	[Export] public NodePath GeneratePath;
 	[Export] public NodePath RecenterPath;
+	[Export] public NodePath SavePathInput;
+	[Export] public NodePath SaveButtonPath;
 
 
 	public InputControlNode() {
@@ -24,6 +37,7 @@ public partial class InputControlNode : Control
 
 	public override void _Ready()
 	{
+		allStats = new();
 		isReady = true;
 		coordinator = GetNode<Coordinator>(CoordinatorPath);
 		if (coordinator.IsReady) {
@@ -33,8 +47,9 @@ public partial class InputControlNode : Control
 		}
 	}
 
-	private void prepareInput() 
-	{
+
+	private void prepareInput() {
+
 		var forceTarget = GetNode<Control>(ExternalForcesPath);
 		PackedScene packed = GD.Load<PackedScene>("res://ExternalForce.tscn");
 		GetNode<Button>(AddForcePath).Pressed += () => 
@@ -67,6 +82,19 @@ public partial class InputControlNode : Control
 		// Segments
 		GetNode<SpinBox>($"{ControlPath}/HBoxContainerSegments/SpinBoxSegments").ValueChanged += val => coordinator.SetSegmentCount((int)val);
 		coordinator.SetSegmentCount((int)GetNode<SpinBox>($"{ControlPath}/HBoxContainerSegments/SpinBoxSegments").Value);
+
+		//output directory
+		try {
+			var pathInput = GetNode<LineEdit>(SavePathInput);
+			pathInput.Text = SavePath; // Set the initial path
+			pathInput.TextChanged += OnSavePathChanged; // Hook up the handler
+		} catch (Exception e) {
+			GD.PrintErr("SavePathInput failed: " + e.Message);
+		}
+		
+		// Save button programming
+		GetNode<Button>(SaveButtonPath).Pressed += saveAllStats;
+
 
 		// Dynamic copies of visibility checkboxes:
 		var checkboxContainer = GetNode<Container>($"{ControlPath}/VisibilityChecksContainer");
@@ -110,16 +138,19 @@ public partial class InputControlNode : Control
 		}
 
 		GetNode<Button>(GeneratePath).Pressed += () => {clearStatistics(); coordinator.GeneratePlots();};
+		GetNode<Button>(GeneratePath).EmitSignal("pressed");
 		GetNode<Button>(RecenterPath).Pressed += coordinator.ResetCamera;
-		coordinator.GeneratePlots();
 	}
 
 	private void clearStatistics()
 	{
+		allStats.Clear();
 		var container = GetNode<VBoxContainer>(StatsPath);
 		foreach (Node child in container.GetChildren())
 			child.QueueFree();
 	}
+
+	private List<(string, Godot.Collections.Dictionary<string, string>)> allStats;
 
 	public void StatisticsCallback(CablePlotter caller, Godot.Collections.Dictionary<string, string> stats)
 	{
@@ -127,6 +158,8 @@ public partial class InputControlNode : Control
 			Ready += () => StatisticsCallback(caller, stats);
 			return;
 		}
+
+		allStats.Add((caller.GetPlotName(), stats));
 
 		var container = GetNode<VBoxContainer>(StatsPath);
 
@@ -165,6 +198,12 @@ public partial class InputControlNode : Control
 		};
 		container.AddChild(separator);
 	}
+
+	private void OnSavePathChanged(string text)
+	{
+		SavePath = text;
+	}
+
 
 	public void AddDoubleField(string labelText, double initialValue, Action<double> onChanged)
 	{
@@ -205,4 +244,68 @@ public partial class InputControlNode : Control
 		alert.PopupCentered(); // Center it on the screen
 	}
 
+	private void saveAllStats()
+	{
+		try
+		{
+			// Abort if there's nothing to save
+			if (allStats == null || allStats.Count == 0)
+			{
+				ShowAlert("Nothing to Save", "There are no statistics available to export.");
+				return;
+			}
+
+			// Abort if path is missing or invalid
+			if (string.IsNullOrEmpty(SavePath) || !System.IO.Directory.Exists(SavePath))
+			{
+				ShowAlert("Download Fail", $"Path not found or incorrect: '{SavePath}'. Please select an existing folder.");
+				return;
+			}
+
+			// Ensure trailing separator
+			if (!SavePath.EndsWith("/") && !SavePath.EndsWith("\\"))
+			{
+				SavePath += Path.DirectorySeparatorChar;
+			}
+
+			foreach ((string name, var statsDict) in allStats)
+			{
+				string title = Regex.Replace(name, @"\s", string.Empty);
+				string fullPath = Path.Combine(SavePath, $"{title}.csv");
+				saveStatsToCSV(statsDict, fullPath);
+			}
+
+			ShowAlert("Download Complete", $"Files saved to:\n{SavePath}");
+		}
+		catch (Exception ex)
+		{
+			ShowAlert("Download Error", $"An error occurred while saving stats:\n\n{ex.Message}");
+		}
+	}
+
+
+	private void saveStatsToCSV(Godot.Collections.Dictionary<string, string> statsDict, string filePath)
+	{
+		string directory = Path.GetDirectoryName(filePath);
+
+		// Ensure the directory exists
+		if (!Directory.Exists(directory))
+		{
+			Directory.CreateDirectory(directory);
+		}
+
+		bool fileExists = File.Exists(filePath);
+
+		using (var writer = new StreamWriter(filePath, append: true))
+		{
+			if (!fileExists)
+			{
+				writer.WriteLine("Timestamp," + string.Join(",", statsDict.Keys));
+			}
+
+			string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+			string csvLine = timestamp + "," + string.Join(",", statsDict.Values);
+			writer.WriteLine(csvLine);
+		}
+	}
 }
