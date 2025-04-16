@@ -2,8 +2,6 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.IO;
-using System.Globalization;
 
 public partial class FEMLine : Node2D, CablePlotter
 {
@@ -1136,49 +1134,6 @@ public partial class FEMLine : Node2D, CablePlotter
 		// }
 		if (deformedLine != null && deformedLine.IsInsideTree()) {
 			deformedLine.Show();
-		}
-	}
-	
-	private void SaveStatsToCSV(Dictionary<string, string> statsDict)
-	{
-		string filePath = InputControlNode.Instance.SavePath;
-
-		// If the path is a directory (or looks like one), append /output.csv
-		if (Directory.Exists(filePath) || string.IsNullOrWhiteSpace(Path.GetExtension(filePath)))
-		{
-			if (!filePath.EndsWith("/") && !filePath.EndsWith("\\"))
-				filePath += "/";
-
-			filePath += "output.csv";
-		}
-
-		string directory = Path.GetDirectoryName(filePath);
-
-		// Ensure the directory exists
-		if (!Directory.Exists(directory))
-		{
-			Directory.CreateDirectory(directory);
-		}
-
-		bool fileExists = File.Exists(filePath);
-
-		try
-		{
-			using (var writer = new StreamWriter(filePath, append: true))
-			{
-				if (!fileExists)
-				{
-					writer.WriteLine("Timestamp," + string.Join(",", statsDict.Keys));
-				}
-
-				string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
-				string csvLine = timestamp + "," + string.Join(",", statsDict.Values);
-				writer.WriteLine(csvLine);
-			}
-		}
-		catch (Exception ex)
-		{
-			GD.PrintErr("Failed to save CSV: " + ex.Message);
 		}
 	}
 }
