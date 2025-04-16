@@ -60,85 +60,86 @@ public partial class Coordinator : Node
 	}
 
 
-public void GeneratePlots()
-{
-	GD.Print("GeneratePlots()...");
-	var mass = massPerMeter * length;
-	Vector2[] initalPoints = InitialCurve.Make(startPoint, endPoint, mass, length, segmentCount);
-	float nodeMass = mass / segmentCount;
-	var addedForces = createExtraForcesList();
-
-	foreach (CablePlotter plotter in plotters)
+	public void GeneratePlots()
 	{
-		plotter.Generate(nodeMass, initalPoints, length, addedForces);
-	}
+		GD.Print("GeneratePlots()...");
 
-	if (plotters.Count < 2)
-	{
-		GD.Print("Not enough plotters to compare.");
-		return;
-	}
+		var mass = massPerMeter * length;
+		Vector2[] initalPoints = InitialCurve.Make(startPoint, endPoint, mass, length, segmentCount);
+		float nodeMass = mass / segmentCount;
+		var addedForces = createExtraForcesList();
 
-	ThreadPool.QueueUserWorkItem(_ =>
-	{
-		try
+		// Filter out hidden plotters up front
+		var visiblePlotters = plotters.Where(p => !p.GetHidden()).ToList();
+
+		foreach (CablePlotter plotter in visiblePlotters)
 		{
-			// Wait for all plotters to finish
-			bool allDone;
-			do
-			{
-				allDone = plotters.All(p => p.GetProgress() >= 1f);
-				if (!allDone)
-					Thread.Sleep(100);
-			} while (!allDone);
+			plotter.Generate(nodeMass, initalPoints, length, addedForces);
+		}
 
-			var statsDict = new Godot.Collections.Dictionary<string, string>();
+		if (visiblePlotters.Count < 2)
+		{
+			GD.Print("Not enough visible plotters to compare.");
+			return;
+		}
 
-			for (int i = 0; i < plotters.Count; i++)
+		ThreadPool.QueueUserWorkItem(_ =>
+		{
+			try
 			{
-				for (int j = i + 1; j < plotters.Count; j++)
+				// Wait for all visible plotters to finish
+				bool allDone;
+				do
 				{
-					string nameA = plotters[i].GetPlotName();
-					string nameB = plotters[j].GetPlotName();
+					allDone = visiblePlotters.All(p => p.GetProgress() >= 1f);
+					if (!allDone)
+						Thread.Sleep(100);
+				} while (!allDone);
 
-					Vector2[] resultA = plotters[i].GetFinalPoints();
-					Vector2[] resultB = plotters[j].GetFinalPoints();
+				var statsDict = new Godot.Collections.Dictionary<string, string>();
 
-					if (resultA.Length != resultB.Length)
+				for (int i = 0; i < visiblePlotters.Count; i++)
+				{
+					for (int j = i + 1; j < visiblePlotters.Count; j++)
 					{
-						GD.PrintErr($"Mismatch in point count between '{nameA}' and '{nameB}'");
-						continue;
+						string nameA = visiblePlotters[i].GetPlotName();
+						string nameB = visiblePlotters[j].GetPlotName();
+
+						Vector2[] resultA = visiblePlotters[i].GetFinalPoints();
+						Vector2[] resultB = visiblePlotters[j].GetFinalPoints();
+
+						if (resultA.Length != resultB.Length)
+						{
+							GD.PrintErr($"Mismatch in point count between '{nameA}' and '{nameB}'");
+							continue;
+						}
+
+						double mse = 0.0;
+						for (int k = 0; k < resultA.Length; k++)
+						{
+							float dx = resultA[k].X - resultB[k].X;
+							float dy = resultA[k].Y - resultB[k].Y;
+							mse += dx * dx + dy * dy;
+						}
+						mse /= resultA.Length;
+
+						string key = $"MSE: {nameA} vs {nameB} (m²)";
+						string value = $"{mse:F6}";
+
+						statsDict[key] = value;
+						GD.Print($"{key} = {value}");
 					}
-
-					double mse = 0.0;
-					for (int k = 0; k < resultA.Length; k++)
-					{
-						float dx = resultA[k].X - resultB[k].X;
-						float dy = resultA[k].Y - resultB[k].Y;
-						mse += dx * dx + dy * dy;
-					}
-					mse /= resultA.Length;
-
-					string key = $"MSE: {nameA} vs {nameB} (m^2)";
-					string value = $"{mse:F6}";
-
-					statsDict[key] = value;
-					GD.Print($"{key} = {value}");
 				}
+
+				CallDeferred(nameof(postStatistics), statsDict);
 			}
+			catch (Exception ex)
+			{
+				GD.PrintErr($"Comparison error: {ex.Message}");
+			}
+		});
+	}
 
-			CallDeferred(nameof(postStatistics), statsDict);
-
-			// You can send this statsDict elsewhere if needed:
-			// InputControlNode.Instance.StatisticsCallback(this, statsDict);
-
-		}
-		catch (Exception ex)
-		{
-			GD.PrintErr($"Comparison error: {ex.Message}");
-		}
-	});
-}
 
 	protected void postStatistics(Godot.Collections.Dictionary<string, string> statsDict) {
 		var dummy = new RawPlotter("Plot Comparisons", new Color(0,0,0));
@@ -191,9 +192,15 @@ public void GeneratePlots()
 
 	public override void _Ready()
 	{
-		AddPlotter(new RawPlotter("Initial Plot", new Color(0.9f, 0.9f, 0)));
-		AddPlotter(new FEMLine(new Color(0, 0, 1)));
-		AddPlotter(new MassSpringCable("Mass Spring", new Color(0.7f, 0, 0.7f)));
+		var initial = new RawPlotter("Initial Plot", new Color(0.9f, 0.9f, 0));
+		initial.ShowPlot();
+		AddPlotter(initial);
+		var fem = new FEMLine(new Color(0, 0, 1));
+		fem.ShowPlot();
+		AddPlotter(fem);
+		var massSpring = new MassSpringCable("Mass Spring", new Color(0.7f, 0, 0.7f));
+		massSpring.HidePlot();
+		AddPlotter(massSpring);
 		// AddPlotter(new FEMLineNewer(new Color(0.7f, 0, 0.7f)));
 		IsReady = true;
 	}
