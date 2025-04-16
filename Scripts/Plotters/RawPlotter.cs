@@ -53,6 +53,10 @@ public partial class RawPlotter : Node2D, CablePlotter
 		return 1f;
 	}
 
+	public bool GetHidden() {
+		return !show;
+	}
+
 	public Color GetColor() {
 		return lineColor;
 	}

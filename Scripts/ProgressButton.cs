@@ -61,6 +61,9 @@ public partial class ProgressButton : Button
 
 		foreach (var plotter in plotters)
 		{
+			if (plotter.GetHidden())
+				continue; // Skip hidden plotters
+
 			var bar = new ProgressBar
 			{
 				MinValue = 0,
@@ -81,6 +84,13 @@ public partial class ProgressButton : Button
 			barContainer.AddChild(container);
 
 			bars[plotter] = bar;
+		}
+
+		if (bars.Count == 0)
+		{
+			GD.Print("No visible plotters to track.");
+			FinishReset();
+			return;
 		}
 
 		pollTimer.Start();

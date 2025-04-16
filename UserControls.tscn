@@ -113,11 +113,10 @@ text = "Mass"
 [node name="Mass" type="SpinBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerMass"]
 layout_mode = 2
 size_flags_horizontal = 3
-min_value = -1000.0
-max_value = 1000.0
-step = 0.1
-value = 100.0
-suffix = "kg"
+min_value = -100.0
+step = 0.01
+value = 14.0
+suffix = "kg/m"
 
 [node name="HBoxContainerLength" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
 layout_mode = 2

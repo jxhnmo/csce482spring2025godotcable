@@ -1115,6 +1115,9 @@ public partial class FEMLine : Node2D, CablePlotter
 		return result;
 	}
 
+	public bool GetHidden() {
+		return !show;
+	}
 
 	public void HidePlot() {
 		show = false;

@@ -98,9 +98,11 @@ public partial class InputControlNode : Control
 
 		// Dynamic copies of visibility checkboxes:
 		var checkboxContainer = GetNode<Container>($"{ControlPath}/VisibilityChecksContainer");
-		foreach (Node child in checkboxContainer.GetChildren()) {
+		foreach (Node child in checkboxContainer.GetChildren())
+		{
 			child.QueueFree(); // Remove sample containers from tree.
 		}
+
 		plotters = coordinator.GetPlotters();
 		for (int i = 0; i < plotters.Length; i++)
 		{
@@ -109,7 +111,7 @@ public partial class InputControlNode : Control
 
 			var hbox = new HBoxContainer();
 
-			var centerCont = new CenterContainer 
+			var centerCont = new CenterContainer
 			{
 				SizeFlagsVertical = Control.SizeFlags.Expand | Control.SizeFlags.Fill
 			};
@@ -125,7 +127,7 @@ public partial class InputControlNode : Control
 			var checkbox = new CheckBox
 			{
 				Text = plotter.GetPlotName(),
-				ButtonPressed = true
+				ButtonPressed = !plotter.GetHidden() // 👈 Set default based on current visibility
 			};
 
 			checkbox.Toggled += pressed => coordinator.SetVisible(index, pressed);
@@ -136,6 +138,7 @@ public partial class InputControlNode : Control
 			hbox.AddChild(checkbox);
 			checkboxContainer.AddChild(hbox);
 		}
+
 
 		GetNode<Button>(GeneratePath).Pressed += () => {clearStatistics(); coordinator.GeneratePlots();};
 		GetNode<Button>(GeneratePath).EmitSignal("pressed");

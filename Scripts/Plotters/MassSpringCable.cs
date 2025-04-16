@@ -47,6 +47,10 @@ public partial class MassSpringCable : Node2D, CablePlotter
 		InputControlNode.Instance.AddDoubleField("Mass Spring Convergence Threshold (m/s)", 0.01, (double val) => convergenceThreshold = (float)val);
 	}
 
+	public bool GetHidden() {
+		return !Visible;
+	}
+
 	public override void _Process(double delta)
 	{
 		if (!isProcessing || converged) return;
