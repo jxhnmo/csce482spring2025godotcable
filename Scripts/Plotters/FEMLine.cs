@@ -1132,7 +1132,6 @@ public partial class FEMLine : Node2D, CablePlotter
 	
 	private void SaveStatsToCSV(Dictionary<string, string> statsDict)
 	{
-
 		string filePath = InputControlNode.Instance.SavePath;
 
 		// If the path is a directory (or looks like one), append /output.csv
