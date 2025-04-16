@@ -35,7 +35,9 @@ public partial class InputControlNode : Control
 		}
 	}
 
+
 	private void prepareInput() {
+
 		var forceTarget = GetNode<Control>(ExternalForcesPath);
 		PackedScene packed = GD.Load<PackedScene>("res://ExternalForce.tscn");
 		GetNode<Button>(AddForcePath).Pressed += () => 
@@ -177,11 +179,12 @@ public partial class InputControlNode : Control
 		};
 		container.AddChild(separator);
 	}
-	
+
 	private void OnSavePathChanged(string text)
 	{
 		SavePath = text;
 	}
+
 
 	public void AddDoubleField(string labelText, double initialValue, Action<double> onChanged)
 	{

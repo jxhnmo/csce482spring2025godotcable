@@ -170,7 +170,9 @@ public partial class FEMLine : Node2D, CablePlotter
 
 	public virtual void RunFEMComputation(float nodeMass, Vector2[] meterPoints, float actualLength, List<(int nodeIndex, Vector2 force)> extraForces = null)
 	{
+
 		var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+
 		SetProgress(0.01f); // Start
 
 		// Parameter Setup (very fast)
@@ -355,12 +357,12 @@ public partial class FEMLine : Node2D, CablePlotter
 			{ "Convergence Threshold", convThreshold.ToString() + " N" },
 			{ "Compute Time", $"{elapsedMs:F2} ms" }
 		};
-		
+
 		CallDeferred(nameof(postStatistics), statsDict);
+
 		SetProgress(1f); // Done
 		GD.Print("FEMLine generated");
-		
-		
+
 	}
 
 
