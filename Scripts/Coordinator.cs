@@ -131,6 +131,7 @@ public partial class Coordinator : Node
 		AddPlotter(new FEMLine(new Color(0, 0, 1)));
 		// AddPlotter(new FEMLineNewer(new Color(0.7f, 0, 0.7f)));
 		IsReady = true;
+
 	}
 
 	public const float PixelsPerMeter = 75.0f;
