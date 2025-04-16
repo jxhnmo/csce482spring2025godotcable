@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 public partial class Coordinator : Node
 {
@@ -70,17 +71,91 @@ public partial class Coordinator : Node
 			.ToList();
 	}
 
-	public void GeneratePlots()
+
+public void GeneratePlots()
+{
+	GD.Print("GeneratePlots()...");
+	Vector2[] initalPoints = InitialCurve.Make(startPoint, endPoint, mass, length, segmentCount);
+	float nodeMass = mass / segmentCount;
+	var addedForces = createExtraForcesList();
+
+	foreach (CablePlotter plotter in plotters)
 	{
-		GD.Print("GeneratePlots()...");
-		Vector2[] initalPoints = InitialCurve.Make(startPoint, endPoint, mass, length, segmentCount);
-		float nodeMass = mass / segmentCount;
-		var addedForces = createExtraForcesList();
-		foreach (CablePlotter plotter in plotters)
-		{
-			plotter.Generate(nodeMass, initalPoints, length, addedForces);
-		}
+		plotter.Generate(nodeMass, initalPoints, length, addedForces);
 	}
+
+	if (plotters.Count < 2)
+	{
+		GD.Print("Not enough plotters to compare.");
+		return;
+	}
+
+	ThreadPool.QueueUserWorkItem(_ =>
+	{
+		try
+		{
+			// Wait for all plotters to finish
+			bool allDone;
+			do
+			{
+				allDone = plotters.All(p => p.GetProgress() >= 1f);
+				if (!allDone)
+					Thread.Sleep(100);
+			} while (!allDone);
+
+			var statsDict = new Godot.Collections.Dictionary<string, string>();
+
+			for (int i = 0; i < plotters.Count; i++)
+			{
+				for (int j = i + 1; j < plotters.Count; j++)
+				{
+					string nameA = plotters[i].GetPlotName();
+					string nameB = plotters[j].GetPlotName();
+
+					Vector2[] resultA = plotters[i].GetFinalPoints();
+					Vector2[] resultB = plotters[j].GetFinalPoints();
+
+					if (resultA.Length != resultB.Length)
+					{
+						GD.PrintErr($"Mismatch in point count between '{nameA}' and '{nameB}'");
+						continue;
+					}
+
+					double mse = 0.0;
+					for (int k = 0; k < resultA.Length; k++)
+					{
+						float dx = resultA[k].X - resultB[k].X;
+						float dy = resultA[k].Y - resultB[k].Y;
+						mse += dx * dx + dy * dy;
+					}
+					mse /= resultA.Length;
+
+					string key = $"MSE: {nameA} vs {nameB} (m^2)";
+					string value = $"{mse:F6}";
+
+					statsDict[key] = value;
+					GD.Print($"{key} = {value}");
+				}
+			}
+
+			CallDeferred(nameof(postStatistics), statsDict);
+
+			// You can send this statsDict elsewhere if needed:
+			// InputControlNode.Instance.StatisticsCallback(this, statsDict);
+
+		}
+		catch (Exception ex)
+		{
+			GD.PrintErr($"Comparison error: {ex.Message}");
+		}
+	});
+}
+
+	protected void postStatistics(Godot.Collections.Dictionary<string, string> statsDict) {
+		var dummy = new RawPlotter("Plot Comparisons", new Color(0,0,0));
+		InputControlNode.Instance.StatisticsCallback(dummy, statsDict);
+	}
+
 
 	public void AddPlotter(CablePlotter plotter)
 	{
@@ -132,7 +207,6 @@ public partial class Coordinator : Node
 		AddPlotter(new MassSpringCable("Mass Spring", new Color(0.7f, 0, 0.7f)));
 		// AddPlotter(new FEMLineNewer(new Color(0.7f, 0, 0.7f)));
 		IsReady = true;
-
 	}
 
 	public const float PixelsPerMeter = 75.0f;

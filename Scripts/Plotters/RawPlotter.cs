@@ -15,6 +15,10 @@ public partial class RawPlotter : Node2D, CablePlotter
 		this.lineColor = lineColor;
 	}
 
+	public Vector2[] GetFinalPoints() {
+		return (Vector2[])meterPoints.Clone();
+	}
+
 	public override void _Ready()
 	{
 		line = new Line2D {
@@ -61,6 +65,7 @@ public partial class RawPlotter : Node2D, CablePlotter
 			return;
 		}
 		
+		this.meterPoints = meterPoints;
 		Vector2[] worldPoints = new Vector2[meterPoints.Length];
 
 		for (int i = 0; i < meterPoints.Length; i++) {

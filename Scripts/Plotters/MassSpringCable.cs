@@ -32,7 +32,7 @@ public partial class MassSpringCable : Node2D, CablePlotter
 
 	private float maxVelocityEverSeen = 0f;
 	private float lastFrameVelocity = 0f;
-
+	
 	public MassSpringCable(string plotName, Color lineColor)
 	{
 		this.plotName = plotName;
@@ -213,6 +213,14 @@ public partial class MassSpringCable : Node2D, CablePlotter
 		if (converged) return 1f;
 		if (!isProcessing) return 0f;
 		return PredictProgress(lastFrameVelocity, maxVelocityEverSeen);
+	}
+
+	public Vector2[] GetFinalPoints()
+	{
+		if (!converged)
+			throw new InvalidOperationException($"{GetPlotName()} has not finished computing. Final points are not available yet.");
+
+		return (Vector2[])positions.Clone();
 	}
 
 	public void HidePlot() => Hide();

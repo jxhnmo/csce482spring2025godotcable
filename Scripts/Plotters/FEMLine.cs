@@ -13,6 +13,7 @@ public partial class FEMLine : Node2D, CablePlotter
 	private float progress = 0f;
 	private object progressLock = new object();
 	private System.Threading.Thread computeThread;
+	private Vector2[] finalPoints;
 
 	// Catenary Variables (User Input/Adjustable)
 	protected int n = 12; // Number of segments for the plot
@@ -335,7 +336,7 @@ public partial class FEMLine : Node2D, CablePlotter
 				double uy = UG_FINAL[2 * i + 1, lastCol];
 				deformedPoints[i] = new Vector2((float)(nodes[i].X + ux), (float)(nodes[i].Y + uy));
 			}
-
+			finalPoints = deformedPoints;
 			var linePoints = new Vector2[deformedPoints.Length];
 			for (int i = 0; i < deformedPoints.Length; i++)
 				linePoints[i] = Coordinator.MetersToWorld(deformedPoints[i]);
@@ -362,7 +363,6 @@ public partial class FEMLine : Node2D, CablePlotter
 
 		SetProgress(1f); // Done
 		GD.Print("FEMLine generated");
-
 	}
 
 
@@ -372,7 +372,6 @@ public partial class FEMLine : Node2D, CablePlotter
 
 	protected void postStatistics(Godot.Collections.Dictionary<string, string> statsDict) {
 		InputControlNode.Instance.StatisticsCallback(this, statsDict);
-		SaveStatsToCSV(statsDict.ToDictionary(kvp => kvp.Key, kvp => kvp.Value));
 	}
 
 	private Vector2[] FEM(Vector2[] points){
@@ -751,6 +750,13 @@ public partial class FEMLine : Node2D, CablePlotter
 		}
 
 		return notConverged;
+	}
+
+	public Vector2[] GetFinalPoints()
+	{
+		if (GetProgress() < 0f)
+			throw new InvalidOperationException("Cannot retrieve final points before simulation has started or progress is set.");
+		return finalPoints;
 	}
 
 	public static double[] CalculateMemberForces(double[] UG,

@@ -12,5 +12,5 @@ public interface CablePlotter
 	public string GetPlotName();
 	public Color GetColor();
 	public float GetProgress();
-	// public Vector2[] GetFinalPoints();
+	public Vector2[] GetFinalPoints();
 }
