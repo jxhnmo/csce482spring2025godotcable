@@ -79,7 +79,7 @@ public partial class Cable : Node2D
 	public override void _Ready()
 	{
 		CablePointsLine2D = new List<Vector2>();
-		CableSegmentPackedScene = GD.Load<PackedScene>("res://Mass Spring/cable_segment.tscn");
+		CableSegmentPackedScene = GD.Load<PackedScene>("res://Real Time Cable/cable_segment.tscn");
 		Line2DNode = GetNode<Line2D>("Line2D");
 		CableStart = GetNode<CableSegment>("CableStart");
 		CableStart.GlobalPosition = new Vector2(startXPosition, startYPosition);

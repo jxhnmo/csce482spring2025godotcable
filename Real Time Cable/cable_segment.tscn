@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cwmnnuvg5hv1f"]
 
-[ext_resource type="Script" path="res://Mass Spring/Scripts/CableSegment.cs" id="1_cly4x"]
+[ext_resource type="Script" path="res://Real Time Cable/Scripts/CableSegment.cs" id="1_cly4x"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3q2jh"]
 radius = 1.0
