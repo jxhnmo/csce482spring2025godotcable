@@ -27,7 +27,7 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="MainPanel" type="PanelContainer" parent="GreyBackground/CenterContainer"]
-custom_minimum_size = Vector2(300, 300)
+custom_minimum_size = Vector2(525.445, 300)
 layout_mode = 2
 
 [node name="MainColor" type="ColorRect" parent="GreyBackground/CenterContainer/MainPanel"]
@@ -71,9 +71,9 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "This application allows users to simulate cable behavior using static physics models.
 
-You can define the cable's start point and end point (in meters), mass (kg), total length (m), and the number of segments to discretize the cable. These parameters influence the internal force calculations and deformation profile.
+You can define the cable's start point and end point (in meters), mass (kg/m), total length (m), and the number of segments to discretize the cable. These parameters influence the internal force calculations and deformation profile.
 
-The simulation visualizes multiple paths. Only enabled plots will be displayed.
+The simulation visualizes multiple paths. Only enabled plots will be generated.
 
-Use this tool to visualize how physical parameters affect cable sag and final shape in this simplified environment."
+Use this tool to visualize how physical parameters affect cable sag and final shape in this simplified environment. The statistics tab provides more output including some time analysis."
 fit_content = true

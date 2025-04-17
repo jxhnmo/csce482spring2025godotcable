@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cl8v8vnftiyeq"]
+[gd_scene load_steps=4 format=3 uid="uid://cl8v8vnftiyeq"]
 
 [ext_resource type="Script" path="res://Scripts/InputControlNode.cs" id="1_y6inc"]
+[ext_resource type="Script" path="res://Scripts/ProgressButton.cs" id="2_7p1td"]
+[ext_resource type="Texture2D" uid="uid://u6j8iextndgd" path="res://Assets/save.png" id="2_huxef"]
 
 [node name="UserControls" type="VBoxContainer"]
 anchors_preset = 9
@@ -12,9 +14,11 @@ ControlPath = NodePath("TabContainer/Controls/MarginContainer/VBoxContainer/Scro
 ExternalForcesPath = NodePath("TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/ExternalForces")
 AddForcePath = NodePath("TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/AddForceButton")
 ControlDynamicsPath = NodePath("TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/Dynamics")
-StatsPath = NodePath("TabContainer/Statistics/ScrollContainer/MarginContainer/VBoxContainer")
+StatsPath = NodePath("TabContainer/Statistics/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer")
 GeneratePath = NodePath("TabContainer/Controls/MarginContainer/VBoxContainer/GeneratePlots")
 RecenterPath = NodePath("TabContainer/Controls/MarginContainer/VBoxContainer/RecenterCamera")
+SavePathInput = NodePath("TabContainer/Statistics/VBoxContainer/VBoxContainer/HBoxContainer/Save Path Input")
+SaveButtonPath = NodePath("TabContainer/Statistics/VBoxContainer/VBoxContainer/HBoxContainer/SaveButton")
 
 [node name="TabContainer" type="TabContainer" parent="."]
 custom_minimum_size = Vector2(218.725, 0)
@@ -109,11 +113,10 @@ text = "Mass"
 [node name="Mass" type="SpinBox" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer/HBoxContainerMass"]
 layout_mode = 2
 size_flags_horizontal = 3
-min_value = -1000.0
-max_value = 1000.0
-step = 0.1
-value = 100.0
-suffix = "kg"
+min_value = -100.0
+step = 0.01
+value = 14.0
+suffix = "kg/m"
 
 [node name="HBoxContainerLength" type="HBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ControlContainer"]
 layout_mode = 2
@@ -222,6 +225,15 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Generate Plots"
+script = ExtResource("2_7p1td")
+LoadingPanelPath = NodePath("../ProgressBars")
+ProgressBarContainerPath = NodePath("../ProgressBars/VBoxContainer")
+
+[node name="ProgressBars" type="PanelContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Controls/MarginContainer/VBoxContainer/ProgressBars"]
+layout_mode = 2
 
 [node name="RecenterCamera" type="Button" parent="TabContainer/Controls/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -237,11 +249,36 @@ metadata/_tab_index = 1
 layout_mode = 2
 color = Color(0.243834, 0.258919, 0.263992, 1)
 
-[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Statistics"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Statistics"]
 layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Statistics/VBoxContainer"]
+layout_mode = 2
+
+[node name="Save Location" type="Label" parent="TabContainer/Statistics/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Save Location"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Statistics/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SaveButton" type="Button" parent="TabContainer/Statistics/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(31, 0)
+layout_mode = 2
+icon = ExtResource("2_huxef")
+expand_icon = true
+
+[node name="Save Path Input" type="LineEdit" parent="TabContainer/Statistics/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Statistics/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Statistics/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Statistics/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -250,5 +287,5 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Statistics/ScrollContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Statistics/VBoxContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2

@@ -8,7 +8,7 @@ offset_right = 6.0
 offset_bottom = 23.0
 script = ExtResource("1_hbw5a")
 NodeBoxPath = NodePath("NodeBox")
-XBoxPath = NodePath("NodeBox")
+XBoxPath = NodePath("XBox")
 YBoxPath = NodePath("YBox")
 RemovePath = NodePath("RemoveButton")
 
