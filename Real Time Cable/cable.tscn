@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cj0qkq23kioy2"]
+
+[ext_resource type="Script" path="res://Real Time Cable/Scripts/Cable.cs" id="1_43h1j"]
+[ext_resource type="PackedScene" uid="uid://cwmnnuvg5hv1f" path="res://Real Time Cable/cable_segment.tscn" id="1_es15g"]
+[ext_resource type="Texture2D" uid="uid://pm780dkmkv82" path="res://Assets/icon.svg" id="3_11g35"]
+
+[node name="Cable" type="Node2D"]
+script = ExtResource("1_43h1j")
+
+[node name="Line2D" type="Line2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+width = 5.0
+
+[node name="CableStart" parent="." instance=ExtResource("1_es15g")]
+freeze = true
+
+[node name="Sprite2D" type="Sprite2D" parent="CableStart"]
+modulate = Color(0, 0, 0, 1)
+rotation = 0.785398
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_11g35")
+
+[node name="CableEnd" parent="." instance=ExtResource("1_es15g")]
+
+[node name="Sprite2D" type="Sprite2D" parent="CableEnd"]
+modulate = Color(0, 0, 0, 1)
+rotation = 0.785398
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_11g35")

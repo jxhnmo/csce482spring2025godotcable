@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwmnnuvg5hv1f"]
+
+[ext_resource type="Script" path="res://Real Time Cable/Scripts/CableSegment.cs" id="1_cly4x"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3q2jh"]
+radius = 1.0
+height = 16.0
+
+[node name="CableSegment" type="RigidBody2D"]
+mass = 25.0
+linear_damp = 0.15
+script = ExtResource("1_cly4x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("CapsuleShape2D_3q2jh")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2(0, 4)
