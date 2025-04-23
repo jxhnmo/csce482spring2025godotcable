@@ -67,6 +67,7 @@ To use the project, follow these steps:
 - [Capstone Summary Video](https://youtu.be/0oB9SjARxZM)
 - [LICENSE](LICENSE)
 - [Source Code Documentation](Documentation/SourceCodeDocumentation.md)
+- [Individual Contributions Slides](Documentation/IndividualContributions.pdf)
 
 ## Credits and Acknowledgments
 - [Non-linear Finite Element Analysis of 2D Catenary & Cable Structures](https://www.engineeringskills.com/course/non-linear-finite-element-analysis-of-2d-catenary-and-cable-structures) for FEM deformation solving.
