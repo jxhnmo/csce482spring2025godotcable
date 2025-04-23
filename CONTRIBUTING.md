@@ -27,9 +27,9 @@ Thank you for your interest in contributing to our project! This simulation mode
 Main point of Contact:
 David Mascarenas (LANL)
 Core team:
+* Thomas Holt tmholt02@tamu.edu 682-319-4595
 * John Mo johnmo@tamu.edu
 * Jordan Daryanani Jordandary@tamu.edu
 * Jonathan Zhao jonz64@tamu.edu
-* Thomas Holt tmholt02@tamu.edu
 * Mustafa Tekin mt37863@tamu.edu
    
