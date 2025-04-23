@@ -1,13 +1,13 @@
 @startuml
 interface CablePlotter {
-  +Generate(nodeMass: float, initialPoints: Vector2[])
+  +Generate(nodeMass: float, initialPoints: Vector2[], actualLength: float, extraForces: List<(int nodeIndex, Vector2 force)> = null)
   +HidePlot()
   +ShowPlot()
+  +GetHidden(): bool
   +GetPlotName(): String
   +GetColor(): Color
   +GetProgress(): float
   +GetFinalPoints(): Vector2[]
-  +GetStatistics(): Dictionary<String, String>
 }
 
 class RawPlotter {
@@ -26,6 +26,9 @@ class Coordinator {
   +GetPlotters(): CablePlotter[]
   +GeneratePlots()
   +SetVisible(index: int, visible: bool)
+  +postStatistics(statsDict: Dictionary<String, String>)
+  +ResetCamera()
+  +Instance: Coordinator
 }
 
 Coordinator --> "calls" InitialCurve
@@ -40,6 +43,8 @@ class InputControlNode {
   +CoordinatorPath: NodePath
   -coordinator: Coordinator
   -PrepareInput(): void
+  +StatisticsCallback(caller: CablePlotter, stats: Dictionary<String, String>)
+  +Instance: InputControlNode
 }
 
 InputControlNode --> Coordinator

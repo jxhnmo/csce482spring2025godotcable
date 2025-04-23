@@ -66,6 +66,7 @@ To use the project, follow these steps:
 - [Godot 4 Documentation](https://docs.godotengine.org/en/stable/)
 - [Capstone Summary Video](https://youtu.be/0oB9SjARxZM)
 - [LICENSE](LICENSE)
+- [Source Code Documentation](Documentation/SourceCodeDocumentation.md)
 
 ## Credits and Acknowledgments
 - [Non-linear Finite Element Analysis of 2D Catenary & Cable Structures](https://www.engineeringskills.com/course/non-linear-finite-element-analysis-of-2d-catenary-and-cable-structures) for FEM deformation solving.
