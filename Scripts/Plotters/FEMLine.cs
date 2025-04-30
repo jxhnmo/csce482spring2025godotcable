@@ -24,7 +24,7 @@ public partial class FEMLine : Node2D, CablePlotter
 	protected int P = 0; // (N) Point load magnitude (and direction via sign)
 	protected char pointLoadAxis = 'y'; //The GLOBAL axis along which point loads are applied
 	protected int nForceIncrements = 1000; // 
-	protected double convThreshold = 50.0; // (N) Threshold on average percentage increase in incremental deflection
+	protected double convThreshold = 30.0; // (N) Threshold on average percentage increase in incremental deflection
 	
 
 	protected int[][] members;
