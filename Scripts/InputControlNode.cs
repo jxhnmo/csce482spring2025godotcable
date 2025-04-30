@@ -218,7 +218,7 @@ public partial class InputControlNode : Control
 		{
 			MinValue = -1e12,
 			MaxValue = 1e12,
-			Step = 0.1,
+			Step = 0.001,
 			Value = initialValue,
 			SizeFlagsHorizontal = SizeFlags.ExpandFill
 		};

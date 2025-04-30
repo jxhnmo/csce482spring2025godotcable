@@ -24,7 +24,7 @@ public partial class FEMLine : Node2D, CablePlotter
 	protected int P = 0; // (N) Point load magnitude (and direction via sign)
 	protected char pointLoadAxis = 'y'; //The GLOBAL axis along which point loads are applied
 	protected int nForceIncrements = 1000; // 
-	protected double convThreshold = 10.0; // (N) Threshold on average percentage increase in incremental deflection
+	protected double convThreshold = 50.0; // (N) Threshold on average percentage increase in incremental deflection
 	
 
 	protected int[][] members;
@@ -114,9 +114,9 @@ public partial class FEMLine : Node2D, CablePlotter
 		};
 		AddChild(deformedLine);
 
-		InputControlNode.Instance.AddDoubleField("Young's Modulus (Pa)", E, (double val) =>  E = val);
+		InputControlNode.Instance.AddDoubleField("FEM: Young's Stifness (Pa)", E, (double val) =>  E = val);
 		// InputControlNode.Instance.AddDoubleField("Cross-sectional Area (m^2)", A, (double val) => A = val);
-		InputControlNode.Instance.AddDoubleField("Convergence Threshold N", convThreshold, (double val) => convThreshold = val);
+		InputControlNode.Instance.AddDoubleField("FEM: Convergence Threshold N", convThreshold, (double val) => convThreshold = val);
 		
 	}
 	// Ready() ENDS HERE

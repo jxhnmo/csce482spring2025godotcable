@@ -123,25 +123,24 @@ public partial class MassSpringCable : Node2D, CablePlotter
 		lastFrameVelocity = Mathf.Sqrt(maxVelocitySq);
 		maxVelocityEverSeen = Mathf.Max(maxVelocityEverSeen, lastFrameVelocity);
 
-		sw.Stop();
-		totalProcessingTime += sw.Elapsed.TotalSeconds;
-
 		if (maxVelocitySq < convergenceThreshold * convergenceThreshold)
 		{
 			isProcessing = false;
 			converged = true;
 			realTimeStopwatch.Stop();
+			sw.Stop();
+			totalProcessingTime += sw.Elapsed.TotalMilliseconds;
 
 			var statsDict = new Godot.Collections.Dictionary<string, string>
 			{
 				{ "Max Displacement", positions.Max(p => p.Length()).ToString("F3") + " m" },
 				{ "Total Internal Force", forces.Sum(f => f.Length()).ToString("F2") + " N" },
 				{ "Real Time to Stability", realTimeStopwatch.Elapsed.TotalSeconds.ToString("F4") + " s" },
-				{ "Total Processing Time", totalProcessingTime.ToString("F4") + " s" }
+				{ "Total Processing Time", totalProcessingTime.ToString("F4") + " ms" }
 			};
 
 			InputControlNode.Instance.StatisticsCallback(this, statsDict);
-			GD.Print("MassSpring generated");
+			return;
 		}
 
 		if (realTimeStopwatch.Elapsed.TotalSeconds > TimeoutSeconds)
@@ -149,13 +148,28 @@ public partial class MassSpringCable : Node2D, CablePlotter
 			isProcessing = false;
 			converged = true;
 			realTimeStopwatch.Stop();
+			sw.Stop();
+			totalProcessingTime += sw.Elapsed.TotalMilliseconds;
 
 			InputControlNode.Instance.ShowAlert("Timeout",
 				$"{GetPlotName()} simulation timed out after {TimeoutSeconds} seconds.\n\n" +
 				"Try lowering the stiffness value for lighter or less rigid cables.");
+			
+			var statsDict = new Godot.Collections.Dictionary<string, string>
+			{
+				{ "Max Displacement", positions.Max(p => p.Length()).ToString("F3") + " m" },
+				{ "Total Internal Force", forces.Sum(f => f.Length()).ToString("F2") + " N" },
+				{ "Real Time to Stability", realTimeStopwatch.Elapsed.TotalSeconds.ToString("F4") + " s" },
+				{ "Total Processing Time", totalProcessingTime.ToString("F4") + " ms" }
+			};
 
+			InputControlNode.Instance.StatisticsCallback(this, statsDict);
 			return;
 		}
+
+		sw.Stop();
+		totalProcessingTime += sw.Elapsed.TotalMilliseconds;
+		GD.Print($"{totalProcessingTime:F5}    {sw.Elapsed.TotalMilliseconds:F5}");
 	}
 
 	private bool IsValid(Vector2 v)
