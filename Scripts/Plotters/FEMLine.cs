@@ -114,7 +114,7 @@ public partial class FEMLine : Node2D, CablePlotter
 		};
 		AddChild(deformedLine);
 
-		InputControlNode.Instance.AddDoubleField("FEM: Young's Stifness (Pa)", E, (double val) =>  E = val);
+		InputControlNode.Instance.AddDoubleField("FEM: Young's Stiffness (Pa)", E, (double val) =>  E = val);
 		// InputControlNode.Instance.AddDoubleField("Cross-sectional Area (m^2)", A, (double val) => A = val);
 		InputControlNode.Instance.AddDoubleField("FEM: Convergence Threshold N", convThreshold, (double val) => convThreshold = val);
 		
