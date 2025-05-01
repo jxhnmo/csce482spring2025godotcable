@@ -69,6 +69,7 @@ To use the project, follow these steps:
 - [LICENSE](LICENSE)
 - [Source Code Documentation](Documentation/SourceCodeDocumentation.md)
 - [Individual Contributions Slides](Documentation/IndividualContributions.pdf)
+- [Project Slideshow](Documentation/Godot_ProjectSlides.pdf)
 
 ## Credits and Acknowledgments
 - [Non-linear Finite Element Analysis of 2D Catenary & Cable Structures](https://www.engineeringskills.com/course/non-linear-finite-element-analysis-of-2d-catenary-and-cable-structures) for FEM deformation solving.
