@@ -1,0 +1,235 @@
+1
+00:00:00,400 --> 00:00:02,240
+Hi all. Let's take some time to look at
+
+2
+00:00:02,240 --> 00:00:03,800
+the Cable Models Capstone project
+
+3
+00:00:03,800 --> 00:00:05,200
+sponsored by Los Alamos.
+
+4
+00:00:08,080 --> 00:00:09,640
+This project was conceived because the
+
+5
+00:00:09,640 --> 00:00:11,520
+work done by the New Hanford dry
+
+6
+00:00:11,520 --> 00:00:13,640
+retrieval effort. Work done involved use
+
+7
+00:00:13,640 --> 00:00:15,440
+of machinery in dangerous waste tanks.
+
+8
+00:00:15,600 --> 00:00:17,240
+The problem is that cable management
+
+9
+00:00:17,240 --> 00:00:18,320
+takes an unfortunate amount of
+
+10
+00:00:18,320 --> 00:00:20,360
+engineering time, which can attributes to
+
+11
+00:00:20,360 --> 00:00:22,320
+a lot of inefficiencies. So our
+
+12
+00:00:22,320 --> 00:00:24,520
+contracts - our contacts at Los Alamos
+
+13
+00:00:24,520 --> 00:00:26,280
+are very interested in seeing simulations
+
+14
+00:00:26,280 --> 00:00:27,200
+of cable behavior.
+
+15
+00:00:29,960 --> 00:00:32,720
+The first algorithm we considered was a
+
+16
+00:00:32,720 --> 00:00:35,120
+finite element deformation. This is a
+
+17
+00:00:35,120 --> 00:00:37,280
+precise solution utilizing non-linear
+
+18
+00:00:37,280 --> 00:00:39,920
+implicit solving. The other
+
+19
+00:00:39,920 --> 00:00:42,560
+solver we implemented uses mass spring
+
+20
+00:00:42,560 --> 00:00:44,800
+evaluation. This is a naive approach, but
+
+21
+00:00:44,800 --> 00:00:46,480
+it's very fast and easy to implement.
+
+22
+00:00:46,880 --> 00:00:48,320
+It serves very well for many different
+
+23
+00:00:48,320 --> 00:00:51,320
+applications. The application was
+
+24
+00:00:51,320 --> 00:00:53,600
+developed using Godot 4, an open source
+
+25
+00:00:53,600 --> 00:00:54,240
+game engine.
+
+26
+00:00:56,687 --> 00:00:59,247
+Now let's look at the program. Here's the
+
+27
+00:00:59,247 --> 00:01:00,367
+main scene where we can view the
+
+28
+00:01:00,367 --> 00:01:02,807
+structures generated. We have the ability
+
+29
+00:01:02,807 --> 00:01:04,607
+to view and generate these two
+
+30
+00:01:04,607 --> 00:01:06,127
+structures, mass spring and FEM
+
+31
+00:01:06,127 --> 00:01:07,847
+deformation. We can change parameters
+
+32
+00:01:07,847 --> 00:01:09,607
+such as mass, length, and start and end
+
+33
+00:01:09,607 --> 00:01:12,327
+position. We can also change the
+
+34
+00:01:12,927 --> 00:01:15,247
+stiffness and convergence thresholds and
+
+35
+00:01:15,247 --> 00:01:17,487
+add external forces if we wanted to.
+
+36
+00:01:18,207 --> 00:01:20,647
+In the statistics panel we can see the
+
+37
+00:01:20,647 --> 00:01:21,967
+amount of time it takes to do the
+
+38
+00:01:21,967 --> 00:01:23,727
+computations as well as the plot
+
+39
+00:01:23,727 --> 00:01:26,047
+comparison differences like mean squared
+
+40
+00:01:26,047 --> 00:01:28,127
+error. We can also save this to a file.
+
+41
+00:01:28,878 --> 00:01:31,047
+To consider our project evaluation, let's
+
+42
+00:01:31,047 --> 00:01:33,136
+look at user testing. We had responses
+
+43
+00:01:33,136 --> 00:01:35,144
+from 5 engineers and researchers at Los
+
+44
+00:01:35,144 --> 00:01:37,594
+Alamos. They gave us open-ended feedback
+
+45
+00:01:37,594 --> 00:01:39,804
+as well as Likert scale responses. We
+
+46
+00:01:39,804 --> 00:01:41,812
+also had to perform many internal checks
+
+47
+00:01:41,812 --> 00:01:43,338
+for stability as we developed.
+
+48
+00:01:43,726 --> 00:01:45,606
+In the future, we expect this project to
+
+49
+00:01:45,606 --> 00:01:47,886
+expand to a 3D space with more intuitive
+
+50
+00:01:47,886 --> 00:01:50,046
+controls for forces and endpoint
+
+51
+00:01:50,046 --> 00:01:51,966
+placement. Collision and friction would
+
+52
+00:01:51,966 --> 00:01:53,886
+also be required for further research and
+
+53
+00:01:53,886 --> 00:01:55,886
+development. We feel that what our
+
+54
+00:01:55,886 --> 00:01:57,526
+sponsors really need is a focus on
+
+55
+00:01:57,526 --> 00:01:59,366
+decision-making components. We want to
+
+56
+00:01:59,366 --> 00:02:01,966
+develop methods to detect bad states when
+
+57
+00:02:01,966 --> 00:02:04,926
+managing cables. Thank
+
+58
+00:02:04,926 --> 00:02:06,366
+you very much and that's what we've
+
+59
+00:02:06,366 --> 00:02:06,926
+accomplished.
