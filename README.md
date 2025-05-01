@@ -63,8 +63,9 @@ To use the project, follow these steps:
 - Final deformation comparison
 
 ## Documentation
+- [Final Report](Documentation/Godot_FinalReport.pdf)
 - [Godot 4 Documentation](https://docs.godotengine.org/en/stable/)
-- [Capstone Summary Video](https://youtu.be/0oB9SjARxZM)
+- [Capstone Summary Video](https://youtu.be/X5CCbvr5pSA)
 - [LICENSE](LICENSE)
 - [Source Code Documentation](Documentation/SourceCodeDocumentation.md)
 - [Individual Contributions Slides](Documentation/IndividualContributions.pdf)
