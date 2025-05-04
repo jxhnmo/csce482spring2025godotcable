@@ -64,6 +64,7 @@ To use the project, follow these steps:
 
 ## Documentation
 - [Final Report](Documentation/Godot_FinalReport.pdf)
+- [Final Report Word Doc](Documentation/Godot_FinalReport.docx)
 - [Godot 4 Documentation](https://docs.godotengine.org/en/stable/)
 - [Capstone Summary Video](https://youtu.be/X5CCbvr5pSA)
 - [LICENSE](LICENSE)
